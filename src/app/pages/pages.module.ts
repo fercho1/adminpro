@@ -18,12 +18,14 @@ import { PagesComponent } from './pages.component';
 //Pipe Module
 import { PipesModule } from './../pipes/pipes.module';
 
-//temporal
+//Componentes
 import { IncrementadorComponent } from './../components/incrementador/incrementador.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ModalUploadComponent } from './../components/modal-upload/modal-upload.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,9 @@ import { ProfileComponent } from './profile/profile.component';
         AccountSettingsComponent,
         PromesasComponent,
         RxjsComponent,
-        ProfileComponent
+        ProfileComponent,
+        UsuariosComponent,
+        ModalUploadComponent
 
     ],
     exports: [
