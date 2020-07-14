@@ -26,6 +26,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ModalUploadComponent } from './../components/modal-upload/modal-upload.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { FacturasComponent } from './facturas/facturas.component';
+import { FacturaComponent } from './facturas/factura.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +43,10 @@ import { ModalUploadComponent } from './../components/modal-upload/modal-upload.
         RxjsComponent,
         ProfileComponent,
         UsuariosComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        ClientesComponent,
+        FacturasComponent,
+        FacturaComponent
 
     ],
     exports: [

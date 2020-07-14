@@ -1,3 +1,8 @@
+import { FacturaComponent } from './facturas/factura.component';
+import { FacturasComponent } from './facturas/facturas.component';
+
+
+import { ClientesComponent } from './clientes/clientes.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginGuardGuard } from './../services/guards/login-guard.guard';
@@ -27,6 +32,9 @@ const pagesRoutes: Routes = [
             
             //Mantenimientos
             { path: 'usuarios', component: UsuariosComponent, data: {titulo:'Mantenimiento de usuarios'} },
+            { path: 'clientes', component: ClientesComponent, data: {titulo:'Mantenimiento de clientes'} },
+            { path: 'facturas', component: FacturasComponent, data: {titulo:'Mantenimiento de facturas'} },
+            { path: 'factura/:id', component: FacturaComponent, data: {titulo:'Actualizar Medico'} },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
 
 
