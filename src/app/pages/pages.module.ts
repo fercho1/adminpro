@@ -29,6 +29,7 @@ import { ModalUploadComponent } from './../components/modal-upload/modal-upload.
 import { ClientesComponent } from './clientes/clientes.component';
 import { FacturasComponent } from './facturas/facturas.component';
 import { FacturaComponent } from './facturas/factura.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { FacturaComponent } from './facturas/factura.component';
         ModalUploadComponent,
         ClientesComponent,
         FacturasComponent,
-        FacturaComponent
+        FacturaComponent,
+        BusquedaComponent
 
     ],
     exports: [

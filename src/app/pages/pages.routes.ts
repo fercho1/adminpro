@@ -1,3 +1,5 @@
+import { AdminGuard } from './../services/service.index';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 import { FacturaComponent } from './facturas/factura.component';
 import { FacturasComponent } from './facturas/facturas.component';
 
@@ -29,9 +31,14 @@ const pagesRoutes: Routes = [
             { path: 'rxjs', component: RxjsComponent, data: {titulo:'RxJs'} },
             { path: 'account-settings', component: AccountSettingsComponent, data: {titulo:'Ajustes del tema'} },
             { path: 'perfil', component: ProfileComponent, data: {titulo:'Perfil de usuario'} },
+            { path: 'busqueda/:termino', component: BusquedaComponent, data: {titulo:'Buscador'} },
             
             //Mantenimientos
-            { path: 'usuarios', component: UsuariosComponent, data: {titulo:'Mantenimiento de usuarios'} },
+            {   path: 'usuarios', 
+                component: UsuariosComponent,
+                canActivate: [AdminGuard], 
+                data: {titulo:'Mantenimiento de usuarios'} 
+            },
             { path: 'clientes', component: ClientesComponent, data: {titulo:'Mantenimiento de clientes'} },
             { path: 'facturas', component: FacturasComponent, data: {titulo:'Mantenimiento de facturas'} },
             { path: 'factura/:id', component: FacturaComponent, data: {titulo:'Actualizar Medico'} },

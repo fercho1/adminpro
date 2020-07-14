@@ -10,6 +10,7 @@ import {  SettingsService,
           SharedService,
           UsuarioService,
           LoginGuardGuard,
+          AdminGuard,
           SubirArchivoService,
           ClienteService,
           FacturaService } from './service.index'
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     SubirArchivoService,
     ModalUploadService,
     ClienteService,
-    FacturaService
+    FacturaService,
+    AdminGuard
   ]
 })
 export class ServiceModule { }

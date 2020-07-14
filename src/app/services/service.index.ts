@@ -1,3 +1,4 @@
+export { AdminGuard } from './../services/guards/admin.guard';
 export { FacturaService } from './factura/factura.service';
 export { ClienteService } from './cliente/cliente.service';
 export { SubirArchivoService } from './subir-archivo/subir-archivo.service';
