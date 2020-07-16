@@ -13,7 +13,8 @@ import {  SettingsService,
           AdminGuard,
           SubirArchivoService,
           ClienteService,
-          FacturaService } from './service.index'
+          FacturaService,
+          VerificaTokenGuard } from './service.index'
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -33,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     ModalUploadService,
     ClienteService,
     FacturaService,
-    AdminGuard
+    AdminGuard,
+    VerificaTokenGuard
   ]
 })
 export class ServiceModule { }

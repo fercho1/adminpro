@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { ModalUploadService } from './../../components/modal-upload/modal-upload.service';
 import { ClienteService } from './../../services/service.index';
 import { Cliente } from './../../models/cliente.model';
@@ -5,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 
-declare var swal: any;
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-clientes',
@@ -53,30 +54,34 @@ export class ClientesComponent implements OnInit {
           .subscribe(()=> this.cargarClientes());
   }
 
-  crearCliente(){
-    swal({
-      title: 'Crear cliente',
-      text: 'Ingrese el nombre del cliente',
-      content: 'input',
-      icon: 'info',
-      buttons: true,
-      dangerMode: true
+  //Falta Crear Cliente
+  
 
-    }).then((valor:string)=>{
-
-      if(!valor || valor.length ===0){
-        return;
-      }
-
-      this._clienteService.crearCliente(valor)
-          .subscribe(()=> this.cargarClientes());
-
-    })
-  }
+  
 
   actualizarImagen(cliente:Cliente){
     this._modalUploadservice.mostrarModal('clientes',cliente._id);
 
+  }
+
+  async abrirSweetAlert(){
+    const {value} = await Swal.fire<string>({
+      title: 'Crear Cliente',
+      text:'Ingrese el nombre del nuevo cliente',
+      input: 'text',
+      inputPlaceholder: 'Nombre del cliente',
+      showCancelButton: true
+    })
+
+    if(value.trim().length > 0){
+      this._clienteService.crearCliente(value)
+        .subscribe((resp:any)=>{
+          //console.log(resp);
+          this.clientes.push(resp.cliente);
+        })
+    }
+    
+    //console.log(valor);
   }
 
 }

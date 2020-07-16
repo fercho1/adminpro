@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     init_plugins();
-    this.googleInit();
+    this.renderButton();
+    /* this.googleInit(); */
 
       this.email = localStorage.getItem('email') || '';
 
@@ -34,17 +35,27 @@ export class LoginComponent implements OnInit {
 
   }
 
-  googleInit(){
-    gapi.load('auth2',()=>{
-      this.auth2 = gapi.auth2.init({
-        client_id: '393210260632-kqcvn0j8676pr4d8voor0jdac4dued0s.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        scope: 'profile email'
-      });
-
-      this.attachSigin(document.getElementById('btnGoogle'));
-
+  renderButton() {
+    gapi.signin2.render('my-signin2', {
+      'scope': 'profile email',
+      'width': 240,
+      'height': 50,
+      'longtitle': true,
+      'theme': 'dark',
     });
+
+    this.googleInit();
+
+  }
+
+  async googleInit(){
+    await this._usuarioService.googleInit();
+    this.auth2 = this._usuarioService.auth2;
+
+      /* this.attachSigin(document.getElementById('btnGoogle')); */
+      this.attachSigin(document.getElementById('my-signin2'));
+
+   
   }
 
   attachSigin(element){

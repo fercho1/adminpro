@@ -3,7 +3,7 @@ import { URL_SERVICIOS } from './../../config/config';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import swal from 'sweetalert';
+import Swal from 'sweetalert2'
 import { Factura } from 'src/app/models/factura.model';
 
 @Injectable({
@@ -52,7 +52,7 @@ export class FacturaService {
 
     return this.http.delete(url)
           .map(resp=>{
-            swal('Factura borrada','Factura borrada correctamente', 'success');
+            Swal.fire('Factura borrada','Factura borrada correctamente', 'success');
             return resp;
           });
 
@@ -68,7 +68,7 @@ export class FacturaService {
       url += '?token=' + this._usuarioService.token;
       return this.http.put(url,factura)
                   .map((resp:any)=>{
-                    swal('Factura actualizada',factura.numFactura, 'success');
+                    Swal.fire('Factura actualizada',factura.numFactura, 'success');
                     return resp.factura;
                   });
 
@@ -79,7 +79,7 @@ export class FacturaService {
   
       return this.http.post(url,factura)
         .map((resp:any)=>{
-          swal('Factura creada',factura.numFactura, 'success');
+          Swal.fire('Factura creada',factura.numFactura, 'success');
           return resp.factura;
         });
     }

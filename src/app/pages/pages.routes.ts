@@ -1,3 +1,4 @@
+import { VerificaTokenGuard } from './../services/guards/verifica-token.guard';
 import { AdminGuard } from './../services/service.index';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { FacturaComponent } from './facturas/factura.component';
@@ -19,34 +20,35 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const pagesRoutes: Routes = [
+
+    { 
+        path: 'dashboard', 
+        component: DashboardComponent,
+        canActivate: [VerificaTokenGuard], 
+        data: { titulo: 'Dashboard' } 
+    },
+    { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },
+    { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Graficas' } },
+    { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
+    { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
+    { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del tema' } },
+    { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
+    { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
+
+    //Mantenimientos
     {
-        path: '',
-        component: PagesComponent,
-        canActivate: [LoginGuardGuard],
-        children: [
-            { path: 'dashboard', component: DashboardComponent, data: {titulo:'Dashboard'} },
-            { path: 'progress', component: ProgressComponent, data: {titulo:'Progress'} },
-            { path: 'graficas1', component: Graficas1Component, data: {titulo:'Graficas'} },
-            { path: 'promesas', component: PromesasComponent, data: {titulo:'Promesas'} },
-            { path: 'rxjs', component: RxjsComponent, data: {titulo:'RxJs'} },
-            { path: 'account-settings', component: AccountSettingsComponent, data: {titulo:'Ajustes del tema'} },
-            { path: 'perfil', component: ProfileComponent, data: {titulo:'Perfil de usuario'} },
-            { path: 'busqueda/:termino', component: BusquedaComponent, data: {titulo:'Buscador'} },
-            
-            //Mantenimientos
-            {   path: 'usuarios', 
-                component: UsuariosComponent,
-                canActivate: [AdminGuard], 
-                data: {titulo:'Mantenimiento de usuarios'} 
-            },
-            { path: 'clientes', component: ClientesComponent, data: {titulo:'Mantenimiento de clientes'} },
-            { path: 'facturas', component: FacturasComponent, data: {titulo:'Mantenimiento de facturas'} },
-            { path: 'factura/:id', component: FacturaComponent, data: {titulo:'Actualizar Medico'} },
-            { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+        path: 'usuarios',
+        component: UsuariosComponent,
+        canActivate: [AdminGuard],
+        data: { titulo: 'Mantenimiento de usuarios' }
+    },
+    { path: 'clientes', component: ClientesComponent, data: { titulo: 'Mantenimiento de clientes' } },
+    { path: 'facturas', component: FacturasComponent, data: { titulo: 'Mantenimiento de facturas' } },
+    { path: 'factura/:id', component: FacturaComponent, data: { titulo: 'Actualizar Medico' } },
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
 
 
-        ]
-    }
+
 ];
 export const PAGES_ROUTES = RouterModule.forChild(pagesRoutes);

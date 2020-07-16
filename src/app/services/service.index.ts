@@ -1,3 +1,4 @@
+export { VerificaTokenGuard } from './guards/verifica-token.guard';
 export { AdminGuard } from './../services/guards/admin.guard';
 export { FacturaService } from './factura/factura.service';
 export { ClienteService } from './cliente/cliente.service';

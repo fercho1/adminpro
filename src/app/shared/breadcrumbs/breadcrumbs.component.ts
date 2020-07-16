@@ -1,46 +1,61 @@
-import { filter, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { Title, Meta, MetaDefinition } from '@angular/platform-browser';
+import { Meta, Title, MetaDefinition } from '@angular/platform-browser';
+import {filter,map} from 'rxjs/operators'
 
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
-  styles: [
-  ]
+  styles: []
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnDestroy {
 
   titulo: string;
+  tituloSubs$: Subscription;
 
-  constructor(private router: Router,
-              private title: Title,
-              private meta: Meta) { 
-    
-    this.getDataRoute().subscribe(data =>{
-      //console.log(data);
-      this.titulo = data.titulo;
+  constructor(
+    private router: Router,
+    public title: Title,
+    public meta: Meta
+   ) {
+
+    this.tituloSubs$ = this.getDataRoute()
+        .subscribe(({titulo})=>{
+          this.titulo = titulo;
+          document.title = `AdminPro-${titulo}`;
+        })
+
+    this.getDataRoute()
+      .subscribe( data => {
+
+        this.titulo = data.titulo;
       this.title.setTitle(this.titulo);
 
-      const metaTag: MetaDefinition={
-        name: 'description',
-        content: this.titulo
-      };
+        let metaTag: MetaDefinition = {
+          name: 'description',
+          content: this.titulo
+        };
 
-      this.meta.updateTag(metaTag);
-    })
+        this.meta.updateTag(metaTag);
+
+      });
 
   }
 
-  ngOnInit(): void {
+  getDataRoute() {
+
+    return this.router.events
+      .pipe(
+        filter( evento => evento instanceof ActivationEnd  ),
+        filter( (evento: ActivationEnd) => evento.snapshot.firstChild === null ),
+        map( (evento: ActivationEnd) => evento.snapshot.data )
+        );
   }
 
-  getDataRoute(){
-    return this.router.events.pipe(
-      filter(evento => evento instanceof ActivationEnd),
-      filter((evento: ActivationEnd) => evento.snapshot.firstChild === null),
-      map((evento: ActivationEnd)=> evento.snapshot.data)
-    );
+
+  ngOnDestroy(): void {
+    this.tituloSubs$.unsubscribe();
   }
 
 }

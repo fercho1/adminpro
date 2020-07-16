@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 
 
 
-declare var swal:any;
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-usuarios',
@@ -81,29 +81,30 @@ export class UsuariosComponent implements OnInit {
 
   }
 
+  //Falta borrar usuario
   borrarUsuario(usuario:Usuario){
     if(usuario._id === this._usuarioService.usuario._id){
-      swal('No puede borrar usuario', 'No se puede borrar a si mismo','error');
+      Swal.fire('No puede borrar usuario', 'No se puede borrar a si mismo','error');
       return;
     }
 
-    swal({
+    /* Swal.fire({
       title: 'Esta seguro?',
       text: 'Esta a punto de borrar a ' + usuario.nombre,
       icon: 'warning',
       buttons: true,
       dangerMode: true
-    })
-    .then(borrar =>{
+    }) */
+    /* .then(borrar =>{ */
       //console.log(borrar);
-      if(borrar){
+      /* if(borrar){ */
         this._usuarioService.borrarUsuario(usuario._id)
             .subscribe(borrado=>{
               //console.log(borrado);
               this.cargarUsuarios();
             })
-      }
-    });
+      /* } */
+    /* }); */
   }
 
   guardarUsuario(usuario: Usuario){

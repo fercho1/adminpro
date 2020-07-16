@@ -12,7 +12,7 @@ import { ChartsModule } from 'ng2-charts';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { ProgressComponent } from './progress/progress.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PagesComponent } from './pages.component';
+
 
 
 //Pipe Module
@@ -25,7 +25,6 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { ModalUploadComponent } from './../components/modal-upload/modal-upload.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { FacturasComponent } from './facturas/facturas.component';
 import { FacturaComponent } from './facturas/factura.component';
@@ -33,7 +32,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 
 @NgModule({
     declarations: [
-        PagesComponent,
+        
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
@@ -44,7 +43,6 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
         RxjsComponent,
         ProfileComponent,
         UsuariosComponent,
-        ModalUploadComponent,
         ClientesComponent,
         FacturasComponent,
         FacturaComponent,
@@ -52,7 +50,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 
     ],
     exports: [
-        PagesComponent,
+        
         DashboardComponent,
         ProgressComponent,
         Graficas1Component

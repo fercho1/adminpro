@@ -4,7 +4,7 @@ import { URL_SERVICIOS } from './../../config/config';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import swal from 'sweetalert';
+import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class ClienteService {
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete(url)
-            .map(resp=>swal('Cliente Borrado','Eliminado correctamente','success'));
+            .map(resp=>Swal.fire('Cliente Borrado','Eliminado correctamente','success'));
 
   }
 
@@ -45,11 +45,11 @@ export class ClienteService {
     let url = URL_SERVICIOS + '/cliente';
     url += '?token=' + this._usuarioService.token;
 
-    return this.http.post(url, {nombre:nombre})
-            .map((resp:any)=> resp.cliente);
+    return this.http.post(url, {nombre:nombre});
 
   }
 
+  
   buscarCliente(termino:string){
     let url = URL_SERVICIOS + '/busqueda/coleccion/clientes/' + termino;
     return this.http.get(url)
@@ -63,7 +63,7 @@ export class ClienteService {
 
     return this.http.put(url, cliente)
                 .map((resp:any)=> {
-                  swal('Cliente actualizado',cliente.nombre,'success');
+                  Swal.fire('Cliente actualizado',cliente.nombre,'success');
                   return resp.cliente;
                 });
 

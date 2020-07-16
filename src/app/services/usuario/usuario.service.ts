@@ -5,16 +5,20 @@ import { Usuario } from './../../models/usuario.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import swal from 'sweetalert';
+import Swal from 'sweetalert2'
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
 
+declare const gapi: any;
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
+
+  public auth2: any;
 
   usuario: Usuario;
   token: string;
@@ -27,6 +31,43 @@ export class UsuarioService {
   ) {
     //console.log('Servivio de usuario listo');
     this.cargarStorage();
+    this.googleInit();
+  }
+
+  googleInit() {
+
+    return new Promise( resolve => {
+      gapi.load('auth2', () => {
+        this.auth2 = gapi.auth2.init({
+          client_id: '393210260632-kqcvn0j8676pr4d8voor0jdac4dued0s.apps.googleusercontent.com',
+          cookiepolicy: 'single_host_origin',
+        });
+
+        resolve();
+      });
+    })
+
+  }
+
+  renuevaToken(){
+    let url = URL_SERVICIOS + '/login/renuevatoken';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+                .map((resp:any)=>{
+                  this.token = resp.token;
+
+                  localStorage.setItem('token', this.token);
+                  //console.log('token renovado');
+                  return true;
+                })
+                .catch(err=>{
+                  this.router.navigate(['/login']);
+                  //console.log(err.error.mensaje);
+                  Swal.fire('No se pudo renovar token','No fue posible renovar token','error');
+                  return Observable.throw(err);
+                });
+
   }
 
   estaLogueado() {
@@ -99,7 +140,7 @@ export class UsuarioService {
       })
       .catch(err=>{
         //console.log(err.error.mensaje);
-        swal('Error en el login',err.error.mensaje,'error');
+        Swal.fire('Error en el login',err.error.mensaje,'error');
         return Observable.throw(err);
       });
 
@@ -113,12 +154,12 @@ export class UsuarioService {
 
     return this.http.post(url, usuario)
       .map((resp: any) => {
-        swal('Usuario creado', usuario.email, 'success');
+        Swal.fire('Usuario creado', usuario.email, 'success');
         return resp.usuario
       })
       .catch(err=>{
         //console.log(err.error.mensaje);
-        swal(err.error.mensaje, err.error.errors.message,'error');
+        Swal.fire(err.error.mensaje, err.error.errors.message,'error');
         return Observable.throw(err);
       });
 
@@ -137,13 +178,13 @@ export class UsuarioService {
 
         }
 
-        swal('Usuario actualizado', usuario.nombre, 'success');
+        Swal.fire('Usuario actualizado', usuario.nombre, 'success');
 
         return true;
       })
       .catch(err=>{
         //console.log(err.error.mensaje);
-        swal(err.error.mensaje, err.error.errors.message,'error');
+        Swal.fire(err.error.mensaje, err.error.errors.message,'error');
         return Observable.throw(err);
       });
 
@@ -155,7 +196,7 @@ export class UsuarioService {
       .then((resp:any) => {
         //console.log(resp);
         this.usuario.img = resp.usuario.img;
-        swal('Imagen actualizada',this.usuario.nombre,'success');
+        Swal.fire('Imagen actualizada',this.usuario.nombre,'success');
 
         this.guardarStorage(id,this.token,this.usuario, this.menu);
       })
@@ -183,7 +224,7 @@ export class UsuarioService {
 
     return this.http.delete(url)
             .map(resp=>{
-              swal('Usuario borrado','El usuario a sido eliminado correctamente','success');
+              Swal.fire('Usuario borrado','El usuario a sido eliminado correctamente','success');
               return true;
             });
   }

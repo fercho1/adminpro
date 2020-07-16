@@ -23,7 +23,7 @@
     "ng2-charts": "^2.3.2",
     "rxjs": "^6.6.0",
     "rxjs-compat": "^6.6.0",
-    "sweetalert": "^2.1.2",
+    "sweetalert2": "^9.17.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
