@@ -1,26 +1,82 @@
 <div class="row animated fadeIn">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card card-body">
             <h3 class="box-title m-b-0">Factura: {{factura.numFactura}}</h3>
 
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarFactura(f)">
-                        <div class="form-group">
-                            <label>Numero factura</label>
-                            <input [(ngModel)]="factura.numFactura" name="numFactura" type="text" class="form-control"
-                                placeholder="Numero factura" required>
-                        </div>
+
+
                         <div class="form-group">
                             <label>Cliente</label>
                             <select (change)="cambioCliente($event.target.value)" [(ngModel)]="factura.cliente"
                                 name="cliente" class="form-control" required>
-                                <option value="">Seleccione Cliente</option>
+                    
                                 <option *ngFor="let cliente of clientes" [value]="cliente._id">
                                     {{cliente.nombre}}
                                 </option>
                             </select>
                         </div>
+                        
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.tipo" name="tipo" type="text" class="form-control"
+                                placeholder="tipo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.numFactura" name="numFactura" type="text" class="form-control"
+                                placeholder="numFactura" required>
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.fecha" name="fecha" type="text" class="form-control"
+                                placeholder="fecha">
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.concepto" name="concepto" type="text" class="form-control"
+                                placeholder="concepto">
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.bImponible0" name="bImponible0" type="text" class="form-control"
+                                placeholder="bImponible0">
+                        </div>
+                        <div *ngFor="let variable of variables" class="form-group">
+                            <input [(ngModel)]="factura.total/variable.varImponible" name="bImponible" type="text" class="form-control"
+                                placeholder="bImponible">
+                        </div>
+                        <div *ngFor="let variable of variables" class="form-group">
+                            <input [(ngModel)]="factura.total*variable.varIva/variable.varImponible" name="iva" type="text" class="form-control"
+                                placeholder="iva">
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.total" name="total" type="text" class="form-control"
+                                placeholder="total">
+                        </div>
+                        <div *ngFor="let variable of variables" class="form-group">
+                            <input [(ngModel)]="factura.total/variable.varImponible" name="bImpRet" type="text" class="form-control"
+                                placeholder="bImpRet">
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.cbte" name="cbte" type="text" class="form-control"
+                                placeholder="cbte">
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.agnt" name="agnt" type="text" class="form-control"
+                                placeholder="agnt">
+                        </div>
+                        <div *ngFor="let variable of variables" class="form-group">
+                            <input [(ngModel)]="factura.total*variable.varRetIr/variable.varImponible" name="retIr" type="text" class="form-control"
+                                placeholder="retIr">
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="factura.retIva" name="retIva" type="text" class="form-control"
+                                placeholder="retIva">
+                        </div>
+                        <div *ngFor="let variable of variables" class="form-group">
+                            <input [(ngModel)]="factura.retIva+factura.total*variable.varRetIr/variable.varImponible" name="total2" type="text" class="form-control"
+                                placeholder="total2">
+                        </div>
+                        
 
 
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
@@ -35,19 +91,6 @@
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card card-body">
-
-            <h4 class="box-title m-b-0">Cliente</h4>
-            <img [src]="cliente.img | imagen:'cliente' " class="rounded img-fluid">
-        </div>
-    </div>
-
-    <div class="col-md-3" *ngIf="factura._id">
-        <div class="card card-body">
-            <h4 class="box-title m-b-0">Fotografia</h4>
-            <img (click)="cambiarFoto()" [src]="factura.img | imagen:'factura'" class="img-fluid pointer">
-        </div>
-    </div>
+    
 
 </div>

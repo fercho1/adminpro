@@ -126,8 +126,10 @@ export class UsuarioService {
     //Boton recuerdame
     if (recordar) {
       localStorage.setItem('email', usuario.email);
+      localStorage.setItem('password', usuario.password);
     } else {
       localStorage.removeItem('email');
+      localStorage.removeItem('password');
     }
 
     let url = URL_SERVICIOS + '/login';

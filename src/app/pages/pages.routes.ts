@@ -1,3 +1,5 @@
+import { VariablesComponent } from './variables/variables.component';
+import { ClienteComponent } from './clientes/cliente.component';
 import { VerificaTokenGuard } from './../services/guards/verifica-token.guard';
 import { AdminGuard } from './../services/service.index';
 import { BusquedaComponent } from './busqueda/busqueda.component';
@@ -25,12 +27,12 @@ const pagesRoutes: Routes = [
         path: 'dashboard', 
         component: DashboardComponent,
         canActivate: [VerificaTokenGuard], 
-        data: { titulo: 'Dashboard' } 
+        data: { titulo: 'Declaración mensual de IVA' } 
     },
-    { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },
-    { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Graficas' } },
-    { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
-    { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
+    { path: 'progress', component: ProgressComponent, data: { titulo: 'Declaración semestral de IVA' } },
+    { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Declaración de Impuesto a la Renta' } },
+    { path: 'promesas', component: PromesasComponent, data: { titulo: 'Anexo de Gastos Personales' } },
+    { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Anexo de Retenciones en la fuente por relación de dependencia' } },
     { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del tema' } },
     { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
     { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
@@ -43,8 +45,10 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Mantenimiento de usuarios' }
     },
     { path: 'clientes', component: ClientesComponent, data: { titulo: 'Mantenimiento de clientes' } },
+    { path: 'cliente/:id', component: ClienteComponent, data: { titulo: 'Cliente' } },
     { path: 'facturas', component: FacturasComponent, data: { titulo: 'Mantenimiento de facturas' } },
-    { path: 'factura/:id', component: FacturaComponent, data: { titulo: 'Actualizar Medico' } },
+    { path: 'factura/:id', component: FacturaComponent, data: { titulo: 'Factura' } },
+    { path: 'variables', component: VariablesComponent, data: { titulo: 'Variables' } },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
 

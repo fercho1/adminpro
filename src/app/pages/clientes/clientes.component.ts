@@ -64,7 +64,7 @@ export class ClientesComponent implements OnInit {
 
   }
 
-  async abrirSweetAlert(){
+  /* async abrirSweetAlert(){
     const {value} = await Swal.fire<string>({
       title: 'Crear Cliente',
       text:'Ingrese el nombre del nuevo cliente',
@@ -82,6 +82,6 @@ export class ClientesComponent implements OnInit {
     }
     
     //console.log(valor);
-  }
+  } */
 
 }

@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
 
   recuerdame: boolean = false;
   email: string;
+  password: string;
+  
 
   auth2: any;
 
@@ -28,10 +30,14 @@ export class LoginComponent implements OnInit {
     /* this.googleInit(); */
 
       this.email = localStorage.getItem('email') || '';
+      this.password = localStorage.getItem('password') || '';
+      
 
+      
       if(this.email.length > 1){
         this.recuerdame = true;
       }
+      
 
   }
 

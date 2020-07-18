@@ -1,3 +1,4 @@
+
 import { Cliente } from './../../models/cliente.model';
 import { UsuarioService } from './../usuario/usuario.service';
 import { URL_SERVICIOS } from './../../config/config';
@@ -40,12 +41,33 @@ export class ClienteService {
 
   }
 
-  crearCliente(nombre: string){
+  crearCliente(cliente : Cliente){
 
     let url = URL_SERVICIOS + '/cliente';
+
+    if(cliente._id){
+      //Actualizando
+      url += '/'+cliente._id;
+      url += '?token=' + this._usuarioService.token;
+      return this.http.put(url,cliente)
+                  .map((resp:any)=>{
+                    Swal.fire('Cliente actualizado',cliente.nombre, 'success');
+                    return resp.cliente;
+                  });
+
+    }else{
+      //Creando
+
     url += '?token=' + this._usuarioService.token;
 
-    return this.http.post(url, {nombre:nombre});
+    
+
+    return this.http.post(url,cliente)
+        .map((resp:any)=>{
+          Swal.fire('Cliente creado',cliente.nombre, 'success');
+          return resp.cliente;
+        });
+      }
 
   }
 

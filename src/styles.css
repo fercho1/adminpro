@@ -18,6 +18,14 @@
   width: 50px;
 }
 
+.img-70{
+  width: 70px;
+}
+
+.img-80{
+  width: 700px;
+}
+
 .oculto{
   display: none;
 }
@@ -30,5 +38,10 @@
   width: 100%;
   height: 100%;
   z-index: 9999;
+}
+
+.textoLogo{
+  color: gray;
+  font-size: smaller;
 }
 

@@ -25,21 +25,44 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Foto</th>
-                            <th>Factura</th>
                             <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>Factura</th>
+                            <th>Fecha</th>
+                            <th>Concepto</th>
+                            <th>Base Imponible IVA 0%</th>
+                            <th>Base Imponible IVA</th>
+                            <th>Iva</th>
+                            <th>Total</th>
+                            <th>Base Imp. Ret.</th>
+                            <th>Cbte. Tetenc.</th>
+                            <th>Agnt. Retención</th>
+                            <th>Ret. I.R</th>
+                            <th>Ret. Iva</th>
+                            <th>Total 2</th>
+                            <th>Acciones</th>
                             <th></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let factura of facturas">
-                            <th>
-                                <img [src]="factura.img | imagen:'factura'" class="img-50 img-circle">
-                            </th>
-                            <th>{{factura.numFactura}}</th>
-                            <th>{{factura.cliente.nombre}}</th>
-                            <th>
+                        <tr *ngFor="let factura of facturas">                    
+                            <td>{{factura.cliente.nombre}}</td>
+                            <td>{{factura.tipo}}</td>
+                            <td>{{factura.numFactura}}</td>
+                            <td>{{factura.fecha}}</td>
+                            <td>{{factura.concepto}}</td>
+                            <td>{{factura.bImponible0}}</td>
+                            <td>{{factura.bImponible}}</td>
+                            <td>{{factura.iva}}</td>
+                            <td>{{factura.total}}</td>
+                            <td>{{factura.bImpRet}}</td>
+                            <td>{{factura.cbte}}</td>
+                            <td>{{factura.agnt}}</td>
+                            <td>{{factura.retIr}}</td>
+                            <td>{{factura.retIva}}</td>
+                            <td>{{factura.total2}}</td>
+                            <td class="text-center">
                                 <button [routerLink]="['/factura', factura._id]" class="btn btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -47,7 +70,7 @@
                                 <button (click)="borrarFactura(factura)" class="btn btn-danger">
                                     <i class="fa fa-trash-o"></i>
                                 </button>
-                            </th>
+                            </td>
                         </tr>
                     </tbody>
 

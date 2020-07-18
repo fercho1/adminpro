@@ -49,18 +49,17 @@ export class RegisterComponent implements OnInit {
         nombre: new FormControl(null, Validators.required),
         correo: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, Validators.required),
-        password2: new FormControl(null, Validators.required),
-        condiciones: new FormControl(false)
+        password2: new FormControl(null, Validators.required)
     }, {validators: this.sonIguales('password','password2')});
 
 
-    this.forma.setValue({
+    /* this.forma.setValue({
       nombre: 'Test',
       correo: 't@test.com',
       password: '123456',
       password2: '123456',
       condiciones: true
-    });
+    }); */
 
   }
 
@@ -71,11 +70,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    if(!this.forma.value.condiciones){
-      Swal.fire('Importante','Debe de aceptar las condiciones','warning');
-      return;
-
-    }
+    
     
     let usuario = new Usuario(
       this.forma.value.nombre,

@@ -1,3 +1,4 @@
+export { VariableService } from './variable/variable.service';
 export { VerificaTokenGuard } from './guards/verifica-token.guard';
 export { AdminGuard } from './../services/guards/admin.guard';
 export { FacturaService } from './factura/factura.service';
@@ -11,6 +12,8 @@ export {SharedService} from './shared/shared.service';
 export {SidebarService} from './shared/sidebar.service';
 
 export { UsuarioService } from './usuario/usuario.service';
+
+
 
 
 

@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+
+                <h3 class="card-title">Variables</h3>
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>varImponible</th>
+                            <th>varIva</th>
+                            <th>varRetIr</th>
+                            <th class="text-nowrap">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let variable of variables">
+                            
+                            <td>
+                                <input [(ngModel)]="variable.varImponible" name="varImponible" type="text" class="form-control" placeholder="Nombre del Cliente">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="variable.varIva" name="varIva" type="text" class="form-control" placeholder="Nombre del Cliente">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="variable.varRetIr" name="varRetIr" type="text" class="form-control" placeholder="Nombre del Cliente">
+                            </td>
+                            <td class="text-center">
+                                <button (click)="guardarVariable(variable)" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                </button>
+
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

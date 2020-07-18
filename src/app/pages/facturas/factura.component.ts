@@ -1,3 +1,5 @@
+import { Variable } from './../../models/variable.model';
+import { VariableService } from './../../services/variable/variable.service';
 import { ModalUploadService } from './../../components/modal-upload/modal-upload.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClienteService } from './../../services/cliente/cliente.service';
@@ -17,14 +19,16 @@ export class FacturaComponent implements OnInit {
 
 
   clientes: Cliente[] = [];
-  factura: Factura = new Factura('', '', '', '', '');
+  variables: Variable[] = [];
+  factura: Factura = new Factura('');
   cliente: Cliente = new Cliente('');
 
   constructor(public _facturaService: FacturaService,
     public _clienteService: ClienteService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public _modalUploadService: ModalUploadService
+    public _modalUploadService: ModalUploadService,
+    public _variableService: VariableService
   ) {
     activatedRoute.params.subscribe(params => {
       let id = params['id'];
@@ -38,6 +42,9 @@ export class FacturaComponent implements OnInit {
   ngOnInit(): void {
     this._clienteService.cargarClientes()
       .subscribe(clientes => this.clientes = clientes);
+
+      this._variableService.cargarVariables()
+      .subscribe(variables => this.variables = variables);
 
     this._modalUploadService.notificacion
       .subscribe(resp => {
