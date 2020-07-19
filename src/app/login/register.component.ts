@@ -17,13 +17,15 @@ declare function init_plugins();
 })
 export class RegisterComponent implements OnInit {
   
-
+  public formSubmitted = false;
   forma: FormGroup;
 
   constructor(
     public _usuarioService: UsuarioService,
     public roter: Router
   ) { }
+
+  
 
   sonIguales(campo1: string, campo2: string){
     return (group: FormGroup)=>{
@@ -65,6 +67,7 @@ export class RegisterComponent implements OnInit {
 
   registrarUsuario(){
     
+    this.formSubmitted = true; 
     
     if(this.forma.invalid){
       return;

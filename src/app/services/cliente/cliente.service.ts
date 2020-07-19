@@ -5,6 +5,7 @@ import { UsuarioService } from './../usuario/usuario.service';
 import { URL_SERVICIOS } from './../../config/config';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 import Swal from 'sweetalert2'
 
@@ -19,8 +20,23 @@ export class ClienteService {
               public _usuarioService: UsuarioService,
               public router: Router) { }
 
-  cargarClientes(){
-    let url = URL_SERVICIOS + '/cliente';
+  cargarClientes(desde:number=0){
+
+    let url = URL_SERVICIOS + '/cliente?desde=' + desde;
+    return this.http.get(url);
+
+
+    /* let url = URL_SERVICIOS + '/cliente?desde=' + desde;
+    return this.http.get(url)
+              .map((resp:any)=> {
+                this.totalClientes = resp.total;
+                return resp.clientes
+              }); */
+  }
+
+  cargarClientesFac(){
+
+    let url = URL_SERVICIOS + '/cliente/todo';
     return this.http.get(url)
               .map((resp:any)=> {
                 this.totalClientes = resp.total;
@@ -70,6 +86,11 @@ export class ClienteService {
           Swal.fire('Cliente creado',cliente.nombre, 'success');
           this.router.navigate(['/clientes']);
           return resp.cliente;
+        })
+        .catch(err=>{
+          //console.log(err.error.mensaje);
+          Swal.fire('Error al crear cliente', 'Ya existe un cliente con misma cédula','error');
+          return Observable.throw(err);
         });
       }
 

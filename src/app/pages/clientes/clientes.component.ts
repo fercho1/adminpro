@@ -16,6 +16,10 @@ import Swal from 'sweetalert2'
 })
 export class ClientesComponent implements OnInit {
 
+  desde: number = 0;
+
+  totalRegistros: number=0;
+
   clientes: Cliente[]=[];
 
   constructor(public _clienteService: ClienteService,
@@ -40,8 +44,20 @@ export class ClientesComponent implements OnInit {
   }
 
   cargarClientes(){
-    this._clienteService.cargarClientes()
-        .subscribe(clientes=> this.clientes=clientes);
+    /* this._clienteService.cargarClientes(this.desde)
+        .subscribe(clientes=> {
+          this.clientes=clientes;
+          console.log(this.clientes);
+        }); */
+
+        this._clienteService.cargarClientes(this.desde)
+        .subscribe((resp:any)=>{
+          //console.log(resp);
+          this.totalRegistros = resp.total;
+          this.clientes = resp.clientes;
+          //console.log(this.clientes);
+          //this.cargando = false;
+        });
   }
 
   guardarCliente(cliente:Cliente){
@@ -83,5 +99,20 @@ export class ClientesComponent implements OnInit {
     
     //console.log(valor);
   } */
+
+  cambiarDesde(valor:number){
+
+    let desde = this.desde + valor;
+    //console.log(desde);
+    if(desde>= this.totalRegistros){
+      return;
+    }
+    if(desde<0){
+      return;
+    }
+
+    this.desde += valor;
+    this.cargarClientes();
+  }
 
 }

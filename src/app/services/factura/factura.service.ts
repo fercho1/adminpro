@@ -15,76 +15,72 @@ export class FacturaService {
   totalFacturas: number = 0;
 
   constructor(public http: HttpClient,
-              public _usuarioService: UsuarioService,
-              public router: Router) { }
+    public _usuarioService: UsuarioService,
+    public router: Router) { }
 
-  cargarFacturas(){
-    let url = URL_SERVICIOS + '/factura';
+  cargarFacturas(desde: number = 0) {
 
-    return this.http.get(url)
-            .map((resp:any)=>{
 
-              this.totalFacturas = resp.total;
 
-              //console.log(resp.facturas);
-              return resp.facturas;
-            });
+    let url = URL_SERVICIOS + '/factura?desde=' + desde;
+    return this.http.get(url);
+
 
   }
 
-  cargarFactura(id:string){
-    let url = URL_SERVICIOS + '/factura/'+id;
+  cargarFactura(id: string) {
+    let url = URL_SERVICIOS + '/factura/' + id;
     return this.http.get(url)
-                .map((resp:any)=> resp.factura);
+      .map((resp: any) => resp.factura);
 
   }
 
-  buscarFacturas(termino:string){
+  buscarFacturas(termino: string) {
     let url = URL_SERVICIOS + '/busqueda/coleccion/facturas/' + termino;
     return this.http.get(url)
-            .map((resp:any)=> resp.facturas);
+      .map((resp: any) => resp.facturas);
 
   }
 
 
-  borrarFactura(id:string){
+  borrarFactura(id: string) {
     let url = URL_SERVICIOS + '/factura/' + id;
 
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete(url)
-          .map(resp=>{
-            Swal.fire('Factura borrada','Factura borrada correctamente', 'success');
-            return resp;
-          });
+      .map(resp => {
+        Swal.fire('Factura borrada', 'Factura borrada correctamente', 'success');
+        return resp;
+      });
 
   }
 
-  guardarFactura(factura: Factura){
+  guardarFactura(factura: Factura) {
 
     let url = URL_SERVICIOS + '/factura';
 
-    if(factura._id){
+    if (factura._id) {
       //Actualizando
-      url += '/'+factura._id;
+      url += '/' + factura._id;
       url += '?token=' + this._usuarioService.token;
-      return this.http.put(url,factura)
-                  .map((resp:any)=>{
-                    
-                    Swal.fire('Factura actualizada',factura.numFactura, 'success');
-                    this.router.navigate(['/facturas']);
-                    return resp.factura;
-                  });
+      return this.http.put(url, factura)
+        .map((resp: any) => {
 
-    }else{
+          Swal.fire('Factura actualizada', factura.numFactura, 'success');
+          this.router.navigate(['/facturas']);
+          return resp.factura;
+        });
+
+    } else {
       //Creando
       url += '?token=' + this._usuarioService.token;
-  
-  
-      return this.http.post(url,factura)
-        .map((resp:any)=>{
-          Swal.fire('Factura creada',factura.numFactura, 'success');
-          
+
+
+      return this.http.post(url, factura)
+        .map((resp: any) => {
+          Swal.fire('Factura creada', factura.numFactura, 'success');
+
           this.router.navigate(['/facturas']);
           return resp.factura;
         });

@@ -1,5 +1,6 @@
+import { DOCUMENT } from '@angular/common';
 import { Usuario } from './../models/usuario.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from './../services/service.index';
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   auth2: any;
 
   constructor(public router: Router,
-              public _usuarioService: UsuarioService) { }
+              public _usuarioService: UsuarioService,
+              @Inject(DOCUMENT) private _document) { }
 
   ngOnInit(): void {
     init_plugins();
@@ -94,6 +96,15 @@ export class LoginComponent implements OnInit {
     console.log(forma.value);
      *///console.log('ingresar');
     //this.router.navigate(['/mensualIva']);
+  }
+
+  myFunction() {
+    let x = this._document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
   }
 
 }

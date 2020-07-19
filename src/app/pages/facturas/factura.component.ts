@@ -41,7 +41,7 @@ export class FacturaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._clienteService.cargarClientes()
+    this._clienteService.cargarClientesFac()
       .subscribe(clientes => this.clientes = clientes);
 
       this._variableService.cargarVariables()

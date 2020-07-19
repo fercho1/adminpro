@@ -49,7 +49,7 @@
                             <td>{{cliente.ruc}}</td>
                             <td>{{cliente.clave}}</td>
                             <td class="text-center">
-                                <button [routerLink]="['/cliente', cliente._id]" class="btn btn-primary">
+                                <button [routerLink]="['/cliente', cliente._id]" class="btn btn-primary mr-3">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
@@ -64,6 +64,14 @@
                     </tbody>
                 </table>
             </div>
+
+            <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-3">
+                Anteriores
+            </button>
+
+            <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                Siguientes
+            </button>
             
             </div>
         </div>

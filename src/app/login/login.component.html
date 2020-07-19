@@ -15,9 +15,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 input-group">
                         <input [ngModel]="password" name='password' class="form-control" type="password" required
-                            placeholder="Contraseña">
+                            placeholder="Contraseña" id="myInput">
+                            <span (click)="myFunction()" class="mr-2">
+                            <i class="fa fa-eye"></i>
+                            </span>
                     </div>
                 </div>
                 <div class="form-group row">

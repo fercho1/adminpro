@@ -20,7 +20,7 @@
                     </button>
                 </div>
 
-                <h3 class="card-title">Facturas registradas (<small>{{_facturaService.totalFacturas}}</small>)</h3>
+                <h3 class="card-title">Facturas registradas (<small>{{totalRegistros}}</small>)</h3>
                 <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -63,7 +63,7 @@
                             <td>{{factura.retIva}}</td>
                             <td>{{factura.total2}}</td>
                             <td class="text-center">
-                                <button [routerLink]="['/factura', factura._id]" class="btn btn-primary">
+                                <button [routerLink]="['/factura', factura._id]" class="btn btn-primary mb-2">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
@@ -76,6 +76,14 @@
 
                 </table>
             </div>
+
+            <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-3">
+                Anteriores
+            </button>
+
+            <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                Siguientes
+            </button>
 
             </div>
         </div>
