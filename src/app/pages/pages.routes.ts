@@ -1,3 +1,7 @@
+import { GastosPersonalesComponent } from './gastos-personales/gastos-personales.component';
+import { ImpuestoRentaComponent } from './impuesto-renta/impuesto-renta.component';
+import { SemestralIvaComponent } from './semestral-iva/semestral-iva.component';
+import { MensualIvaComponent } from './mensual-iva/mensual-iva.component';
 import { VariablesComponent } from './variables/variables.component';
 import { ClienteComponent } from './clientes/cliente.component';
 import { VerificaTokenGuard } from './../services/guards/verifica-token.guard';
@@ -16,7 +20,6 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { ProgressComponent } from './progress/progress.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -24,15 +27,16 @@ import { Routes, RouterModule } from '@angular/router';
 const pagesRoutes: Routes = [
 
     { 
-        path: 'dashboard', 
-        component: DashboardComponent,
+        path: 'mensualIva', 
+        component: MensualIvaComponent,
         canActivate: [VerificaTokenGuard], 
         data: { titulo: 'Declaración mensual de IVA' } 
     },
-    { path: 'progress', component: ProgressComponent, data: { titulo: 'Declaración semestral de IVA' } },
+    { path: 'semestralIva', component: SemestralIvaComponent, data: { titulo: 'Declaración semestral de IVA' } },
     { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Declaración de Impuesto a la Renta' } },
-    { path: 'promesas', component: PromesasComponent, data: { titulo: 'Anexo de Gastos Personales' } },
-    { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Anexo de Retenciones en la fuente por relación de dependencia' } },
+    { path: 'impuestoRenta', component: ImpuestoRentaComponent, data: { titulo: 'Declaración de Impuesto a la Renta ' } },
+    { path: 'gastosPersonales', component: GastosPersonalesComponent, data: { titulo: 'Anexo de Gastos Personales' } },
+    { path: 'retencionesRelacion', component: GastosPersonalesComponent, data: { titulo: 'Anexo de Retenciones en la fuente por relación de dependencia' } },
     { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del tema' } },
     { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
     { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
@@ -49,7 +53,7 @@ const pagesRoutes: Routes = [
     { path: 'facturas', component: FacturasComponent, data: { titulo: 'Mantenimiento de facturas' } },
     { path: 'factura/:id', component: FacturaComponent, data: { titulo: 'Factura' } },
     { path: 'variables', component: VariablesComponent, data: { titulo: 'Variables' } },
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: '', redirectTo: '/mensualIva', pathMatch: 'full' },
 
 
 

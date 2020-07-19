@@ -20,7 +20,7 @@ export class VariableService {
     let url = URL_SERVICIOS + '/variable';
     return this.http.get(url)
               .map((resp:any)=> {
-                
+                //console.log(resp.variables);
                 return resp.variables
               });
   }

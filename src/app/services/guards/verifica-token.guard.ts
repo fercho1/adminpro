@@ -38,7 +38,7 @@ export class VerificaTokenGuard implements CanActivate {
       let tokenExp = new Date(fechaExp * 1000);
       let ahora = new Date();
 
-      //Falta 1 hora para que el token expire , hay que ir a Dashboard para renovar el token
+      //Falta 1 hora para que el token expire , hay que ir a MensualIva para renovar el token
       ahora.setTime(ahora.getTime()+(1*60*60*1000));  //1 hora
       //console.log(tokenExp);
       //console.log(ahora);

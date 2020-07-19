@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UsuarioService } from './../usuario/usuario.service';
 import { URL_SERVICIOS } from './../../config/config';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,8 @@ export class FacturaService {
   totalFacturas: number = 0;
 
   constructor(public http: HttpClient,
-              public _usuarioService: UsuarioService) { }
+              public _usuarioService: UsuarioService,
+              public router: Router) { }
 
   cargarFacturas(){
     let url = URL_SERVICIOS + '/factura';
@@ -68,7 +70,9 @@ export class FacturaService {
       url += '?token=' + this._usuarioService.token;
       return this.http.put(url,factura)
                   .map((resp:any)=>{
+                    
                     Swal.fire('Factura actualizada',factura.numFactura, 'success');
+                    this.router.navigate(['/facturas']);
                     return resp.factura;
                   });
 
@@ -80,6 +84,8 @@ export class FacturaService {
       return this.http.post(url,factura)
         .map((resp:any)=>{
           Swal.fire('Factura creada',factura.numFactura, 'success');
+          
+          this.router.navigate(['/facturas']);
           return resp.factura;
         });
     }

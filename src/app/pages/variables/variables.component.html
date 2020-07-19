@@ -9,9 +9,9 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>varImponible</th>
-                            <th>varIva</th>
-                            <th>varRetIr</th>
+                            <th>Base Imponible Iva</th>
+                            <th>Iva</th>
+                            <th>Ret. I.R</th>
                             <th class="text-nowrap">Acciones</th>
                         </tr>
                     </thead>
@@ -19,13 +19,13 @@
                         <tr *ngFor="let variable of variables">
                             
                             <td>
-                                <input [(ngModel)]="variable.varImponible" name="varImponible" type="text" class="form-control" placeholder="Nombre del Cliente">
+                                <input [(ngModel)]="variable.varImponible" name="varImponible" type="text" class="form-control" placeholder="Base Imponible Iva">
                             </td>
                             <td>
-                                <input [(ngModel)]="variable.varIva" name="varIva" type="text" class="form-control" placeholder="Nombre del Cliente">
+                                <input [(ngModel)]="variable.varIva" name="varIva" type="text" class="form-control" placeholder="Iva">
                             </td>
                             <td>
-                                <input [(ngModel)]="variable.varRetIr" name="varRetIr" type="text" class="form-control" placeholder="Nombre del Cliente">
+                                <input [(ngModel)]="variable.varRetIr" name="varRetIr" type="text" class="form-control" placeholder="Ret. I.R">
                             </td>
                             <td class="text-center">
                                 <button (click)="guardarVariable(variable)" class="btn btn-primary">

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 
 import { Cliente } from './../../models/cliente.model';
 import { UsuarioService } from './../usuario/usuario.service';
@@ -15,7 +16,8 @@ export class ClienteService {
   totalClientes: number = 0;
 
   constructor(public http:HttpClient,
-              public _usuarioService: UsuarioService) { }
+              public _usuarioService: UsuarioService,
+              public router: Router) { }
 
   cargarClientes(){
     let url = URL_SERVICIOS + '/cliente';
@@ -52,6 +54,7 @@ export class ClienteService {
       return this.http.put(url,cliente)
                   .map((resp:any)=>{
                     Swal.fire('Cliente actualizado',cliente.nombre, 'success');
+                    this.router.navigate(['/clientes']);
                     return resp.cliente;
                   });
 
@@ -65,6 +68,7 @@ export class ClienteService {
     return this.http.post(url,cliente)
         .map((resp:any)=>{
           Swal.fire('Cliente creado',cliente.nombre, 'success');
+          this.router.navigate(['/clientes']);
           return resp.cliente;
         });
       }

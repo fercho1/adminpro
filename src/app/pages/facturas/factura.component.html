@@ -1,96 +1,179 @@
-<div class="row animated fadeIn">
-    <div class="col-md-12">
-        <div class="card card-body">
-            <h3 class="box-title m-b-0">Factura: {{factura.numFactura}}</h3>
-
-            <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarFactura(f)">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
 
 
-                        <div class="form-group">
+                <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarFactura(f)">
+
+
+                    <div class="row">
+                        <div class="col">
                             <label>Cliente</label>
                             <select (change)="cambioCliente($event.target.value)" [(ngModel)]="factura.cliente"
                                 name="cliente" class="form-control" required>
-                    
+
                                 <option *ngFor="let cliente of clientes" [value]="cliente._id">
                                     {{cliente.nombre}}
                                 </option>
                             </select>
                         </div>
-                        
-                        <div class="form-group">
-                            <input [(ngModel)]="factura.tipo" name="tipo" type="text" class="form-control"
-                                placeholder="tipo" required>
+
+
+                        <div class="col">
+                            <label>Tipo de factura</label>
+
+                            <select [(ngModel)]="factura.tipo" name="tipo" class="form-control" required>
+
+                                <option>VENTA DE BIENES Y/O PRESTACION DE SERVICIOS</option>
+                                <option>COMPRAS</option>
+                                <option>NOTA DE CREDITO</option>
+                                <option>NOTA DE VENTA</option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Número de Factura</label>
                             <input [(ngModel)]="factura.numFactura" name="numFactura" type="text" class="form-control"
-                                placeholder="numFactura" required>
+                                placeholder="Número de Factura" required>
                         </div>
-                        <div class="form-group">
-                            <input [(ngModel)]="factura.fecha" name="fecha" type="text" class="form-control"
-                                placeholder="fecha">
+
+                        <div class="col">
+                            <label>Fecha</label>
+                            <input [(ngModel)]="factura.fecha" name="fecha" type="date" class="form-control"
+                                placeholder="Fecha">
                         </div>
-                        <div class="form-group">
-                            <input [(ngModel)]="factura.concepto" name="concepto" type="text" class="form-control"
-                                placeholder="concepto">
+
+                        <div class="col">
+                            <label>Concepto</label>
+
+                            <select [(ngModel)]="factura.concepto" name="concepto" class="form-control" required>
+
+                                <option>VENTAS</option>
+                                <option>ANULADO</option>
+                                <option>TRANSPORTE</option>
+                                <option>SERVICIOS CONTABLES</option>
+                                <option>MATERIALES</option>
+                                <option>ARRIENDO</option>
+                                <option>MONITOREO</option>
+                                <option>COMBUSTIBLE</option>
+                                <option>DEVOLUCION</option>
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <input [(ngModel)]="factura.bImponible0" name="bImponible0" type="text" class="form-control"
-                                placeholder="bImponible0">
-                        </div>
-                        <div *ngFor="let variable of variables" class="form-group">
-                            <input [(ngModel)]="factura.total/variable.varImponible" name="bImponible" type="text" class="form-control"
-                                placeholder="bImponible">
-                        </div>
-                        <div *ngFor="let variable of variables" class="form-group">
-                            <input [(ngModel)]="factura.total*variable.varIva/variable.varImponible" name="iva" type="text" class="form-control"
-                                placeholder="iva">
-                        </div>
-                        <div class="form-group">
-                            <input [(ngModel)]="factura.total" name="total" type="text" class="form-control"
-                                placeholder="total">
-                        </div>
-                        <div *ngFor="let variable of variables" class="form-group">
-                            <input [(ngModel)]="factura.total/variable.varImponible" name="bImpRet" type="text" class="form-control"
-                                placeholder="bImpRet">
-                        </div>
-                        <div class="form-group">
-                            <input [(ngModel)]="factura.cbte" name="cbte" type="text" class="form-control"
-                                placeholder="cbte">
-                        </div>
-                        <div class="form-group">
-                            <input [(ngModel)]="factura.agnt" name="agnt" type="text" class="form-control"
-                                placeholder="agnt">
-                        </div>
-                        <div *ngFor="let variable of variables" class="form-group">
-                            <input [(ngModel)]="factura.total*variable.varRetIr/variable.varImponible" name="retIr" type="text" class="form-control"
-                                placeholder="retIr">
-                        </div>
-                        <div class="form-group">
-                            <input [(ngModel)]="factura.retIva" name="retIva" type="text" class="form-control"
-                                placeholder="retIva">
-                        </div>
-                        <div *ngFor="let variable of variables" class="form-group">
-                            <input [(ngModel)]="factura.retIva+factura.total*variable.varRetIr/variable.varImponible" name="total2" type="text" class="form-control"
-                                placeholder="total2">
-                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="row">
                         
 
+                        <div class="col">
+                            <label>Base Imponible Iva 0%</label>
+                            <input [(ngModel)]="factura.bImponible0" name="bImponible0" type="text" class="form-control"
+                                placeholder="Base Imponible Iva 0%">
+                        </div>
 
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
-                            <i class="fa fa-save"></i>
-                            Guardar
-                        </button>
-                        <a routerLink="/facturas" class="btn btn-inverse waves-effect waves-light">Cancelar
-                        </a>
-                    </form>
-                </div>
+                        <div  class="col">
+                            <label>Base Imponible Iva</label>
+                            <input [(ngModel)]="factura.bImponible"  name="bImponible" type="text"
+                                class="form-control" placeholder="Base Imponible Iva">
+                        </div>
+    
+                        <div  class="col">
+                            <label>Iva</label>
+                            <input [(ngModel)]="factura.iva" name="iva" type="text"
+                                class="form-control" placeholder="Iva">
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Total</label>
+                            <input [(ngModel)]="factura.total" (ngModelChange)="onChanges($event)" name="total" type="text" class="form-control"
+                                placeholder="Total">
+                        </div>
+    
+                        <div  class="col">
+                            <label>Base Imp. Ret.</label>
+                            <input [(ngModel)]="factura.bImpRet" (ngModelChange)="onChanges1($event)" name="bImpRet" type="text"
+                                class="form-control" placeholder="Base Imp. Ret.">
+                        </div>
+
+                        <div class="col">
+                            <label>Cbte. Retenc.</label>
+                            <input [(ngModel)]="factura.cbte" name="cbte" type="text" class="form-control"
+                                placeholder="Cbte. Retenc.">
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Agnt. Retención</label>
+                            <input [(ngModel)]="factura.agnt" name="agnt" type="text" class="form-control"
+                                placeholder="Agnt. Retención">
+                        </div>
+
+                        <div  class="col">
+                            <label>Ret. I.R</label>
+                            <input [(ngModel)]="factura.retIr" name="retIr"
+                                type="text" class="form-control" placeholder="Ret. I.R">
+                        </div>
+    
+                        <div class="col">
+                            <label>Ret. Iva</label>
+                            <input [(ngModel)]="factura.retIva" name="retIva" type="text" class="form-control"
+                                placeholder="Ret. Iva">
+                        </div>
+
+                        <div  class="col">
+                            <label>Total 2</label>
+                            <input [(ngModel)]="factura.total2"
+                                name="total2" type="text" class="form-control" placeholder="Total 2">
+                        </div>
+
+                    </div>
+
+                   
+
+                    <div class="row mt-4">
+                       
+
+                        <div class="col">
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                                <i class="fa fa-save"></i>
+                                Guardar
+                            </button>
+                            <a routerLink="/facturas" class="btn btn-inverse waves-effect waves-light">Cancelar
+                            </a>
+                        </div>
+    
+                        
+                    </div>
+
+                   
+                    
+
+
+                </form>
+
+
+
+
             </div>
         </div>
     </div>
-
-    
-
 </div>
+
+
+

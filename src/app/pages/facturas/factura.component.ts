@@ -22,6 +22,7 @@ export class FacturaComponent implements OnInit {
   variables: Variable[] = [];
   factura: Factura = new Factura('');
   cliente: Cliente = new Cliente('');
+  
 
   constructor(public _facturaService: FacturaService,
     public _clienteService: ClienteService,
@@ -65,6 +66,34 @@ export class FacturaComponent implements OnInit {
       });
   }
 
+  onChanges( newValue: number ) { 
+    
+    this.factura.bImponible0 = 0; 
+
+    this.factura.bImponible = Math.round(( newValue / this.variables[0].varImponible + Number.EPSILON) * 100) / 100;
+    
+    this.factura.iva = Math.round(( this.factura.bImponible * this.variables[0].varIva + Number.EPSILON) * 100) / 100;
+
+    this.factura.retIr = Math.round(( this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
+  
+  }
+
+  onChanges1( newValue: number ) {    
+ 
+
+    this.factura.retIr = Math.round(( this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
+
+    this.factura.retIva = 0;
+
+    this.factura.total2 = Math.round(( this.factura.retIr + this.factura.retIva + Number.EPSILON) * 100) / 100;
+  
+  }
+
+
+  
+
+ 
+
   guardarFactura(f: NgForm) {
     //console.log(f.valid);
     //console.log(f.value);
@@ -72,11 +101,16 @@ export class FacturaComponent implements OnInit {
       return;
     }
 
+    
+
     this._facturaService.guardarFactura(this.factura)
       .subscribe(factura => {
+        
         //console.log(factura);
-        this.factura._id = factura._id;
-        this.router.navigate(['/factura', factura._id]);
+
+        
+        /* this.factura._id = factura._id;
+        this.router.navigate(['/factura', factura._id]); */
       })
   }
 

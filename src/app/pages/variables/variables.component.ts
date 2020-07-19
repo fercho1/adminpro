@@ -25,6 +25,8 @@ export class VariablesComponent implements OnInit {
   cargarVariables(){
     this._variableService.cargarVariables()
         .subscribe(variables=> this.variables=variables);
+
+        
   }
 
   guardarVariable(variable:Variable){

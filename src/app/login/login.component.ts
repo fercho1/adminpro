@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
       let token = googleUser.getAuthResponse().id_token;
       
       this._usuarioService.loginGoogle(token)
-        .subscribe(()=> window.location.href='#/dashboard');
+        .subscribe(()=> window.location.href='#/mensualIva');
       //console.log(token);
     });
 
@@ -87,13 +87,13 @@ export class LoginComponent implements OnInit {
     let usuario = new Usuario(null, forma.value.email,forma.value.password);
     
     this._usuarioService.login(usuario, forma.value.recuerdame)
-          .subscribe(correcto=> this.router.navigate(['/dashboard']));
+          .subscribe(correcto=> this.router.navigate(['/mensualIva']));
 
 
     /* console.log(forma.valid);
     console.log(forma.value);
      *///console.log('ingresar');
-    //this.router.navigate(['/dashboard']);
+    //this.router.navigate(['/mensualIva']);
   }
 
 }

@@ -11,7 +11,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { ProgressComponent } from './progress/progress.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 
 
@@ -31,11 +31,16 @@ import { FacturaComponent } from './facturas/factura.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ClienteComponent } from './clientes/cliente.component';
 import { VariablesComponent } from './variables/variables.component';
+import { MensualIvaComponent } from './mensual-iva/mensual-iva.component';
+import { SemestralIvaComponent } from './semestral-iva/semestral-iva.component';
+import { ImpuestoRentaComponent } from './impuesto-renta/impuesto-renta.component';
+import { GastosPersonalesComponent } from './gastos-personales/gastos-personales.component';
+import { RetencionesRelacionComponent } from './retenciones-relacion/retenciones-relacion.component';
 
 @NgModule({
     declarations: [
         
-        DashboardComponent,
+        
         ProgressComponent,
         Graficas1Component,
         IncrementadorComponent,
@@ -50,12 +55,17 @@ import { VariablesComponent } from './variables/variables.component';
         FacturaComponent,
         BusquedaComponent,
         ClienteComponent,
-        VariablesComponent
+        VariablesComponent,
+        MensualIvaComponent,
+        SemestralIvaComponent,
+        ImpuestoRentaComponent,
+        GastosPersonalesComponent,
+        RetencionesRelacionComponent
 
     ],
     exports: [
         
-        DashboardComponent,
+        MensualIvaComponent,
         ProgressComponent,
         Graficas1Component
     ],

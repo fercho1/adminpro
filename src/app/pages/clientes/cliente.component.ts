@@ -52,8 +52,8 @@ export class ClienteComponent implements OnInit {
     this._clienteSevice.crearCliente(this.cliente)
       .subscribe(cliente => {
         //console.log(factura);
-        this.cliente._id = cliente._id;
-        this.router.navigate(['/cliente', cliente._id]);
+        /* this.cliente._id = cliente._id;
+        this.router.navigate(['/cliente', cliente._id]); */
         
       })
   }
