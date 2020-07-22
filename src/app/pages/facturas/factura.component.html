@@ -8,8 +8,10 @@
 
 
                     <div class="row">
+
                         <div class="col">
                             <label>Cliente</label>
+
                             <select (change)="cambioCliente($event.target.value)" [(ngModel)]="factura.cliente"
                                 name="cliente" class="form-control" required>
 
@@ -23,7 +25,8 @@
                         <div class="col">
                             <label>Tipo de factura</label>
 
-                            <select [(ngModel)]="factura.tipo" name="tipo" class="form-control" required>
+                            <select [(ngModel)]="factura.tipo" (ngModelChange)="calculoFactura($event)" name="tipo"
+                                class="form-control" required>
 
                                 <option>VENTA DE BIENES Y/O PRESTACION DE SERVICIOS</option>
                                 <option>COMPRAS</option>
@@ -65,89 +68,99 @@
                             </select>
                         </div>
 
-                    </div>
-
-                    <br>
-
-                    <div class="row">
-                        
-
                         <div class="col">
                             <label>Base Imponible Iva 0%</label>
-                            <input [(ngModel)]="factura.bImponible0" name="bImponible0" type="text" class="form-control"
+                            <input [(ngModel)]="factura.bImponible0" name="bImponible0" type="number" class="form-control"
                                 placeholder="Base Imponible Iva 0%">
                         </div>
 
-                        <div  class="col">
-                            <label>Base Imponible Iva</label>
-                            <input [(ngModel)]="factura.bImponible"  name="bImponible" type="text"
-                                class="form-control" placeholder="Base Imponible Iva">
-                        </div>
-    
-                        <div  class="col">
-                            <label>Iva</label>
-                            <input [(ngModel)]="factura.iva" name="iva" type="text"
-                                class="form-control" placeholder="Iva">
-                        </div>
-
                     </div>
 
                     <br>
 
                     <div class="row">
+
+
+
+
+                        <div class="col">
+                            <label>Base Imponible Iva</label>
+                            <input [(ngModel)]="factura.bImponible" (ngModelChange)="calculoDatos($event)" name="bImponible" type="number" class="form-control"
+                                placeholder="Base Imponible Iva">
+                        </div>
+
+                        <div class="col">
+                            <label>Iva</label>
+                            <input [(ngModel)]="factura.iva" name="iva" type="number" class="form-control"
+                                placeholder="Iva">
+                        </div>
+
                         <div class="col">
                             <label>Total</label>
-                            <input [(ngModel)]="factura.total" (ngModelChange)="onChanges($event)" name="total" type="text" class="form-control"
+                            <input [(ngModel)]="factura.total" (ngModelChange)="calculoDatos($event)" name="total" type="text" class="form-control"
                                 placeholder="Total">
-                        </div>
-    
-                        <div  class="col">
-                            <label>Base Imp. Ret.</label>
-                            <input [(ngModel)]="factura.bImpRet" (ngModelChange)="onChanges1($event)" name="bImpRet" type="text"
-                                class="form-control" placeholder="Base Imp. Ret.">
-                        </div>
-
-                        <div class="col">
-                            <label>Cbte. Retenc.</label>
-                            <input [(ngModel)]="factura.cbte" name="cbte" type="text" class="form-control"
-                                placeholder="Cbte. Retenc.">
                         </div>
 
                     </div>
 
                     <br>
 
-                    <div class="row">
-                        <div class="col">
-                            <label>Agnt. Retención</label>
-                            <input [(ngModel)]="factura.agnt" name="agnt" type="text" class="form-control"
-                                placeholder="Agnt. Retención">
+                    <div *ngIf="mostrarCol">
+
+                        <div class="row">
+
+
+                            <div  class="col">
+                                <label>Base Imp. Ret.</label>
+                                <input [(ngModel)]="factura.bImpRet" (ngModelChange)="onChanges1($event)" name="bImpRet" type="text" class="form-control"
+                                    placeholder="Base Imp. Ret.">
+                            </div>
+
+                            <div class="col">
+                                <label>Cbte. Retenc.</label>
+                                <input [(ngModel)]="factura.cbte" name="cbte" type="text" class="form-control"
+                                    placeholder="Cbte. Retenc.">
+                            </div>
+
+                            <div class="col">
+                                <label>Agnt. Retención</label>
+                                <input [(ngModel)]="factura.agnt" name="agnt" type="text" class="form-control"
+                                    placeholder="Agnt. Retención">
+                            </div>
+
                         </div>
 
-                        <div  class="col">
-                            <label>Ret. I.R</label>
-                            <input [(ngModel)]="factura.retIr" name="retIr"
-                                type="text" class="form-control" placeholder="Ret. I.R">
-                        </div>
-    
-                        <div class="col">
-                            <label>Ret. Iva</label>
-                            <input [(ngModel)]="factura.retIva" name="retIva" type="text" class="form-control"
-                                placeholder="Ret. Iva">
-                        </div>
+                        <br>
 
-                        <div  class="col">
-                            <label>Total 2</label>
-                            <input [(ngModel)]="factura.total2"
-                                name="total2" type="text" class="form-control" placeholder="Total 2">
+                        <div class="row">
+
+
+                            <div class="col">
+                                <label>Ret. I.R</label>
+                                <input [(ngModel)]="factura.retIr" name="retIr" type="number" class="form-control"
+                                    placeholder="Ret. I.R">
+                            </div>
+
+                            <div class="col">
+                                <label>Ret. Iva</label>
+                                <input [(ngModel)]="factura.retIva" name="retIva" type="number" class="form-control"
+                                    placeholder="Ret. Iva">
+                            </div>
+
+                            <div class="col">
+                                <label>Total 2</label>
+                                <input [(ngModel)]="factura.total2" name="total2" type="number" class="form-control"
+                                    placeholder="Total 2">
+                            </div>
+
                         </div>
 
                     </div>
 
-                   
+
 
                     <div class="row mt-4">
-                       
+
 
                         <div class="col">
                             <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
@@ -157,12 +170,12 @@
                             <a routerLink="/facturas" class="btn btn-inverse waves-effect waves-light">Cancelar
                             </a>
                         </div>
-    
-                        
+
+
                     </div>
 
-                   
-                    
+
+
 
 
                 </form>
@@ -174,6 +187,3 @@
         </div>
     </div>
 </div>
-
-
-

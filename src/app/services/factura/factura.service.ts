@@ -18,6 +18,16 @@ export class FacturaService {
     public _usuarioService: UsuarioService,
     public router: Router) { }
 
+  cargarFacturasAgrupadas() {
+
+
+
+    let url = URL_SERVICIOS + '/factura/group';
+    return this.http.get(url);
+
+
+  }
+
   cargarFacturas(desde: number = 0) {
 
 

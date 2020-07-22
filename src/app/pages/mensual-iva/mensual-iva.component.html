@@ -1,1 +1,77 @@
-<p>mensual-iva works!</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!--  <input #input (keyup)="buscarCliente(input.value)" type="text" class="form-control"
+                    placeholder="Buscar cliente..."> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+
+
+                <h3 class="card-title">Totales Facturas Agrupadas (<small>{{totalRegistros}}</small>)</h3>
+
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Anio y Mes</th>
+                                <th>Tipo</th>
+                                
+                                <th>Base Imponible IVA 0%</th>
+                                <th>Base Imponible IVA</th>
+                                <th>Iva</th>
+                                <th>Total</th>
+                                <th>Base Imp. Ret.</th>
+                                <th>Ret. I.R</th>
+                                <th>Ret. Iva</th>
+                                <th>Total 2</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let facturas of facturasAgr">
+
+                                <td>{{facturas.cliente[0].nombre}}</td>
+                                <td>{{facturas._id.mes}}-{{facturas._id.anio}}</td>
+                                <td>{{facturas._id.tipo}}</td>
+                                <td>{{facturas.totalbImponible0}}</td>
+                                <td>{{facturas.totalbImponible}}</td>
+                                <td>{{facturas.totalIva}}</td>
+                                <td>{{facturas.total}}</td>
+                                <td>{{facturas.totalbImpRet}}</td>
+                                <td>{{facturas.totalretIr}}</td>
+                                <td>{{facturas.totalretIva}}</td>
+                                <td>{{facturas.total2}}</td>
+
+
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-3">
+                Anteriores
+            </button>
+
+            <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                Siguientes
+            </button> -->
+
+            </div>
+        </div>
+    </div>
+</div>

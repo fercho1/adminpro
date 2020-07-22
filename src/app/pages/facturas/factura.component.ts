@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { Variable } from './../../models/variable.model';
 import { VariableService } from './../../services/variable/variable.service';
 import { ModalUploadService } from './../../components/modal-upload/modal-upload.service';
@@ -6,8 +7,10 @@ import { ClienteService } from './../../services/cliente/cliente.service';
 import { Cliente } from './../../models/cliente.model';
 import { NgForm } from '@angular/forms';
 import { FacturaService } from './../../services/factura/factura.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Factura } from 'src/app/models/factura.model';
+
+
 
 @Component({
   selector: 'app-factura',
@@ -18,18 +21,21 @@ import { Factura } from 'src/app/models/factura.model';
 export class FacturaComponent implements OnInit {
 
 
+
+  mostrarCol: boolean = false;
   clientes: Cliente[] = [];
   variables: Variable[] = [];
   factura: Factura = new Factura('');
   cliente: Cliente = new Cliente('');
-  
+
 
   constructor(public _facturaService: FacturaService,
     public _clienteService: ClienteService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public _modalUploadService: ModalUploadService,
-    public _variableService: VariableService
+    public _variableService: VariableService,
+    @Inject(DOCUMENT) private _document
   ) {
     activatedRoute.params.subscribe(params => {
       let id = params['id'];
@@ -44,7 +50,7 @@ export class FacturaComponent implements OnInit {
     this._clienteService.cargarClientesFac()
       .subscribe(clientes => this.clientes = clientes);
 
-      this._variableService.cargarVariables()
+    this._variableService.cargarVariables()
       .subscribe(variables => this.variables = variables);
 
     this._modalUploadService.notificacion
@@ -52,6 +58,8 @@ export class FacturaComponent implements OnInit {
         //console.log(resp);
         this.factura.img = resp.factura.img;
       });
+
+
   }
 
   cargarFactura(id: string) {
@@ -66,33 +74,109 @@ export class FacturaComponent implements OnInit {
       });
   }
 
-  onChanges( newValue: number ) { 
-    
-    this.factura.bImponible0 = 0; 
 
-    this.factura.bImponible = Math.round(( newValue / this.variables[0].varImponible + Number.EPSILON) * 100) / 100;
-    
-    this.factura.iva = Math.round(( this.factura.bImponible * this.variables[0].varIva + Number.EPSILON) * 100) / 100;
 
-    this.factura.retIr = Math.round(( this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
-  
+
+  calculoDatos(newValue: number) {
+    //console.log(this.factura.tipo);
+
+    if (this.factura.tipo === 'VENTA DE BIENES Y/O PRESTACION DE SERVICIOS') {
+      this.factura.bImponible0 = 0;
+
+      this.factura.bImponible = Math.round((newValue / this.variables[0].varImponible + Number.EPSILON) * 100) / 100;
+
+      this.factura.iva = Math.round((this.factura.bImponible * this.variables[0].varIva + Number.EPSILON) * 100) / 100;
+
+      this.factura.retIr = Math.round((this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
+    }
+    else{
+      
+      this.factura.iva = Math.round((this.factura.bImponible * this.variables[0].varIva + Number.EPSILON) * 100) / 100;
+      
+      this.factura.total = Math.round((this.factura.bImponible0 + this.factura.bImponible + this.factura.iva + Number.EPSILON) * 100) / 100;
+    }
+    
+
+
   }
 
-  onChanges1( newValue: number ) {    
- 
+  onChanges1(newValue: number) {
 
-    this.factura.retIr = Math.round(( this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
+
+    this.factura.retIr = Math.round((this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
 
     this.factura.retIva = 0;
 
-    this.factura.total2 = Math.round(( this.factura.retIr + this.factura.retIva + Number.EPSILON) * 100) / 100;
-  
+
+    this.factura.total2 = Math.round((this.factura.retIr + this.factura.retIva + Number.EPSILON) * 100) / 100;
+
   }
 
 
-  
 
+
+  calculoFactura(tipo: string) {
+
+    switch (tipo) {
+      case "VENTA DE BIENES Y/O PRESTACION DE SERVICIOS": {
+        //console.log("VENTA DE BIENES Y/O PRESTACION DE SERVICIOS");
+        this.mostrarCol = true;
+
+
+
+
+        break;
+      }
+      default: {
+        //console.log("default");
+      /*   this.factura.bImponible0=null;
+        this.factura.bImponible=null;
+        this.factura.iva=null;
+        this.factura.retIr=null;
+        this.factura.retIr=null;
+        this.factura.retIva=null;
+        this.factura.total2=null;
+        this.factura.bImpRet=null; */
+        this.mostrarCol = false;
+
+
+        break;
+      }
+    }
+
+
+
+  }
+
+
+
+  /*  onChanges(newValue: number) {
+     
+     this.factura.bImponible0 = 0;
  
+     this.factura.bImponible = Math.round((newValue / this.variables[0].varImponible + Number.EPSILON) * 100) / 100;
+ 
+     this.factura.iva = Math.round((this.factura.bImponible * this.variables[0].varIva + Number.EPSILON) * 100) / 100;
+ 
+     this.factura.retIr = Math.round((this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
+ 
+   }
+ 
+   onChanges1(newValue: number) {
+ 
+ 
+     this.factura.retIr = Math.round((this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
+ 
+     this.factura.retIva = 0;
+ 
+     this.factura.total2 = Math.round((this.factura.retIr + this.factura.retIva + Number.EPSILON) * 100) / 100;
+ 
+   } */
+
+
+
+
+
 
   guardarFactura(f: NgForm) {
     //console.log(f.valid);
@@ -101,14 +185,14 @@ export class FacturaComponent implements OnInit {
       return;
     }
 
-    
+
 
     this._facturaService.guardarFactura(this.factura)
       .subscribe(factura => {
-        
+
         //console.log(factura);
 
-        
+
         /* this.factura._id = factura._id;
         this.router.navigate(['/factura', factura._id]); */
       })
@@ -126,5 +210,7 @@ export class FacturaComponent implements OnInit {
   cambiarFoto() {
     this._modalUploadService.mostrarModal('facturas', this.factura._id);
   }
+
+
 
 }
