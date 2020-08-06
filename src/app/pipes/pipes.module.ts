@@ -1,5 +1,6 @@
 import { ImagenPipe } from './imagen.pipe';
 import { NgModule } from '@angular/core';
+import { MesesPipe } from './meses.pipe';
 
 
 
@@ -9,10 +10,12 @@ import { NgModule } from '@angular/core';
 @NgModule({
   imports: [  ],
   declarations: [
-    ImagenPipe
+    ImagenPipe,
+    MesesPipe
   ],
   exports:[
-    ImagenPipe
+    ImagenPipe,
+    MesesPipe
   ]
 })
 export class PipesModule { }

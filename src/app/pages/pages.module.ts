@@ -6,6 +6,8 @@ import { SharedModule } from './../shared/shared.module';
 import { PAGES_ROUTES } from './pages.routes';
 import { FormsModule } from '@angular/forms'
 
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 // ng2 - charts
 import { ChartsModule } from 'ng2-charts';
 
@@ -75,7 +77,8 @@ import { RetencionesRelacionComponent } from './retenciones-relacion/retenciones
         PAGES_ROUTES,
         FormsModule,
         ChartsModule,
-        PipesModule
+        PipesModule,
+        NgxDatatableModule
     ]
 })
 

@@ -70,7 +70,7 @@
 
                         <div class="col">
                             <label>Base Imponible Iva 0%</label>
-                            <input [(ngModel)]="factura.bImponible0" name="bImponible0" type="number" class="form-control"
+                            <input [(ngModel)]="factura.bImponible0" name="bImponible0" type="number" step="0.01" class="form-control"
                                 placeholder="Base Imponible Iva 0%">
                         </div>
 
@@ -85,19 +85,19 @@
 
                         <div class="col">
                             <label>Base Imponible Iva</label>
-                            <input [(ngModel)]="factura.bImponible" (ngModelChange)="calculoDatos($event)" name="bImponible" type="number" class="form-control"
+                            <input [(ngModel)]="factura.bImponible" (ngModelChange)="calculoDatos($event)" name="bImponible" type="number" step="0.01" class="form-control"
                                 placeholder="Base Imponible Iva">
                         </div>
 
                         <div class="col">
                             <label>Iva</label>
-                            <input [(ngModel)]="factura.iva" name="iva" type="number" class="form-control"
+                            <input [(ngModel)]="factura.iva" name="iva" type="number" step="0.01" class="form-control"
                                 placeholder="Iva">
                         </div>
 
                         <div class="col">
                             <label>Total</label>
-                            <input [(ngModel)]="factura.total" (ngModelChange)="calculoDatos($event)" name="total" type="text" class="form-control"
+                            <input [(ngModel)]="factura.total" (ngModelChange)="calculoDatos($event)" name="number" step="0.01" type="text" class="form-control"
                                 placeholder="Total">
                         </div>
 
@@ -112,7 +112,7 @@
 
                             <div  class="col">
                                 <label>Base Imp. Ret.</label>
-                                <input [(ngModel)]="factura.bImpRet" (ngModelChange)="onChanges1($event)" name="bImpRet" type="text" class="form-control"
+                                <input [(ngModel)]="factura.bImpRet" (ngModelChange)="onChanges1($event)" name="bImpRet" type="number" step="0.01" class="form-control"
                                     placeholder="Base Imp. Ret.">
                             </div>
 
@@ -137,19 +137,19 @@
 
                             <div class="col">
                                 <label>Ret. I.R</label>
-                                <input [(ngModel)]="factura.retIr" name="retIr" type="number" class="form-control"
+                                <input [(ngModel)]="factura.retIr" name="retIr" type="number" step="0.01" class="form-control"
                                     placeholder="Ret. I.R">
                             </div>
 
                             <div class="col">
                                 <label>Ret. Iva</label>
-                                <input [(ngModel)]="factura.retIva" name="retIva" type="number" class="form-control"
+                                <input [(ngModel)]="factura.retIva" name="retIva" type="number" step="0.01" class="form-control"
                                     placeholder="Ret. Iva">
                             </div>
 
                             <div class="col">
                                 <label>Total 2</label>
-                                <input [(ngModel)]="factura.total2" name="total2" type="number" class="form-control"
+                                <input [(ngModel)]="factura.total2" name="total2" type="number" step="0.01" class="form-control"
                                     placeholder="Total 2">
                             </div>
 

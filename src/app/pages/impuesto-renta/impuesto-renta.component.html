@@ -1,1 +1,59 @@
-<p>impuesto-renta works!</p>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+
+
+                <h3 class="card-title">Totales Facturas Agrupadas</h3>
+
+
+                <div class="table-responsive">
+
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Año</th>
+                                <th>Mes</th>
+                                <th>Ingresos</th>
+                                <th>Total Ingresos</th>
+                                <th>Egresos</th>
+                                <th>Total Egresos</th>
+                                <th>Retención</th>
+                                <th>Total Retención</th>
+                               
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        
+                            
+                            <ng-template ngFor let-totalIng [ngForOf]="totalIng">
+                                <tr *ngFor="let child of totalIng">
+                                    
+                                    <td>{{ child.nombre }}</td>
+                                    <td>{{ child.anio }}</td>
+                                    <td>{{ child.mes| meses }}</td>
+                                    <td>{{ child.ingreso }}</td>
+                                    <td class="totales">{{ child.totalIng | number : '1.2-2'}}</td>
+                                    <td>{{ child.egreso }}</td>
+                                    <td class="totales">{{ child.totalEg | number : '1.2-2'}}</td>
+                                    <td>{{ child.retencion }}</td>
+                                    <td class="totales">{{ child.totalRet | number : '1.2-2'}}</td>                                                
+
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

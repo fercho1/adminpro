@@ -50,7 +50,7 @@
                                 <td style="width: 25%">{{factura.cliente.nombre}}</td>
                                 <td>{{factura.tipo}}</td>
                                 <td>{{factura.numFactura}}</td>
-                                <td>{{factura.fecha}}</td>
+                                <td>{{factura.fecha | date:'dd/MM/yyyy'}}</td>
                                 <td class="text-center">
                                     <label *ngIf="factura.concepto==='VENTAS'" class="label label-success">{{factura.concepto}}</label>
                                     <label *ngIf="factura.concepto==='ANULADO'" class="label label-danger">{{factura.concepto}}</label>

@@ -3,6 +3,8 @@ import { PagesComponent } from './pages/pages.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 //Rutas
 import { APP_ROUTES } from './app.routes';
 
@@ -37,7 +39,8 @@ import { RegisterComponent } from './login/register.component';
     FormsModule,
     ReactiveFormsModule,
     ServiceModule,
-    SharedModule
+    SharedModule,
+    NgxDatatableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,6 +8,8 @@ import { UsuarioService } from './../services/service.index';
 declare function init_plugins();
 declare const gapi:any;
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -106,5 +108,7 @@ export class LoginComponent implements OnInit {
       x.type = "password";
     }
   }
+
+  
 
 }

@@ -25,9 +25,10 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Anio y Mes</th>
+                                <th>Anio</th>
+                                <th>Mes</th>
                                 <th>Tipo</th>
-                                
+
                                 <th>Base Imponible IVA 0%</th>
                                 <th>Base Imponible IVA</th>
                                 <th>Iva</th>
@@ -44,16 +45,17 @@
                             <tr *ngFor="let facturas of facturasAgr">
 
                                 <td>{{facturas.cliente[0].nombre}}</td>
-                                <td>{{facturas._id.mes}}-{{facturas._id.anio}}</td>
+                                <td>{{facturas._id.anio}}</td>
+                                <td>{{facturas._id.mes}}</td>
                                 <td>{{facturas._id.tipo}}</td>
-                                <td>{{facturas.totalbImponible0}}</td>
-                                <td>{{facturas.totalbImponible}}</td>
-                                <td>{{facturas.totalIva}}</td>
-                                <td>{{facturas.total}}</td>
-                                <td>{{facturas.totalbImpRet}}</td>
-                                <td>{{facturas.totalretIr}}</td>
-                                <td>{{facturas.totalretIva}}</td>
-                                <td>{{facturas.total2}}</td>
+                                <td>{{facturas.totalbImponible0 | number : '1.2-2'}}</td>
+                                <td>{{facturas.totalbImponible | number : '1.2-2'}}</td>
+                                <td>{{facturas.totalIva | number : '1.2-2'}}</td>
+                                <td>{{facturas.total | number : '1.2-2'}}</td>
+                                <td>{{facturas.totalbImpRet | number : '1.2-2'}}</td>
+                                <td>{{facturas.totalretIr | number : '1.2-2'}}</td>
+                                <td>{{facturas.totalretIva | number : '1.2-2'}}</td>
+                                <td>{{facturas.total2 | number : '1.2-2'}}</td>
 
 
 

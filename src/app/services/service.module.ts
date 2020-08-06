@@ -16,7 +16,8 @@ import {  SettingsService,
           ClienteService,
           FacturaService,
           VerificaTokenGuard,
-          VariableService } from './service.index'
+          VariableService,
+          ImpuestoRentaService } from './service.index'
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -37,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     ClienteService,
     FacturaService,
     VariableService,
+    ImpuestoRentaService,
     AdminGuard,
     VerificaTokenGuard
   ]

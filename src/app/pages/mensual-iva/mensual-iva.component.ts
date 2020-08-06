@@ -2,6 +2,8 @@ import { FacturaAgrupada } from './../../models/facturaAgrupada.model';
 import { FacturaService } from './../../services/factura/factura.service';
 import { Component, OnInit } from '@angular/core';
 
+
+
 @Component({
   selector: 'app-mensual-iva',
   templateUrl: './mensual-iva.component.html',
@@ -28,9 +30,11 @@ export class MensualIvaComponent implements OnInit {
 
         this.totalRegistros = resp.total;
         this.facturasAgr = resp.facturas;
-        console.log(this.facturasAgr);
+        //console.log(this.facturasAgr);
 
       });
   }
+
+ 
 
 }
