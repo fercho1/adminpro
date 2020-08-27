@@ -38,6 +38,12 @@ import { SemestralIvaComponent } from './semestral-iva/semestral-iva.component';
 import { ImpuestoRentaComponent } from './impuesto-renta/impuesto-renta.component';
 import { GastosPersonalesComponent } from './gastos-personales/gastos-personales.component';
 import { RetencionesRelacionComponent } from './retenciones-relacion/retenciones-relacion.component';
+import { ReportesComponent } from './reportes/reportes.component';
+import { ReporteComponent } from './reportes/reporte.component';
+
+
+
+
 
 @NgModule({
     declarations: [
@@ -62,7 +68,9 @@ import { RetencionesRelacionComponent } from './retenciones-relacion/retenciones
         SemestralIvaComponent,
         ImpuestoRentaComponent,
         GastosPersonalesComponent,
-        RetencionesRelacionComponent
+        RetencionesRelacionComponent,
+        ReportesComponent,
+        ReporteComponent
 
     ],
     exports: [

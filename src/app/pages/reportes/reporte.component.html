@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+
+                <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarReporte(f)">
+
+
+                    <div class="row">
+
+                        <div class="col">
+                            <label>Año</label>
+
+                            <select (change)="cambioCliente($event.target.value)" [(ngModel)]="reporte.cliente"
+                                name="cliente" class="form-control" required>
+
+                                <option *ngFor="let cliente of clientes" [value]="cliente._id">
+                                    {{cliente.anio}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label>Cliente</label>
+
+                            <select (change)="cambioCliente($event.target.value)" [(ngModel)]="reporte.cliente"
+                                name="cliente" class="form-control" required>
+
+                                <option *ngFor="let cliente of clientes" [value]="cliente._id">
+                                    {{cliente.nombre}}
+                                </option>
+                            </select>
+                        </div>
+
+
+                       
+
+                    </div>
+                    <br>
+
+                   
+
+                   
+
+                  
+
+
+
+
+
+                    <div class="row mt-4">
+
+
+                        <div class="col">
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                                <i class="fa fa-save"></i>
+                                Guardar
+                            </button>
+                            <a routerLink="/reportes" class="btn btn-inverse waves-effect waves-light">Cancelar
+                            </a>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                </form>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

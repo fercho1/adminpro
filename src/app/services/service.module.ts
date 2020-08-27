@@ -1,6 +1,7 @@
 
 
 
+
 import { ModalUploadService } from './../components/modal-upload/modal-upload.service';
 
 
@@ -15,6 +16,7 @@ import {  SettingsService,
           SubirArchivoService,
           ClienteService,
           FacturaService,
+          ReporteService,
           VerificaTokenGuard,
           VariableService,
           ImpuestoRentaService } from './service.index'
@@ -37,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     ModalUploadService,
     ClienteService,
     FacturaService,
+    ReporteService,
     VariableService,
     ImpuestoRentaService,
     AdminGuard,

@@ -1,7 +1,7 @@
 import { ImpuestoRentaService } from './../../services/impuesto-renta/impuesto-renta.service';
 import { FacturaAgrupada } from './../../models/facturaAgrupada.model';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-impuesto-renta',
@@ -20,16 +20,31 @@ export class ImpuestoRentaComponent implements OnInit {
   arreglado1: any = [];
   dataExt: any[] = [];
   result: any[] = [];
+  result1: void;
 
 
   totalIng: any;
+  totalIng1: any;
   totalEg: number;
   totalRet: number;
 
   constructor(public _impuestoRentaService: ImpuestoRentaService) { }
   ngOnInit(): void {
     this.cargarFacturasAgrupadas();
+    
   }
+
+  cargarDatos(){
+    //console.log(this.totalIng1);
+    this._impuestoRentaService.crearCliente(this.totalIng1)
+      .subscribe(user => {
+       
+        
+      })
+  }
+
+
+  
 
   cargarFacturasAgrupadas() {
     this._impuestoRentaService.cargarFacturasAgrupadas()
@@ -50,9 +65,13 @@ export class ImpuestoRentaComponent implements OnInit {
             }
           }
         }
+
+        //console.log(resp);
         this.arreglado = resp.map(item => {
           return {
             nombre: item.cliente[0].nombre,
+            cedula: item.cliente[0].cedula,
+            clave: item.cliente[0].clave,
             ruc: item.cliente[0].ruc,
             anio: item._id.anio,
             mes: item._id.mes,
@@ -82,16 +101,55 @@ export class ImpuestoRentaComponent implements OnInit {
 
         //console.log(this.result);
 
-        this.totalIng = this.result.map((resp) => {
+        this.totalIng1 = this.result.map((resp) => {
 
           let totalIng = 0;
           let totalEg = 0;
           let totalRet = 0;
+          let anio = 0;
+          let cedula = "";
+          let nombre = "";
+          let clave = "";
+          let ruc = "";
 
           for (let i = 0; i < resp.length; i++) {
             totalIng += resp[i].ingreso;
             totalEg += resp[i].egreso;
             totalRet += resp[i].retencion;
+            cedula = resp[i].cedula;
+            nombre = resp[i].nombre;
+            ruc = resp[i].ruc;
+            clave = resp[i].clave;
+            anio = resp[i].anio;
+
+          }
+
+          let totales = {"cedula": cedula, "nombre": nombre, "ruc": ruc, "clave": clave, "anio": anio, "totalIng": totalIng, "totalEg": totalEg, "totalRet": totalRet}
+
+         
+
+          //return [{ ...resp, "Ingresos": total } ];
+          return totales;
+        });
+
+      
+
+        //console.log(this.totalIng1);
+
+        this.totalIng = this.result.map((resp) => {
+
+          let totalIng = 0;
+          let totalEg = 0;
+          let totalRet = 0;
+          let anio = 0;
+          let nom = "";
+
+          for (let i = 0; i < resp.length; i++) {
+            totalIng += resp[i].ingreso;
+            totalEg += resp[i].egreso;
+            totalRet += resp[i].retencion;
+            nom = resp[i].nombre;
+            anio = resp[i].anio;
 
           }
 

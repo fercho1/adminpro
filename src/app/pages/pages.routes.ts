@@ -1,3 +1,4 @@
+import { ReportesComponent } from './reportes/reportes.component';
 import { GastosPersonalesComponent } from './gastos-personales/gastos-personales.component';
 import { ImpuestoRentaComponent } from './impuesto-renta/impuesto-renta.component';
 import { SemestralIvaComponent } from './semestral-iva/semestral-iva.component';
@@ -22,6 +23,7 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { ProgressComponent } from './progress/progress.component';
 import { PagesComponent } from './pages.component';
 import { Routes, RouterModule } from '@angular/router';
+import { ReporteComponent } from './reportes/reporte.component';
 
 
 const pagesRoutes: Routes = [
@@ -37,6 +39,8 @@ const pagesRoutes: Routes = [
     { path: 'impuestoRenta', component: ImpuestoRentaComponent, data: { titulo: 'Declaración de Impuesto a la Renta ' } },
     { path: 'gastosPersonales', component: GastosPersonalesComponent, data: { titulo: 'Anexo de Gastos Personales' } },
     { path: 'retencionesRelacion', component: GastosPersonalesComponent, data: { titulo: 'Anexo de Retenciones en la fuente por relación de dependencia' } },
+    { path: 'reportes', component: ReportesComponent, data: { titulo: 'Reportes' } },
+    { path: 'reporte/:id', component: ReporteComponent, data: { titulo: 'Reporte' } },
     { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del tema' } },
     { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
     { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },

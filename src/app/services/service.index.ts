@@ -1,3 +1,4 @@
+export { ReporteService } from './reporte/reporte.service';
 export { ImpuestoRentaService } from './impuesto-renta/impuesto-renta.service';
 export { VariableService } from './variable/variable.service';
 export { VerificaTokenGuard } from './guards/verifica-token.guard';
@@ -13,6 +14,8 @@ export {SharedService} from './shared/shared.service';
 export {SidebarService} from './shared/sidebar.service';
 
 export { UsuarioService } from './usuario/usuario.service';
+
+
 
 
 
