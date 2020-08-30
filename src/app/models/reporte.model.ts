@@ -10,6 +10,7 @@ export class Reporte {
         public totalIng?: number,
         public totalRet?: number,
         public cliente?: string,
+        public sueldos?: number,
         public _id?: string
         
     ) { }

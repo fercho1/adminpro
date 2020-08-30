@@ -6,38 +6,113 @@
 
                 <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarReporte(f)">
 
-
-                    <div class="row">
+                    <div class="row" *ngIf="!mostrar">
 
                         <div class="col">
-                            <label>Año</label>
+                            <label>Cliente y Año</label>
 
-                            <select (change)="cambioCliente($event.target.value)" [(ngModel)]="reporte.cliente"
-                                name="cliente" class="form-control" required>
+                            <select (change)="cambioCliente($event.target.value)" [(ngModel)]="cliente.cliente"
+                                name="cliente" class="form-control">
 
                                 <option *ngFor="let cliente of clientes" [value]="cliente._id">
-                                    {{cliente.anio}}
+                                    {{cliente.nombre}}-{{cliente.anio}}
                                 </option>
                             </select>
                         </div>
-
-                        <div class="col">
-                            <label>Cliente</label>
-
-                            <select (change)="cambioCliente($event.target.value)" [(ngModel)]="reporte.cliente"
-                                name="cliente" class="form-control" required>
-
-                                <option *ngFor="let cliente of clientes" [value]="cliente._id">
-                                    {{cliente.nombre}}
-                                </option>
-                            </select>
-                        </div>
-
-
-                       
 
                     </div>
                     <br>
+                    
+
+
+                    <div class="row">
+
+                        
+
+                        <div class="col">
+                            <label>Año</label>
+                            <input [(ngModel)]="reporte.anio" name="anio" type="text" class="form-control"
+                                placeholder="Año" disabled>
+                        </div> 
+
+                        <div class="col">
+                            <label>Cédula</label>
+                            <input [(ngModel)]="reporte.cedula" name="cedula" type="text" class="form-control"
+                                placeholder="Cédula" disabled>
+                        </div> 
+                        
+                        <div class="row">
+                            <div class="col">
+                                <label>Clave</label>
+                                <input [(ngModel)]="reporte.clave" name="clave" type="text" class="form-control"
+                                    placeholder="Clave" disabled>
+                            </div> 
+    
+                        </div>
+                        
+                        
+
+                    </div>
+                    <br>
+
+                    <div class="row">
+
+                        
+
+                        <div class="col">
+                            <label>Nombre</label>
+                            <input [(ngModel)]="reporte.nombre" name="nombre" type="text" class="form-control"
+                                placeholder="Nombre" disabled>
+                        </div> 
+
+                        <div class="col">
+                            <label>Ruc</label>
+                            <input [(ngModel)]="reporte.ruc" name="ruc" type="text" class="form-control"
+                                placeholder="Ruc" disabled>
+                        </div> 
+                        
+                        <div class="row">
+                            <div class="col">
+                                <label>Ingresos</label>
+                                <input [(ngModel)]="reporte.totalIng" name="totalIng" type="text" class="form-control"
+                                    placeholder="Ingresos" disabled>
+                            </div> 
+    
+                        </div>
+                        
+                        
+
+                    </div>
+
+                    <div class="row">
+
+                        
+
+                        <div class="col">
+                            <label>Egresos</label>
+                            <input [(ngModel)]="reporte.totalEg" name="totalEg" type="text" class="form-control"
+                                placeholder="Egresos" disabled>
+                        </div> 
+
+                        <div class="col">
+                            <label>Retención</label>
+                            <input [(ngModel)]="reporte.totalRet" name="totalRet" type="text" class="form-control"
+                                placeholder="Retención" disabled>
+                        </div> 
+
+                        <div class="col">
+                            <label>Sueldos</label>
+                            <input [(ngModel)]="reporte.sueldos" name="sueldos" type="number" step="0.01" class="form-control"
+                                placeholder="Sueldos" >
+                        </div> 
+                        
+                       
+                        
+                        
+
+                    </div>
+
+                    
 
                    
 

@@ -9,6 +9,7 @@ export class User {
         public totalEg?: number,
         public totalIng?: number,
         public totalRet?: number,
+        public cliente?: number,
         public _id?: string
     ) { }
 

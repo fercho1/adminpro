@@ -18,20 +18,25 @@ export class ReporteComponent implements OnInit {
   cliente: User = new User();
 
   reporte: Reporte = new Reporte();
+
+  mostrar: boolean = false;
+
   
+
 
   constructor(public _reporteService: ReporteService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
     @Inject(DOCUMENT) private _document) {
-      activatedRoute.params.subscribe(params => {
-        let id = params['id'];
-  
-        if (id !== 'nuevo') {
-          this.cargarReporte(id);
-        }
-      });
-     }
+    activatedRoute.params.subscribe(params => {
+      let id = params['id'];
+
+      if (id !== 'nuevo') {
+        this.mostrar = true;
+        this.cargarReporte(id);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this._reporteService.cargarClientesTotales()
@@ -40,9 +45,20 @@ export class ReporteComponent implements OnInit {
   }
 
   cambioCliente(id: string) {
-    //console.log(event);
+    //console.log(id);
     this._reporteService.obtenerClienteT(id)
-      .subscribe(cliente => this.cliente = cliente);
+      .subscribe(cliente => {
+
+        cliente._id = null;
+        //console.log(cliente);
+
+        
+        
+
+        this.reporte = cliente;
+        
+      }
+      );
   }
 
   cargarReporte(id: string) {
@@ -51,9 +67,9 @@ export class ReporteComponent implements OnInit {
 
         //console.log(reporte);
 
-        this.reporte = reporte
-        this.reporte.cliente = reporte.cliente._id;
-        this.cambioCliente(this.reporte.cliente);
+        this.reporte = reporte;
+        
+        
       });
   }
 
@@ -64,12 +80,15 @@ export class ReporteComponent implements OnInit {
       return;
     }
 
-
+   //console.log(this.cliente);
+   
+  
+   //console.log(this.reporte);
 
     this._reporteService.guardarReporte(this.reporte)
       .subscribe(reporte => {
 
-        //console.log(factura);
+        //console.log(reporte);
 
 
         /* this.factura._id = factura._id;
@@ -77,6 +96,6 @@ export class ReporteComponent implements OnInit {
       })
   }
 
-  
+
 
 }

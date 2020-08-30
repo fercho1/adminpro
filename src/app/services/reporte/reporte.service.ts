@@ -18,90 +18,99 @@ export class ReporteService {
     public _usuarioService: UsuarioService,
     public router: Router) { }
 
-    cargarClientesTotales(){
+  cargarClientesTotales() {
 
-      let url = URL_SERVICIOS + '/user/todo';
-      return this.http.get(url)
-                .map((resp:any)=> {
-                  
-                  return resp.users
-                });
-    }
+    let url = URL_SERVICIOS + '/user/todo';
+    return this.http.get(url)
+      .map((resp: any) => {
 
-    obtenerClienteT(id:string){
-      let url = URL_SERVICIOS + '/user/'+ id;
-      return this.http.get(url)
-              .map((resp:any)=> resp.user);
-    }
+        return resp.users
+      });
+  }
 
-
+  obtenerClienteT(id: string) {
+    let url = URL_SERVICIOS + '/user/' + id;
+    return this.http.get(url)
+      .map((resp: any) => resp.user);
+  }
 
 
 
 
 
-    cargarReportes(desde: number = 0) {
+
+
+  cargarReportes(desde: number = 0) {
 
 
 
-      let url = URL_SERVICIOS + '/reporte?desde=' + desde;
-      return this.http.get(url);
-  
-  
-    }
-  
-    cargarReporte(id: string) {
-      let url = URL_SERVICIOS + '/reporte/' + id;
-      return this.http.get(url)
-        .map((resp: any) => resp.reporte);
-  
-    }
-  
-    
-  
-  
-    borrarReporte(id: string) {
-      let url = URL_SERVICIOS + '/reporte/' + id;
-  
-      url += '?token=' + this._usuarioService.token;
-  
-      return this.http.delete(url)
-        .map(resp => {
-          Swal.fire('Reporte borrada', 'Reporte borrado correctamente', 'success');
-          return resp;
-        });
-  
-    }
-  
-    guardarReporte(reporte: Reporte) {
-  
-      let url = URL_SERVICIOS + '/reporte';
-  
-      if (reporte._id) {
-        //Actualizando
-        url += '/' + reporte._id;
-        url += '?token=' + this._usuarioService.token;
-        return this.http.put(url, reporte)
-          .map((resp: any) => {
-  
-            Swal.fire('Reporte actualizada', 'Actualizado', 'success');
-            this.router.navigate(['/reportes']);
-            return resp.reporte;
-          });
-  
-      } else {
-        //Creando
-        url += '?token=' + this._usuarioService.token;
-  
-  
-        return this.http.post(url, reporte)
-          .map((resp: any) => {
-            Swal.fire('Reporte creado', 'Creado', 'success');
-  
-            this.router.navigate(['/reportes']);
-            return resp.reporte;
-          });
+    let url = URL_SERVICIOS + '/reporte?desde=' + desde;
+    return this.http.get(url);
+
+
+  }
+
+  cargarReporte(id: string) {
+    let url = URL_SERVICIOS + '/reporte/' + id;
+    return this.http.get(url)
+      .map((resp: any) => {
+        //console.log(resp.reporte);
+        return resp.reporte;
       }
-  
+      );
+
+  }
+
+
+
+
+  borrarReporte(id: string) {
+    let url = URL_SERVICIOS + '/reporte/' + id;
+
+    url += '?token=' + this._usuarioService.token;
+
+    return this.http.delete(url)
+      .map(resp => {
+        Swal.fire('Reporte borrada', 'Reporte borrado correctamente', 'success');
+        return resp;
+      });
+
+  }
+
+  guardarReporte(reporte: Reporte) {
+
+    let url = URL_SERVICIOS + '/reporte';
+
+    if (reporte._id) {
+      //Actualizando
+      //console.log(reporte._id);
+      url += '/' + reporte._id;
+      url += '?token=' + this._usuarioService.token;
+      return this.http.put(url, reporte)
+        .map((resp: any) => {
+
+          Swal.fire('Reporte actualizada', 'Actualizado', 'success');
+          this.router.navigate(['/reportes']);
+          return resp.reporte;
+        });
+
+    } else {
+      //Creando
+      //console.log(reporte);
+
+
+      url += '?token=' + this._usuarioService.token;
+
+
+      return this.http.post(url, reporte)
+        .map((resp: any) => {
+          Swal.fire('Reporte creado', 'Creado', 'success');
+
+          this.router.navigate(['/reportes']);
+          //console.log(resp.reporte);
+          return resp.reporte;
+        });
     }
+
+  }
 }
