@@ -10,6 +10,7 @@ export class User {
         public totalIng?: number,
         public totalRet?: number,
         public cliente?: number,
+        public actEmpresariales?: number,
         public _id?: string
     ) { }
 
