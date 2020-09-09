@@ -1,23 +1,7 @@
-<div class="row animated fadeIn">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <input #input (keyup)="buscarCliente(input.value)" type="text" class="form-control"
-                    placeholder="Buscar cliente...">
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <!-- <div class="text-right">
-                    <button (click)="abrirSweetAlert()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                        <i class="fa fa-plus"> Crear Cliente</i>
-                    </button>
-                </div> -->
                 <div class="text-right">
                     <button [routerLink]="['/cliente','nuevo']" type="button"
                         class="btn waves-effect waves-light btn-rounded btn-primary">
@@ -26,54 +10,119 @@
                 </div>
 
                 <h3 class="card-title">Clientes registrados (<small>{{totalRegistros}}</small>)</h3>
-               
 
-                <div class="table-responsive">
+                <dx-data-grid [dataSource]="this.clientes"
+                              [allowColumnReordering]="true"
+                              [allowColumnResizing]="true"
+                              [columnAutoWidth]="true"
+                              [columnHidingEnabled]="false"
+                              [columnMinWidth]="50"
+                              [columnResizingMode]="'nextColumn'"
+                              [hoverStateEnabled]="true"
+                              [rowAlternationEnabled]="true"
+                              [showBorders]="true"
+                              [showColumnLines]="true"
+                              [showRowLines]="false"
+                              >
 
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Cédula</th>
-                            <th>Ruc</th>
-                            <th>Clave</th>
-                            <th class="text-nowrap">Acciones</th>
-                        </tr>
-                    </thead>
+                              <dxo-grouping
+                              [autoExpandAll]="true"
+                              [contextMenuEnabled]="true"
+                              [expandMode]="'rowClick'">
+                              </dxo-grouping>
 
-                    <tbody>
-                        <tr *ngFor="let cliente of clientes">
-                            
-                            <td>{{cliente.nombre}}</td>
-                            <td>{{cliente.cedula}}</td>
-                            <td>{{cliente.ruc}}</td>
-                            <td>{{cliente.clave}}</td>
-                            <td class="text-center">
-                                <button [routerLink]="['/cliente', cliente._id]" class="btn btn-primary mr-3">
-                                    <i class="fa fa-edit"></i>
-                                </button>
+                              <dxo-selection 
+                              mode="multiple">
+                              </dxo-selection>
 
-                                <button (click)="borrarCliente(cliente)" class="btn btn-danger">
-                                    <i class="fa fa-trash-o"></i>
-                                </button>
-                            </td>
-                            
-                            
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                              <dxo-export
+                              fileName="Clientes"
+                              [allowExportSelectedData]="true"
+                              [enabled]="true"
+                              >
+                              </dxo-export>
 
-            <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-3">
-                Anteriores
-            </button>
+                              <dxo-column-chooser
+                              mode="dragAndDrop"
+                              [allowSearch]="true"
+                              [enabled]="true">
+                              </dxo-column-chooser>
 
-            <button (click)="cambiarDesde(5)" class="btn btn-secondary">
-                Siguientes
-            </button>
-            
+                              <dxo-search-panel
+                              [highlightCaseSensitive]="false"
+                              [visible]="true"
+                              [width]="300">
+                              </dxo-search-panel>
+
+                              <dxo-sorting
+                              mode="multiple">
+                              </dxo-sorting>
+
+                              <dxo-header-filter
+                              [visible]="true">
+                              </dxo-header-filter>
+
+                              <dxo-filter-row 
+                              [visible]="true">
+                              </dxo-filter-row>
+
+                              <dxo-filter-panel
+                              [filterEnabled]="true"
+                              [visible]="true">
+                              </dxo-filter-panel>
+
+                              <dxo-load-panel
+                              [enabled]="true"
+                              [indicatorSrc]="'../../../../assets/images/dia-b.png'"
+                              [showIndicator]="true"
+                              [showPane]="true">
+                              </dxo-load-panel>
+
+                              <dxo-paging 
+                              [pageSize]="15"
+                              [pageIndex]="1"> <!-- Shows the second page -->
+                              </dxo-paging>
+
+                                <dxi-column type="buttons" [caption]="'Acciones'">
+                                    <dxi-button template="myCommand">
+                                    
+                                        <div *dxTemplate="let cliente of 'myCommand'" class="text-center">
+                                            <button class="btn btn-primary mr-2" [routerLink]="['/cliente', cliente.data._id]"><i class="fa fa-edit"></i></button>
+                                            <button class="btn btn-danger" (click)="borrarCliente(cliente.data)"><i class="fa fa-trash-o"></i></button>
+                                        </div>
+                                    </dxi-button>
+                                </dxi-column>
+
+ 
+ 
+                                <dxi-column 
+                                [caption]="'Nombre'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'nombre'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Cédula'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'cedula'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Ruc'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'ruc'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Clave'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'clave'"                
+                                ></dxi-column>
+                    
+                               
+                </dx-data-grid>
             </div>
         </div>
     </div>
 </div>
+

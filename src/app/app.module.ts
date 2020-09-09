@@ -24,6 +24,9 @@ import { RegisterComponent } from './login/register.component';
 
 
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +43,8 @@ import { RegisterComponent } from './login/register.component';
     ReactiveFormsModule,
     ServiceModule,
     SharedModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -41,6 +41,10 @@ import { RetencionesRelacionComponent } from './retenciones-relacion/retenciones
 import { ReportesComponent } from './reportes/reportes.component';
 import { ReporteComponent } from './reportes/reporte.component';
 
+import { DxButtonModule,DxDataGridModule  } from 'devextreme-angular';
+
+
+
 
 
 
@@ -77,7 +81,9 @@ import { ReporteComponent } from './reportes/reporte.component';
         
         MensualIvaComponent,
         ProgressComponent,
-        Graficas1Component
+        Graficas1Component,
+        
+        
     ],
     imports: [
         CommonModule,
@@ -86,7 +92,10 @@ import { ReporteComponent } from './reportes/reporte.component';
         FormsModule,
         ChartsModule,
         PipesModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        DxButtonModule,
+        DxDataGridModule 
+        
     ]
 })
 

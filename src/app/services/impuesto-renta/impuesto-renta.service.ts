@@ -52,7 +52,7 @@ export class ImpuestoRentaService {
     return this.http.post(url, user)
       .map((resp: any) => {
         Swal.fire('Datos Cargados', 'Datos', 'success');
-        this.router.navigate(['/mensualIva']);
+        this.router.navigate(['/reportes']);
         return resp.user;
       })
       .catch(err => {

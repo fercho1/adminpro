@@ -120,7 +120,7 @@ export class ReporteComponent implements OnInit {
 
         this.reporte.subBImponible = this.reporte.actEmpresariales + this.reporte.actRelDep + this.reporte.ingRendimientos;
 
-        this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+        this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
 
         this.reporte.iRentaFavor = this.reporte.iRentaC - (this.reporte.totalRet + this.reporte.creditoT + this.reporte.retRelacionD  + this.reporte.retRendimiento);
 
@@ -130,31 +130,31 @@ export class ReporteComponent implements OnInit {
 
   cambio(newValue: number) {
     this.reporte.gPersonales = newValue + this.reporte.salud + this.reporte.alimentacion + this.reporte.vivienda + this.reporte.vestimenta;
-    this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+    this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
   }
 
   cambio1(newValue: number) {
     this.reporte.gPersonales = this.reporte.educacion + newValue + this.reporte.alimentacion + this.reporte.vivienda + this.reporte.vestimenta;
 
-    this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+    this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
   }
 
   cambio2(newValue: number) {
     this.reporte.gPersonales = this.reporte.educacion + this.reporte.salud + newValue + this.reporte.vivienda + this.reporte.vestimenta;
 
-    this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+    this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
   }
 
   cambio3(newValue: number) {
     this.reporte.gPersonales = this.reporte.educacion + this.reporte.salud + this.reporte.alimentacion + newValue + this.reporte.vestimenta;
 
-    this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+    this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
   }
 
   cambio4(newValue: number) {
     this.reporte.gPersonales = this.reporte.educacion + this.reporte.salud + this.reporte.alimentacion + this.reporte.vivienda + newValue;
 
-    this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+    this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
   }
 
   cambio5(newValue: number) {
@@ -193,7 +193,7 @@ export class ReporteComponent implements OnInit {
 
     this.reporte.subBImponible = this.reporte.actEmpresariales + this.reporte.actRelDep + this.reporte.ingRendimientos;
 
-    this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+    this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
 
     //console.log(this.reporte.actRelDep);
 
@@ -210,9 +210,9 @@ export class ReporteComponent implements OnInit {
 
     this.reporte.actRelDep = this.reporte.sueldos - newValue;
 
-    this.reporte.subBImponible = this.reporte.actEmpresariales + this.reporte.actRelDep + this.reporte.ingRendimientos;
+    this.reporte.subBImponible = Math.round((this.reporte.actEmpresariales + this.reporte.actRelDep + this.reporte.ingRendimientos + Number.EPSILON) * 100) / 100;
 
-    this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+    this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
 
 
 
@@ -227,9 +227,9 @@ export class ReporteComponent implements OnInit {
 
 
 
-    this.reporte.subBImponible = this.reporte.actEmpresariales + this.reporte.actRelDep + this.reporte.ingRendimientos;
+    this.reporte.subBImponible = Math.round((this.reporte.actEmpresariales + this.reporte.actRelDep + this.reporte.ingRendimientos + Number.EPSILON) * 100) / 100;
 
-    this.reporte.bimponibleGeneral = this.reporte.subBImponible - this.reporte.gPersonales;
+    this.reporte.bimponibleGeneral = Math.round((this.reporte.subBImponible - this.reporte.gPersonales + Number.EPSILON) * 100) / 100;
 
 
 

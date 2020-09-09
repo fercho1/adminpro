@@ -60,13 +60,29 @@ export class FacturaComponent implements OnInit {
       });
 
 
+      
+
+
   }
+
+ 
 
   cargarFactura(id: string) {
     this._facturaService.cargarFactura(id)
       .subscribe(factura => {
 
         //console.log(factura);
+
+        switch (factura.tipo) {
+          case "VENTA DE BIENES Y/O PRESTACION DE SERVICIOS": {            
+            this.mostrarCol = true;    
+            break;
+          }
+          default: {            
+            this.mostrarCol = false;
+            break;
+          }
+        }
 
         this.factura = factura
         this.factura.cliente = factura.cliente._id;

@@ -38,6 +38,7 @@ export class ReportesComponent implements OnInit {
  
 
   borrarReporte(reporte: Reporte) {
+    //console.log(reporte);
     this._reporteService.borrarReporte(reporte._id)
       .subscribe(() => this.cargarReportes());
   }

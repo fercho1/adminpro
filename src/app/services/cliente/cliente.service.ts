@@ -22,7 +22,7 @@ export class ClienteService {
 
   cargarClientes(desde:number=0){
 
-    let url = URL_SERVICIOS + '/cliente?desde=' + desde;
+    let url = URL_SERVICIOS + '/cliente/todo';
     return this.http.get(url);
 
 

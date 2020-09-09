@@ -43,6 +43,8 @@ export class ImpuestoRentaComponent implements OnInit {
       })
   }
 
+ 
+
 
   
 
@@ -136,7 +138,7 @@ export class ImpuestoRentaComponent implements OnInit {
 
         //console.log(this.totalIng1);
 
-        this.totalIng = this.result.map((resp) => {
+        /* this.totalIng = this.result.map((resp) => {
 
           let totalIng = 0;
           let totalEg = 0;
@@ -159,7 +161,9 @@ export class ImpuestoRentaComponent implements OnInit {
 
           //return [{ ...resp, "Ingresos": total } ];
           return resp;
-        });
+        }); */
+
+        this.totalRegistros = this.totalIng1.length;
 
         //console.log(this.totalIng);
 

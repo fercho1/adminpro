@@ -32,7 +32,7 @@ export class FacturaService {
 
 
 
-    let url = URL_SERVICIOS + '/factura?desde=' + desde;
+    let url = URL_SERVICIOS + '/factura/todo';
     return this.http.get(url);
 
 

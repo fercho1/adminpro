@@ -1,14 +1,3 @@
-<div class="row animated fadeIn">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <input #input (keyup)="buscarFactura(input.value)" type="text" class="form-control"
-                    placeholder="Buscar por # factura...">
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -21,84 +10,190 @@
                 </div>
 
                 <h3 class="card-title">Facturas registradas (<small>{{totalRegistros}}</small>)</h3>
-                <div class="table-responsive">
-                    <table class="table-bordered" width="135%">
-                        <thead>
-                            <tr>
-                                <th style="width:2.25%">Cliente</th>
-                                <th style="width:6.25%">Tipo</th>
-                                <th style="width:11.25%">Factura</th>
-                                <th style="width:9.25%">Fecha</th>
-                                <th style="width:6.25%">Concepto</th>
-                                <th style="width:6.25%">Base Imponible IVA 0%</th>
-                                <th style="width:6.25%">Base Imponible IVA</th>
-                                <th style="width:6.25%">Iva</th>
-                                <th style="width:6.25%">Total</th>
-                                <th style="width:6.25%">Base Imp. Ret.</th>
-                                <th style="width:26.25%">Cbte. Tetenc.</th>
-                                <th style="width:6.25%">Agnt. Retención</th>
-                                <th style="width:6.25%">Ret. I.R</th>
-                                <th style="width:6.25%">Ret. Iva</th>
-                                <th style="width:6.25%">Total 2</th>
-                                <th style="width:6.25%">Acciones</th>
-                                
-                            </tr>
-                        </thead>
 
-                        <tbody>
-                            <tr *ngFor="let factura of facturas">
-                                <td style="width: 25%">{{factura.cliente.nombre}}</td>
-                                <td>{{factura.tipo}}</td>
-                                <td>{{factura.numFactura}}</td>
-                                <td>{{factura.fecha | date:'dd/MM/yyyy'}}</td>
-                                <td class="text-center">
-                                    <label *ngIf="factura.concepto==='VENTAS'" class="label label-success">{{factura.concepto}}</label>
-                                    <label *ngIf="factura.concepto==='ANULADO'" class="label label-danger">{{factura.concepto}}</label>
-                                    <label *ngIf="factura.concepto==='TRANSPORTE'" class="label label-primary">{{factura.concepto}}</label>
-                                    <label *ngIf="factura.concepto==='SERVICIOS CONTABLES'" class="label label-info">{{factura.concepto}}</label>
-                                    <label *ngIf="factura.concepto==='MATERIALES'" class="label label-warning">{{factura.concepto}}</label>
-                                    <label *ngIf="factura.concepto==='ARRIENDO'" class="label label-info">{{factura.concepto}}</label>
-                                    <label *ngIf="factura.concepto==='MONITOREO'" class="label label-light">{{factura.concepto}}</label>
-                                    <label *ngIf="factura.concepto==='COMBUSTIBLE'" class="label label-secondary">{{factura.concepto}}</label>
-                                    <label *ngIf="factura.concepto==='DEVOLUCION'" class="label label-danger">{{factura.concepto}}</label>
+                <dx-data-grid [dataSource]="this.facturas"
+                              [allowColumnReordering]="true"
+                              [allowColumnResizing]="true"
+                              [columnAutoWidth]="true"
+                              [columnHidingEnabled]="false"
+                              [columnMinWidth]="50"
+                              [columnResizingMode]="'nextColumn'"
+                              [hoverStateEnabled]="true"
+                              [rowAlternationEnabled]="true"
+                              [showBorders]="true"
+                              [showColumnLines]="true"
+                              [showRowLines]="false"
+                              >
+
+                              <dxo-grouping
+                              [autoExpandAll]="true"
+                              [contextMenuEnabled]="true"
+                              [expandMode]="'rowClick'">
+                              </dxo-grouping>
+
+                              <dxo-selection 
+                              mode="multiple">
+                              </dxo-selection>
+
+                              <dxo-export
+                              fileName="Facturas"
+                              [allowExportSelectedData]="true"
+                              [enabled]="true"
+                              >
+                              </dxo-export>
+
+                              <dxo-column-chooser
+                              mode="dragAndDrop"
+                              [allowSearch]="true"
+                              [enabled]="true">
+                              </dxo-column-chooser>
+
+                              <dxo-search-panel
+                              [highlightCaseSensitive]="false"
+                              [visible]="true"
+                              [width]="300">
+                              </dxo-search-panel>
+
+                              <dxo-sorting
+                              mode="multiple">
+                              </dxo-sorting>
+
+                              <dxo-header-filter
+                              [visible]="true">
+                              </dxo-header-filter>
+
+                              <dxo-filter-row 
+                              [visible]="true">
+                              </dxo-filter-row>
+
+                              <dxo-filter-panel
+                              [filterEnabled]="true"
+                              [visible]="true">
+                              </dxo-filter-panel>
+
+                              <dxo-load-panel
+                              [enabled]="true"
+                              [indicatorSrc]="'../../../../assets/images/dia-b.png'"
+                              [showIndicator]="true"
+                              [showPane]="true">
+                              </dxo-load-panel>
+
+                              <dxo-paging 
+                              [pageSize]="10"
+                              [pageIndex]="1"> <!-- Shows the second page -->
+                              </dxo-paging>
+
+                                <dxi-column type="buttons" [caption]="'Acciones'">
+                                    <dxi-button template="myCommand">
                                     
-                                </td>
-                                <td>{{factura.bImponible0}}</td>
-                                <td>{{factura.bImponible}}</td>
-                                <td>{{factura.iva}}</td>
-                                <td>{{factura.total}}</td>
-                                <td>{{factura.bImpRet}}</td>
-                                <td>{{factura.cbte}}</td>
-                                <td>{{factura.agnt}}</td>
-                                <td>{{factura.retIr}}</td>
-                                <td>{{factura.retIva}}</td>
-                                <td>{{factura.total2}}</td>
-                                <td class="text-center">
-                                    <button [routerLink]="['/factura', factura._id]" class="btn btn-primary mb-2">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
+                                        <div *dxTemplate="let factura of 'myCommand'" class="text-center">
+                                            <button class="btn btn-primary mr-2" [routerLink]="['/factura', factura.data._id]"><i class="fa fa-edit"></i></button>
+                                            <button class="btn btn-danger" (click)="borrarFactura(factura.data)"><i class="fa fa-trash-o"></i></button>
+                                        </div>
+                                    </dxi-button>
+                                </dxi-column>
 
-                                    <button (click)="borrarFactura(factura)" class="btn btn-danger">
-                                        <i class="fa fa-trash-o"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
+ 
+ 
+                                <dxi-column 
+                                [caption]="'Cliente'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'cliente.nombre'"                
+                                ></dxi-column>
 
-                    </table>
-                </div>
+                                <dxi-column 
+                                [caption]="'Tipo'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'tipo'"                
+                                ></dxi-column>
 
-                <br>
+                                <dxi-column 
+                                [caption]="'# Factura'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'numFactura'"                
+                                ></dxi-column>
 
-                <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-3">
-                    Anteriores
-                </button>
+                                <dxi-column 
+                                [caption]="'Fecha'" 
+                                [allowFiltering]="true" 
+                                dataField="fecha" 
+                                cellTemplate="cityCell"                
+                                ></dxi-column>
+                                <div *dxTemplate="let data of 'cityCell'">  
+                                    {{data.displayValue | date:'dd/MM/yyyy'}}  
+                                </div>
 
-                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
-                    Siguientes
-                </button>
+                                <dxi-column 
+                                [caption]="'Concepto'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'concepto'"                
+                                ></dxi-column>
 
+                                <dxi-column 
+                                [caption]="'Base Imponible IVA 0%'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'bImponible0'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Base Imponible IVA'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'bImponible'"                
+                                ></dxi-column>
+                                
+                                <dxi-column 
+                                [caption]="'IVA'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'iva'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Total'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'total'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Base Imp. Ret.'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'bImpRet'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Cbte. Tetenc.'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'cbte'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Agnt. Retención'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'agnt'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Ret. I.R'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'retIr'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Ret. Iva'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'retIva'"                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Total 2'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'total2'"                
+                                ></dxi-column>
+                               
+                </dx-data-grid>
+                
             </div>
         </div>
     </div>
 </div>
+
+

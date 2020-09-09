@@ -12,10 +12,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MensualIvaComponent implements OnInit {
 
-  facturasAgr: FacturaAgrupada[] = [];
-  totalRegistros: number=0;
+  helloWorld() {
+    alert('Hello world!');
+}
+ 
 
-  constructor(public _facturaService: FacturaService) { }
+  facturasAgr: FacturaAgrupada[] = [];
+  totalRegistros: number = 0;
+  searchText: any;
+  desde: number = 0;
+
+  
+
+
+
+  constructor(public _facturaService: FacturaService) {}
 
   ngOnInit(): void {
     this.cargarFacturasAgrupadas();
@@ -29,12 +40,33 @@ export class MensualIvaComponent implements OnInit {
       .subscribe((resp: any) => {
 
         this.totalRegistros = resp.total;
+
+        //this.facturasAgr = resp.facturas;
+
+        
         this.facturasAgr = resp.facturas;
+
+        
         //console.log(this.facturasAgr);
 
       });
   }
 
- 
+  cambiarDesde(valor:number){
+
+    let desde = this.desde + valor;
+    //console.log(desde);
+    if(desde>= this.totalRegistros){
+      return;
+    }
+    if(desde<0){
+      return;
+    }
+
+    this.desde += valor;
+    this.cargarFacturasAgrupadas();
+  }
+
+
 
 }
