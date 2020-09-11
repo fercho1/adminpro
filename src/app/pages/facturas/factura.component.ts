@@ -206,7 +206,9 @@ export class FacturaComponent implements OnInit {
     this._facturaService.guardarFactura(this.factura)
       .subscribe(factura => {
 
-        //console.log(factura);
+
+        
+        console.log(factura);
 
 
         /* this.factura._id = factura._id;

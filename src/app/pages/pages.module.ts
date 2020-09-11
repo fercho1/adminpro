@@ -41,8 +41,7 @@ import { RetencionesRelacionComponent } from './retenciones-relacion/retenciones
 import { ReportesComponent } from './reportes/reportes.component';
 import { ReporteComponent } from './reportes/reporte.component';
 
-import { DxButtonModule,DxDataGridModule  } from 'devextreme-angular';
-
+import { DxButtonModule,DxDataGridModule, DxDateBoxModule } from 'devextreme-angular';
 
 
 
@@ -94,9 +93,13 @@ import { DxButtonModule,DxDataGridModule  } from 'devextreme-angular';
         PipesModule,
         NgxDatatableModule,
         DxButtonModule,
-        DxDataGridModule 
+        DxDataGridModule,
+        DxDateBoxModule 
         
     ]
 })
 
-export class PagesModule { }
+export class PagesModule { 
+   
+   
+}

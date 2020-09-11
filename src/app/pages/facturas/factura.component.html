@@ -45,11 +45,25 @@
                                 placeholder="Número de Factura" required>
                         </div>
 
-                        <div class="col">
+                        <!-- <div class="col">
                             <label>Fecha</label>
                             <input [(ngModel)]="factura.fecha" name="fecha" type="date" class="form-control"
                                 placeholder="Fecha">
+                        </div> -->
+
+                        <div class="col">
+                            <label>Fecha</label>
+                            
+                                    <div >
+                                        <dx-date-box
+                                        [(ngModel)]="factura.fecha" name="fecha"
+                                            type="date" placeholder="Fecha">
+                                        </dx-date-box>
+                                    </div>
+                                
                         </div>
+
+                        
 
                         <div class="col">
                             <label>Concepto</label>

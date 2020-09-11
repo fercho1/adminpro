@@ -26,17 +26,15 @@
                               >
 
                               <dxo-grouping
-                              [autoExpandAll]="true"
-                              [contextMenuEnabled]="true"
-                              [expandMode]="'rowClick'">
-                              </dxo-grouping>
+                                    [autoExpandAll]="false"
+                              ></dxo-grouping>
 
                               <dxo-selection 
                               mode="multiple">
                               </dxo-selection>
 
                               <dxo-export
-                              fileName="Facturas"
+                              fileName="Reporte 1"
                               [allowExportSelectedData]="true"
                               [enabled]="true"
                               >
@@ -83,6 +81,10 @@
                               [pageIndex]="1"> <!-- Shows the second page -->
                               </dxo-paging>
 
+                              
+                              <dxi-column dataField="cliente.nombre" [groupIndex]="0" [caption]="'Cliente'"></dxi-column>
+
+
                                 <dxi-column type="buttons" [caption]="'Acciones'">
                                     <dxi-button template="myCommand">
                                     
@@ -95,11 +97,7 @@
 
  
  
-                                <dxi-column 
-                                [caption]="'Cliente'" 
-                                [allowFiltering]="true" 
-                                [dataField]="'cliente.nombre'"                
-                                ></dxi-column>
+                                
 
                                 <dxi-column 
                                 [caption]="'Tipo'" 
@@ -113,7 +111,7 @@
                                 [dataField]="'numFactura'"                
                                 ></dxi-column>
 
-                                <dxi-column 
+                                <!-- <dxi-column 
                                 [caption]="'Fecha'" 
                                 [allowFiltering]="true" 
                                 dataField="fecha" 
@@ -121,7 +119,14 @@
                                 ></dxi-column>
                                 <div *dxTemplate="let data of 'cityCell'">  
                                     {{data.displayValue | date:'dd/MM/yyyy'}}  
-                                </div>
+                                </div> -->
+
+                                <dxi-column 
+                                [caption]="'Fecha'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'fecha'"
+                                dataType="date"                
+                                ></dxi-column>
 
                                 <dxi-column 
                                 [caption]="'Concepto'" 
