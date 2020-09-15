@@ -18,6 +18,7 @@ export class Factura {
         public img?: string,
         public usuario?: string,
         public cliente?: string,
-        public _id?: string
+        public _id?: string,
+        
     ) { }
 }

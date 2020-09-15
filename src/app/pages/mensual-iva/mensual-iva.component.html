@@ -75,78 +75,155 @@
                               [pageIndex]="1"> <!-- Shows the second page -->
                               </dxo-paging>
 
-                                <dxi-column dataField="_id.anio" [groupIndex]="0" [caption]="'Año'"></dxi-column>
-                                <dxi-column dataField="cliente[0].nombre" [groupIndex]="1" [caption]="'Nombre'"></dxi-column>
-
- 
- 
+                                <dxi-column dataField="cliente.nombre" [groupIndex]="0" [caption]="'Cliente'"></dxi-column>
                                 
-
+                                <dxi-column dataField="anio" [groupIndex]="1" [caption]="'Año'"></dxi-column>
                                 
-
+                                <dxi-column [customizeText]="customizeText" dataField="mes" [groupIndex]="2" [caption]="'Mes'"></dxi-column>
+                                
+                                <dxi-column  dataField="tipo" [groupIndex]="3" [caption]="'Tipo'"></dxi-column>
+                                    
                                 <dxi-column 
-                                [caption]="'Mes'" 
+                                [caption]="'Fecha'" 
                                 [allowFiltering]="true" 
-                                dataField="_id.mes" 
-                                cellTemplate="cityCell"                
-                                ></dxi-column>
-                                <div *dxTemplate="let data of 'cityCell'">  
-                                    {{data.displayValue | meses}}  
-                                </div> 
-
-                                <dxi-column 
-                                [caption]="'Tipo'" 
-                                [allowFiltering]="true" 
-                                [dataField]="'_id.tipo'"
-                                ></dxi-column>
-                    
-                                <dxi-column 
-                                [caption]="'Base Imponible IVA 0%'" 
-                                [allowFiltering]="true" 
-                                [dataField]="'totalbImponible0'"
+                                [dataField]="'fecha'"
+                                dataType="date"
                                 ></dxi-column>
 
                                 <dxi-column 
-                                [caption]="'Base Imponible IVA'" 
+                                [caption]="'# Factura'" 
                                 [allowFiltering]="true" 
-                                [dataField]="'totalbImponible'"
+                                [dataField]="'numFactura'"                                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Concepto'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'concepto'"                                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Base Imponible Iva 0%'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'bImponible0'"                                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Base Imponible Iva'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'bImponible'"                                
                                 ></dxi-column>
 
                                 <dxi-column 
                                 [caption]="'Iva'" 
                                 [allowFiltering]="true" 
-                                [dataField]="'totalIva'"
-                                ></dxi-column>
-                    
-                                <dxi-column 
-                                [caption]="'Total'" 
-                                [allowFiltering]="true" 
-                                [dataField]="'total'"
+                                [dataField]="'iva'"                                
                                 ></dxi-column>
 
                                 <dxi-column 
-                                [caption]="'Base Imp. Ret.'" 
+                                [caption]="'Total'" 
                                 [allowFiltering]="true" 
-                                [dataField]="'totalbImpRet'"
+                                [dataField]="'total'"                                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Base Imp. tet.'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'bImpRet'"                                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Cbte. Retenc'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'cbte'"                                
+                                ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Agnt. Retención'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'agnt'"                                
                                 ></dxi-column>
 
                                 <dxi-column 
                                 [caption]="'Ret. I.R'" 
                                 [allowFiltering]="true" 
-                                [dataField]="'totalretIr'"
-                                ></dxi-column>
-                    
-                                <dxi-column 
-                                [caption]="'Ret. Iva'" 
-                                [allowFiltering]="true" 
-                                [dataField]="'totalretIva'"
+                                [dataField]="'retIr'"                                
                                 ></dxi-column>
 
                                 <dxi-column 
-                                [caption]="'Total 2'" 
+                                [caption]="'Ret. Iva'" 
                                 [allowFiltering]="true" 
-                                [dataField]="'total2'"
+                                [dataField]="'retIva'"                                
                                 ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Total'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'total2'"                                
+                                ></dxi-column>
+
+                                <dxo-summary>                                                                      
+                                    <dxi-group-item
+                                        column="bImponible0"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                    </dxi-group-item> 
+                                    
+                                    <dxi-group-item
+                                        column="bImponible"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                    </dxi-group-item>
+
+                                    <dxi-group-item
+                                        column="iva"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                    </dxi-group-item>
+
+                                    <dxi-group-item
+                                        column="total"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                    </dxi-group-item>
+
+                                    <dxi-group-item
+                                        column="bImpRet"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                    </dxi-group-item>
+
+                                    <dxi-group-item
+                                        column="retIr"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                    </dxi-group-item>
+
+                                    <dxi-group-item
+                                        column="retIva"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                    </dxi-group-item>
+
+                                    <dxi-group-item
+                                        column="total2"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                    </dxi-group-item>
+
+                                    
+                                </dxo-summary>  
+
+                    
+                                
                 </dx-data-grid>
 
             </div>

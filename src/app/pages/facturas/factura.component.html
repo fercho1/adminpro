@@ -28,7 +28,7 @@
                             <select [(ngModel)]="factura.tipo" (ngModelChange)="calculoFactura($event)" name="tipo"
                                 class="form-control" required>
 
-                                <option>VENTA DE BIENES Y/O PRESTACION DE SERVICIOS</option>
+                                <option>VENTA DE BIENES / PRESTACION DE SERVICIOS</option>
                                 <option>COMPRAS</option>
                                 <option>NOTA DE CREDITO</option>
                                 <option>NOTA DE VENTA</option>
@@ -84,7 +84,7 @@
 
                         <div class="col">
                             <label>Base Imponible Iva 0%</label>
-                            <input [(ngModel)]="factura.bImponible0" name="bImponible0" type="number" step="0.01" class="form-control"
+                            <input [(ngModel)]="factura.bImponible0" (ngModelChange)="calculoT($event)" name="bImponible0" type="number" step="0.01" class="form-control"
                                 placeholder="Base Imponible Iva 0%">
                         </div>
 
@@ -99,19 +99,19 @@
 
                         <div class="col">
                             <label>Base Imponible Iva</label>
-                            <input [(ngModel)]="factura.bImponible" (ngModelChange)="calculoDatos($event)" name="bImponible" type="number" step="0.01" class="form-control"
-                                placeholder="Base Imponible Iva">
+                            <input [(ngModel)]="factura.bImponible" [disabled]="is_edit" (ngModelChange)="calculoDatos($event)" name="bImponible" type="number" step="0.01" class="form-control"
+                                placeholder="Base Imponible Iva" >
                         </div>
 
                         <div class="col">
                             <label>Iva</label>
-                            <input [(ngModel)]="factura.iva" name="iva" type="number" step="0.01" class="form-control"
-                                placeholder="Iva">
+                            <input [(ngModel)]="factura.iva"  name="iva" type="number" step="0.01" class="form-control"
+                                placeholder="Iva" disabled>
                         </div>
 
                         <div class="col">
                             <label>Total</label>
-                            <input [(ngModel)]="factura.total" (ngModelChange)="calculoDatos($event)" name="number" step="0.01" type="text" class="form-control"
+                            <input [(ngModel)]="factura.total" [disabled]="is_edit1" (ngModelChange)="calculoDatos($event)" name="number" step="0.01" type="text" class="form-control"
                                 placeholder="Total">
                         </div>
 
@@ -152,19 +152,19 @@
                             <div class="col">
                                 <label>Ret. I.R</label>
                                 <input [(ngModel)]="factura.retIr" name="retIr" type="number" step="0.01" class="form-control"
-                                    placeholder="Ret. I.R">
+                                    placeholder="Ret. I.R" disabled>
                             </div>
 
                             <div class="col">
                                 <label>Ret. Iva</label>
                                 <input [(ngModel)]="factura.retIva" name="retIva" type="number" step="0.01" class="form-control"
-                                    placeholder="Ret. Iva">
+                                    placeholder="Ret. Iva" (ngModelChange)="total2($event)">
                             </div>
 
                             <div class="col">
                                 <label>Total 2</label>
                                 <input [(ngModel)]="factura.total2" name="total2" type="number" step="0.01" class="form-control"
-                                    placeholder="Total 2">
+                                    placeholder="Total 2" disabled>
                             </div>
 
                         </div>

@@ -31,29 +31,42 @@ export class ImpuestoRentaComponent implements OnInit {
   constructor(public _impuestoRentaService: ImpuestoRentaService) { }
   ngOnInit(): void {
     this.cargarFacturasAgrupadas();
-    
+
   }
 
-  cargarDatos(){
+  cargarDatos() {
     //console.log(this.totalIng1);
     this._impuestoRentaService.crearCliente(this.totalIng1)
       .subscribe(user => {
-       
-        
+
+
       })
   }
 
- 
 
 
-  
+
+
 
   cargarFacturasAgrupadas() {
     this._impuestoRentaService.cargarFacturasAgrupadas()
       .subscribe((resp: any) => {
+
         for (let i = 0; i < resp.length; i++) {
+        
+          if (resp[i].cliente[0] === undefined) {
+            resp[i].cliente[0] = {
+              nombre: "",
+              cedula:"",
+              clave:"",
+              ruc:"",
+            };
+          }
+          
+
+
           for (let j = 0; j < resp[i].grupo.length; j++) {
-            if (resp[i].grupo[j].tipo === 'VENTA DE BIENES Y/O PRESTACION DE SERVICIOS') {
+            if (resp[i].grupo[j].tipo === 'VENTA DE BIENES / PRESTACION DE SERVICIOS') {
 
 
               let temporal = resp[i].grupo[j].totalbImponible;
@@ -69,6 +82,8 @@ export class ImpuestoRentaComponent implements OnInit {
         }
 
         //console.log(resp);
+
+
         this.arreglado = resp.map(item => {
           return {
             nombre: item.cliente[0].nombre,
@@ -82,6 +97,8 @@ export class ImpuestoRentaComponent implements OnInit {
             retencion: item.retencion ?? 0,
           }
         });
+
+        /* this.arreglado = resp.facturas; */
 
         //console.log(this.arreglado);
 
@@ -126,15 +143,15 @@ export class ImpuestoRentaComponent implements OnInit {
 
           }
 
-          let totales = {"cedula": cedula, "nombre": nombre, "ruc": ruc, "clave": clave, "anio": anio, "totalIng": totalIng, "totalEg": totalEg, "totalRet": totalRet}
+          let totales = { "cedula": cedula, "nombre": nombre, "ruc": ruc, "clave": clave, "anio": anio, "totalIng": totalIng, "totalEg": totalEg, "totalRet": totalRet }
 
-         
+
 
           //return [{ ...resp, "Ingresos": total } ];
           return totales;
         });
 
-      
+
 
         //console.log(this.totalIng1);
 

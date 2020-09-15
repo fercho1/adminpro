@@ -29,9 +29,15 @@ export class FacturasComponent implements OnInit {
     this._facturaService.cargarFacturas(this.desde)
       .subscribe((resp: any) => {
 
+        
+
         this.totalRegistros = resp.total;
         this.facturas = resp.facturas;
-        //console.log(this.facturas);
+        
+        
+        
+
+        console.log(this.facturas);
 
       });
   }

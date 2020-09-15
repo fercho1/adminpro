@@ -22,7 +22,7 @@ export class FacturaService {
 
 
 
-    let url = URL_SERVICIOS + '/factura/group';
+    let url = URL_SERVICIOS + '/factura/group1';
     return this.http.get(url);
 
 

@@ -22,6 +22,8 @@ export class ImpuestoRentaService {
               public _usuarioService: UsuarioService,
               public router: Router) { }
 
+  
+
   cargarFacturasAgrupadas() {
 
     let a: any;
