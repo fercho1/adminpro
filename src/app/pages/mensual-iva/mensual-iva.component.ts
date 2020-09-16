@@ -22,6 +22,8 @@ export class MensualIvaComponent implements OnInit {
   searchText: any;
   desde: number = 0;
 
+  currencyConf: any = { type: 'currency', precision: 2 };
+
 
 
 
