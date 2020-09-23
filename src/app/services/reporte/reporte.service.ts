@@ -6,6 +6,11 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 
 import Swal from 'sweetalert2'
 import { Reporte } from 'src/app/models/reporte.model';
+import { environment } from 'src/environments/environment';
+
+import {map} from 'rxjs/operators'
+
+const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +25,26 @@ export class ReporteService {
 
   cargarClientesTotales() {
 
-    let url = URL_SERVICIOS + '/user/todo';
+    /* let url = URL_SERVICIOS + '/user/todo'; */
+    let url = base_url + '/user/todo';
     return this.http.get(url)
-      .map((resp: any) => {
+      .pipe(
+        map((resp: any) => {
 
-        return resp.users
-      });
+          return resp.users
+        })
+      )
+      
   }
 
   obtenerClienteT(id: string) {
-    let url = URL_SERVICIOS + '/user/' + id;
+    /* let url = URL_SERVICIOS + '/user/' + id; */
+    let url = base_url + '/user/' + id;
     return this.http.get(url)
-      .map((resp: any) => resp.user);
+      .pipe(
+        map((resp: any) => resp.user)
+      )
+      
   }
 
 
@@ -44,20 +57,24 @@ export class ReporteService {
 
 
 
-    let url = URL_SERVICIOS + '/reporte?desde=' + desde;
+    /* let url = URL_SERVICIOS + '/reporte?desde=' + desde; */
+    let url = base_url + '/reporte?desde=' + desde;
     return this.http.get(url);
 
 
   }
 
   cargarReporte(id: string) {
-    let url = URL_SERVICIOS + '/reporte/' + id;
+    /* let url = URL_SERVICIOS + '/reporte/' + id; */
+    let url = base_url + '/reporte/' + id;
     return this.http.get(url)
-      .map((resp: any) => {
-        //console.log(resp.reporte);
-        return resp.reporte;
-      }
-      );
+      .pipe(
+        map((resp: any) => {
+          //console.log(resp.reporte);
+          return resp.reporte;
+        })
+      )
+      
 
   }
 
@@ -65,21 +82,26 @@ export class ReporteService {
 
 
   borrarReporte(id: string) {
-    let url = URL_SERVICIOS + '/reporte/' + id;
+    /* let url = URL_SERVICIOS + '/reporte/' + id; */
+    let url = base_url + '/reporte/' + id;
 
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete(url)
-      .map(resp => {
-        Swal.fire('Reporte borrada', 'Reporte borrado correctamente', 'success');
-        return resp;
-      });
+      .pipe(
+        map(resp => {
+          Swal.fire('Reporte borrada', 'Reporte borrado correctamente', 'success');
+          return resp;
+        })
+      )
+      
 
   }
 
   guardarReporte(reporte: Reporte) {
 
-    let url = URL_SERVICIOS + '/reporte';
+    /* let url = URL_SERVICIOS + '/reporte'; */
+    let url = base_url + '/reporte';
 
     if (reporte._id) {
       //Actualizando
@@ -87,12 +109,15 @@ export class ReporteService {
       url += '/' + reporte._id;
       url += '?token=' + this._usuarioService.token;
       return this.http.put(url, reporte)
-        .map((resp: any) => {
+        .pipe(
+          map((resp: any) => {
 
-          Swal.fire('Reporte actualizada', 'Actualizado', 'success');
-          this.router.navigate(['/reportes']);
-          return resp.reporte;
-        });
+            Swal.fire('Reporte actualizada', 'Actualizado', 'success');
+            this.router.navigate(['/reportes']);
+            return resp.reporte;
+          })
+        )
+        
 
     } else {
       //Creando
@@ -103,13 +128,16 @@ export class ReporteService {
 
 
       return this.http.post(url, reporte)
-        .map((resp: any) => {
-          Swal.fire('Reporte creado', 'Creado', 'success');
-
-          this.router.navigate(['/reportes']);
-          //console.log(resp.reporte);
-          return resp.reporte;
-        });
+        .pipe(
+          map((resp: any) => {
+            Swal.fire('Reporte creado', 'Creado', 'success');
+  
+            this.router.navigate(['/reportes']);
+            //console.log(resp.reporte);
+            return resp.reporte;
+          })
+        )
+        
     }
 
   }

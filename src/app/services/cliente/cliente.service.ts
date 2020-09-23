@@ -7,7 +7,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
+
+import {map} from 'rxjs/operators'
+
+
+const base_url = environment.base_url;
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +30,8 @@ export class ClienteService {
 
   cargarClientes(desde:number=0){
 
-    let url = URL_SERVICIOS + '/cliente/todo';
+    /* let url = URL_SERVICIOS + '/cliente/todo'; */
+    let url = base_url + '/cliente/todo';
     return this.http.get(url);
 
 
@@ -36,43 +45,59 @@ export class ClienteService {
 
   cargarClientesFac(){
 
-    let url = URL_SERVICIOS + '/cliente/todo';
+    /* let url = URL_SERVICIOS + '/cliente/todo'; */
+    let url = base_url + '/cliente/todo';
     return this.http.get(url)
-              .map((resp:any)=> {
-                this.totalClientes = resp.total;
-                return resp.clientes
-              });
+      .pipe(
+        map((resp:any)=> {
+          this.totalClientes = resp.total;
+          return resp.clientes
+        })
+      )
+              
   }
 
   obtenerCliente(id:string){
-    let url = URL_SERVICIOS + '/cliente/'+ id;
+    /* let url = URL_SERVICIOS + '/cliente/'+ id; */
+    let url = base_url + '/cliente/'+ id;
     return this.http.get(url)
-            .map((resp:any)=> resp.cliente);
+      .pipe(
+        map((resp:any)=> resp.cliente)
+      )
+            
   }
 
   borrarCliente(id:string){
-    let url = URL_SERVICIOS + '/cliente/'+ id;
+    /* let url = URL_SERVICIOS + '/cliente/'+ id; */
+    let url = base_url + '/cliente/'+ id;
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete(url)
-            .map(resp=>Swal.fire('Cliente Borrado','Eliminado correctamente','success'));
+      .pipe(
+        map(resp=>Swal.fire('Cliente Borrado','Eliminado correctamente','success'))
+      )
+            
 
   }
 
   crearCliente(cliente : Cliente){
 
-    let url = URL_SERVICIOS + '/cliente';
+    /* let url = URL_SERVICIOS + '/cliente'; */
+    let url = base_url + '/cliente';
 
     if(cliente._id){
       //Actualizando
       url += '/'+cliente._id;
       url += '?token=' + this._usuarioService.token;
       return this.http.put(url,cliente)
-                  .map((resp:any)=>{
-                    Swal.fire('Cliente actualizado',cliente.nombre, 'success');
-                    this.router.navigate(['/clientes']);
-                    return resp.cliente;
-                  });
+        .pipe(
+          map((resp:any)=>{
+            Swal.fire('Cliente actualizado',cliente.nombre, 'success');
+            this.router.navigate(['/clientes']);
+            return resp.cliente;
+          })
+        )
+                  
 
     }else{
       //Creando
@@ -82,37 +107,41 @@ export class ClienteService {
     
 
     return this.http.post(url,cliente)
-        .map((resp:any)=>{
+      .pipe(
+        map((resp:any)=>{
           Swal.fire('Cliente creado',cliente.nombre, 'success');
           this.router.navigate(['/clientes']);
           return resp.cliente;
         })
-        .catch(err=>{
-          //console.log(err.error.mensaje);
-          Swal.fire('Error al crear cliente', 'Ya existe un cliente con misma cédula','error');
-          return Observable.throw(err);
-        });
+      )
+        
+        
       }
 
   }
 
   
-  buscarCliente(termino:string){
-    let url = URL_SERVICIOS + '/busqueda/coleccion/clientes/' + termino;
+  /* buscarCliente(termino:string){
+    
+    let url = base_url + '/busqueda/coleccion/clientes/' + termino;
     return this.http.get(url)
             .map((resp:any)=> resp.clientes);
 
-  }
+  } */
 
   actualizarCliente(cliente:Cliente){
-    let url = URL_SERVICIOS + '/cliente/' + cliente._id;
+    /* let url = URL_SERVICIOS + '/cliente/' + cliente._id; */
+    let url = base_url + '/cliente/' + cliente._id;
     url += '?token=' + this._usuarioService.token;
 
     return this.http.put(url, cliente)
-                .map((resp:any)=> {
-                  Swal.fire('Cliente actualizado',cliente.nombre,'success');
-                  return resp.cliente;
-                });
+      .pipe(
+        map((resp:any)=> {
+          Swal.fire('Cliente actualizado',cliente.nombre,'success');
+          return resp.cliente;
+        })
+      )
+                
 
   }
 

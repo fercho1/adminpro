@@ -300,9 +300,9 @@ export class FacturaComponent implements OnInit {
 
   }
 
-  cambiarFoto() {
+  /* cambiarFoto() {
     this._modalUploadService.mostrarModal('facturas', this.factura._id);
-  }
+  } */
 
 
 

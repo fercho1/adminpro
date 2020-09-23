@@ -8,6 +8,11 @@ import { Observable } from 'rxjs/Observable';
 
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+
+
+const base_url = environment.base_url;
 
 
 
@@ -30,7 +35,8 @@ export class ImpuestoRentaService {
     let b: any;
     let c: any;
 
-    let url = URL_SERVICIOS + '/factura/groups';
+    /* let url = URL_SERVICIOS + '/factura/groups'; */
+    let url = base_url + '/factura/groups';
     return this.http.get(url).pipe(
       map(resp => {
         return resp['facturas'];
@@ -42,7 +48,8 @@ export class ImpuestoRentaService {
 
   crearCliente(user: User) {
 
-    let url = URL_SERVICIOS + '/user';
+    /* let url = URL_SERVICIOS + '/user'; */
+    let url = base_url + '/user';
 
 
     //Creando
@@ -52,16 +59,15 @@ export class ImpuestoRentaService {
 
 
     return this.http.post(url, user)
-      .map((resp: any) => {
-        Swal.fire('Datos Cargados', 'Datos', 'success');
-        this.router.navigate(['/reportes']);
-        return resp.user;
-      })
-      .catch(err => {
-        //console.log(err.error.mensaje);
-        Swal.fire('Error al cargar datos ', 'Error', 'error');
-        return Observable.throw(err);
-      });
+      .pipe(
+        map((resp: any) => {
+          Swal.fire('Datos Cargados', 'Datos', 'success');
+          this.router.navigate(['/reportes']);
+          return resp.user;
+        })
+      )
+      
+      
   }
 
 }

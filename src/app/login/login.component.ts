@@ -1,9 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { Usuario } from './../models/usuario.model';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from './../services/service.index';
+
+import Swal from 'sweetalert2'
 
 declare function init_plugins();
 declare const gapi:any;
@@ -26,7 +28,8 @@ export class LoginComponent implements OnInit {
 
   constructor(public router: Router,
               public _usuarioService: UsuarioService,
-              @Inject(DOCUMENT) private _document) { }
+              @Inject(DOCUMENT) private _document,
+              private ngZone: NgZone) { }
 
   ngOnInit(): void {
     init_plugins();
@@ -45,6 +48,12 @@ export class LoginComponent implements OnInit {
 
   }
 
+  
+
+  
+
+  
+
   renderButton() {
     gapi.signin2.render('my-signin2', {
       'scope': 'profile email',
@@ -52,17 +61,49 @@ export class LoginComponent implements OnInit {
       'height': 50,
       'longtitle': true,
       'theme': 'dark',
+    
     });
 
-    this.googleInit();
+    /* this.googleInit(); */
+    this.startApp();
 
   }
 
-  async googleInit(){
+  async startApp() {
+    
     await this._usuarioService.googleInit();
     this.auth2 = this._usuarioService.auth2;
 
-      /* this.attachSigin(document.getElementById('btnGoogle')); */
+    this.attachSignin( document.getElementById('my-signin2') );
+    
+  };
+
+  attachSignin(element) {
+    
+    this.auth2.attachClickHandler( element, {},
+        (googleUser) => {
+            const id_token = googleUser.getAuthResponse().id_token;
+            // console.log(id_token);
+            this._usuarioService.loginGoogle( id_token )
+              .subscribe( resp => {
+                // Navegar al Dashboard
+                this.ngZone.run( () => {
+                  this.router.navigateByUrl('/');
+                })
+              });
+
+        }, (error) => {
+            alert(JSON.stringify(error, undefined, 2));
+        });
+  }
+
+  
+
+ /*  async googleInit(){
+    await this._usuarioService.googleInit();
+    this.auth2 = this._usuarioService.auth2;
+
+      
       this.attachSigin(document.getElementById('my-signin2'));
 
    
@@ -72,15 +113,15 @@ export class LoginComponent implements OnInit {
 
     this.auth2.attachClickHandler(element,{},(googleUser)=>{
 
-      //let profile = googleUser.getBasicProfile();
+      
       let token = googleUser.getAuthResponse().id_token;
       
       this._usuarioService.loginGoogle(token)
         .subscribe(()=> window.location.href='#/mensualIva');
-      //console.log(token);
+      
     });
 
-  }
+  } */
 
   ingresar(forma: NgForm){
 
@@ -91,7 +132,12 @@ export class LoginComponent implements OnInit {
     let usuario = new Usuario(null, forma.value.email,forma.value.password);
     
     this._usuarioService.login(usuario, forma.value.recuerdame)
-          .subscribe(correcto=> this.router.navigate(['/mensualIva']));
+          .subscribe(correcto=> {
+            
+            this.router.navigate(['/mensualIva']);
+          } , (err) => {
+            Swal.fire('Error en el login',err.error.mensaje,'error');
+          });
 
 
     /* console.log(forma.valid);

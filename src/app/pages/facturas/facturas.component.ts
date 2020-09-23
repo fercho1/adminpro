@@ -37,7 +37,7 @@ export class FacturasComponent implements OnInit {
         
         
 
-        console.log(this.facturas);
+        //console.log(this.facturas);
 
       });
   }

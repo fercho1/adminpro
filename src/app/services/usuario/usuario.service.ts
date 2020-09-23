@@ -10,8 +10,15 @@ import Swal from 'sweetalert2'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
+import { environment } from 'src/environments/environment';
+
+import { CargarUsuario } from '../../interfaces/cargar-usuarios.interface';
+
+import {map} from 'rxjs/operators'
 
 declare const gapi: any;
+
+const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +27,7 @@ export class UsuarioService {
 
   public auth2: any;
 
-  usuario: Usuario;
+  public usuario: Usuario;
   token: string;
   menu: any[]=[];
 
@@ -29,7 +36,9 @@ export class UsuarioService {
     public router: Router,
     public _subirArchivoService: SubirArchivoService
   ) {
+    //this.usuario = new Usuario('','','');
     //console.log('Servivio de usuario listo');
+    //console.log(this.usuario);
     this.cargarStorage();
     this.googleInit();
   }
@@ -50,23 +59,29 @@ export class UsuarioService {
   }
 
   renuevaToken(){
-    let url = URL_SERVICIOS + '/login/renuevatoken';
+    /* let url = URL_SERVICIOS + '/login/renuevatoken'; */
+    let url = base_url + '/login/renuevatoken';
     url += '?token=' + this.token;
 
     return this.http.get(url)
-                .map((resp:any)=>{
-                  this.token = resp.token;
+                .pipe(
 
-                  localStorage.setItem('token', this.token);
-                  //console.log('token renovado');
-                  return true;
-                })
-                .catch(err=>{
+                  map((resp:any)=>{
+                    this.token = resp.token;
+  
+                    localStorage.setItem('token', this.token);
+                    //console.log('token renovado');
+                    return true;
+                  })
+
+                )
+                
+                /* .catch(err=>{
                   this.router.navigate(['/login']);
                   //console.log(err.error.mensaje);
                   Swal.fire('No se pudo renovar token','No fue posible renovar token','error');
                   return Observable.throw(err);
-                });
+                }); */
 
   }
 
@@ -87,6 +102,7 @@ export class UsuarioService {
   }
 
   guardarStorage(id: string, token: string, usuario: Usuario, menu: any) {
+    
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
@@ -111,14 +127,19 @@ export class UsuarioService {
   }
 
   loginGoogle(token: string) {
-    let url = URL_SERVICIOS + '/login/google';
+    /* let url = URL_SERVICIOS + '/login/google'; */
+    let url = base_url + '/login/google';
 
     return this.http.post(url, { token: token })
-      .map((resp: any) => {
+    .pipe(
+
+      map((resp: any) => {
         this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
         //console.log(resp);
         return true;
-      });
+      })
+    )
+      
   }
 
   login(usuario: Usuario, recordar: boolean = false) {
@@ -132,47 +153,50 @@ export class UsuarioService {
       localStorage.removeItem('password');
     }
 
-    let url = URL_SERVICIOS + '/login';
+    /* let url = URL_SERVICIOS + '/login'; */
+    let url = base_url + '/login';
     return this.http.post(url, usuario)
-      .map((resp: any) => {
+    .pipe(
+
+      map((resp: any) => {
 
         this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
         //console.log(resp);
         return true;
       })
-      .catch(err=>{
-        //console.log(err.error.mensaje);
-        Swal.fire('Error en el login',err.error.mensaje,'error');
-        return Observable.throw(err);
-      });
+    )
+      
+      
 
   }
 
   crearUsuario(usuario: Usuario) {
 
-    let url = URL_SERVICIOS + '/usuario';
+    /* let url = URL_SERVICIOS + '/usuario'; */
+    let url = base_url + '/usuario';
 
 
 
-    return this.http.post(url, usuario)
-      .map((resp: any) => {
-        Swal.fire('Usuario creado', usuario.email, 'success');
-        return resp.usuario
-      })
-      .catch(err=>{
-        //console.log(err.error.mensaje);
-        Swal.fire(err.error.mensaje, err.error.errors.message,'error');
-        return Observable.throw(err);
-      });
+    return this.http.post(url, usuario) 
+      .pipe(
+        map((resp: any) => {
+          Swal.fire('Usuario creado', usuario.email, 'success');
+          return resp.usuario
+        })
+        
+      )
+      
 
   }
 
   actualizarUsuario(usuario: Usuario) {
 
-    let url = URL_SERVICIOS + '/usuario/' + usuario._id;
+    /* let url = URL_SERVICIOS + '/usuario/' + usuario._id; */
+    let url = base_url + '/usuario/' + usuario._id;
     url += '?token=' + this.token;
     return this.http.put(url, usuario)
-      .map((resp: any) => {
+    .pipe(
+      map((resp: any) => {
 
         if(usuario._id===this.usuario._id){
           let usuarioDB: Usuario = resp.usuario;
@@ -184,11 +208,10 @@ export class UsuarioService {
 
         return true;
       })
-      .catch(err=>{
-        //console.log(err.error.mensaje);
-        Swal.fire(err.error.mensaje, err.error.errors.message,'error');
-        return Observable.throw(err);
-      });
+
+    )
+      
+      
 
   }
 
@@ -209,26 +232,47 @@ export class UsuarioService {
   }
 
   cargarUsuarios(desde:number=0){
-    let url = URL_SERVICIOS + '/usuario?desde=' + desde;
-    return this.http.get(url);
+    /* let url = URL_SERVICIOS + '/usuario?desde=' + desde; */
+    let url = base_url + '/usuario?desde=' + desde;
+    return this.http.get<CargarUsuario>(url)
+    .pipe(
+      map( resp => {
+        const usuarios = resp.usuarios.map( 
+          user => new Usuario(user.nombre, user.email, '', user.img, user.role, user.google, user._id )  
+        );
+        return {
+          total: resp.total,
+          usuarios
+        };
+      })
+    )
   }
 
   buscarUsuarios(termino:string){
-    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+    
+    let url = base_url + '/busqueda/coleccion/usuarios/' + termino;
     return this.http.get(url)
-            .map((resp:any)=> resp.usuarios);
+      .pipe(
+        map((resp:any)=> resp.usuarios)
+      )
+            
 
   }
 
   borrarUsuario(id:string){
-    let url = URL_SERVICIOS + '/usuario/' + id; 
+    /* let url = URL_SERVICIOS + '/usuario/' + id;  */
+    let url = base_url + '/usuario/' + id; 
     url += '?token=' + this.token;
 
     return this.http.delete(url)
-            .map(resp=>{
-              Swal.fire('Usuario borrado','El usuario a sido eliminado correctamente','success');
-              return true;
-            });
+      .pipe(
+
+        map(resp=>{
+          Swal.fire('Usuario borrado','El usuario a sido eliminado correctamente','success');
+          return true;
+        })
+      )
+            
   }
 
 

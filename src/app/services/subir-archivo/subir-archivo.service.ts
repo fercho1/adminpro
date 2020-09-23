@@ -1,5 +1,8 @@
 import { URL_SERVICIOS } from './../../config/config';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +32,7 @@ export class SubirArchivoService {
         }
       };
 
-      let url = URL_SERVICIOS + '/upload/' + tipo + '/' + id;
+      let url = base_url + '/upload/' + tipo + '/' + id;
 
       xhr.open('PUT', url, true);
       xhr.send(formData);

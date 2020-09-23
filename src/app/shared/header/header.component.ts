@@ -12,21 +12,30 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  usuario: Usuario;
+  public usuario:Usuario;
+
+  
 
   constructor(public _usuarioService: UsuarioService,
-    public router: Router,
-    @Inject(DOCUMENT) private _document) { }
+              public router: Router,
+              @Inject(DOCUMENT) private _document            
+              ) {
+                
+               }
 
   ngOnInit(): void {
+    //this.usuario = new Usuario('','','');
 
-    
     this.usuario = this._usuarioService.usuario;
+    //console.log(this.usuario);
+    
   }
 
   buscar(termino: string) {
     this.router.navigate(['/busqueda', termino]);
   }
+
+  
 
   
 

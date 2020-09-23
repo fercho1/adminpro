@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { Cliente } from 'src/app/models/cliente.model';
 import { Component, OnInit } from '@angular/core';
 
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
@@ -55,7 +57,9 @@ export class ClienteComponent implements OnInit {
         /* this.cliente._id = cliente._id;
         this.router.navigate(['/cliente', cliente._id]); */
         
-      })
+      },(err) => {
+        Swal.fire('Error al crear cliente', 'Ya existe un cliente con misma cédula','error');
+      });
   }
 
 }

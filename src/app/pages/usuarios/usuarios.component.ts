@@ -18,6 +18,8 @@ export class UsuariosComponent implements OnInit {
   usuarios: Usuario[]=[];
   desde: number = 0;
 
+  public usuariosTemp: Usuario[] = [];
+
   totalRegistros: number=0;
   cargando: boolean=true;
 
@@ -31,19 +33,18 @@ export class UsuariosComponent implements OnInit {
         .subscribe(resp=>this.cargarUsuarios());
   }
 
-  mostrarModal(id:string){
-    this._modalUploadService.mostrarModal('usuarios',id);
-  }
+  
 
   cargarUsuarios(){
     this.cargando = true;
 
     this._usuarioService.cargarUsuarios(this.desde)
-        .subscribe((resp:any)=>{
+        .subscribe(({ total, usuarios }) =>{
           //console.log(resp);
-          this.totalRegistros = resp.total;
-          this.usuarios = resp.usuarios;
+          this.totalRegistros = total;
+          this.usuarios = usuarios;
           this.cargando = false;
+          //console.log(this.usuarios);
         });
   }
 
@@ -66,7 +67,7 @@ export class UsuariosComponent implements OnInit {
 
     if(termino.length <= 0){
       this.cargarUsuarios();
-      return;
+      return this.usuarios = this.usuariosTemp;
     }
 
     this.cargando = true;
@@ -74,9 +75,9 @@ export class UsuariosComponent implements OnInit {
     //console.log(termino);
     this._usuarioService.buscarUsuarios(termino)
           .subscribe((usuarios: Usuario[]) =>{
-            //console.log(usuarios);
             this.usuarios = usuarios;
             this.cargando = false;
+            //console.log(usuarios);
           });
 
   }
@@ -109,7 +110,16 @@ export class UsuariosComponent implements OnInit {
 
   guardarUsuario(usuario: Usuario){
     this._usuarioService.actualizarUsuario(usuario)
-        .subscribe();
+        .subscribe(resp =>{
+
+        },(err) => {
+          Swal.fire(err.error.mensaje, err.error.errors.message,'error');
+        });
+  }
+
+  mostrarModal(usuario: Usuario){
+    //console.log(usuario);
+    this._modalUploadService.mostrarModal('usuarios',usuario._id, usuario.img);
   }
 
 }

@@ -2,6 +2,8 @@ import { ImpuestoRentaService } from './../../services/impuesto-renta/impuesto-r
 import { FacturaAgrupada } from './../../models/facturaAgrupada.model';
 import { Component, OnInit } from '@angular/core';
 
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-impuesto-renta',
@@ -40,6 +42,8 @@ export class ImpuestoRentaComponent implements OnInit {
       .subscribe(user => {
 
 
+      },(err) =>{
+        Swal.fire('Error al cargar datos ', 'Error', 'error');
       })
   }
 

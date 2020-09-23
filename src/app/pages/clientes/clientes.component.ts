@@ -32,7 +32,7 @@ export class ClientesComponent implements OnInit {
       .subscribe(()=> this.cargarClientes());
   }
 
-  buscarCliente(termino:string){
+  /* buscarCliente(termino:string){
 
     if(termino.length <= 0){
       this.cargarClientes();
@@ -41,7 +41,7 @@ export class ClientesComponent implements OnInit {
 
     this._clienteService.buscarCliente(termino)
         .subscribe(clientes => this.clientes = clientes);
-  }
+  } */
 
   cargarClientes(){
     /* this._clienteService.cargarClientes(this.desde)
@@ -75,10 +75,10 @@ export class ClientesComponent implements OnInit {
 
   
 
-  actualizarImagen(cliente:Cliente){
+  /* actualizarImagen(cliente:Cliente){
     this._modalUploadservice.mostrarModal('clientes',cliente._id);
 
-  }
+  } */
 
   /* async abrirSweetAlert(){
     const {value} = await Swal.fire<string>({
