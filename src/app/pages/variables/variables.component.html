@@ -12,6 +12,7 @@
                             <th>Base Imponible Iva</th>
                             <th>Iva</th>
                             <th>Ret. I.R</th>
+                            <th>Liquidación</th>
                             <th class="text-nowrap">Acciones</th>
                         </tr>
                     </thead>
@@ -26,6 +27,9 @@
                             </td>
                             <td>
                                 <input [(ngModel)]="variable.varRetIr" name="varRetIr" type="text" class="form-control" placeholder="Ret. I.R">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="variable.varLiq" name="varLiq" type="text" class="form-control" placeholder="Liquidación">
                             </td>
                             <td class="text-center">
                                 <button (click)="guardarVariable(variable)" class="btn btn-primary">

@@ -7,9 +7,10 @@ export class Factura {
         public concepto?: string,
         public bImponible0?: number,
         public bImponible?: number,
+        public liquidacion?: number,
         public iva?: number,
         public total?: number,
-        public bImpRet?: number,
+        
         public cbte?: string,
         public agnt?: string,
         public retIr?: number,

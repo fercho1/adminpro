@@ -85,6 +85,17 @@ export class FacturaService {
 
   }
 
+  guardarStorage(cliente: string) {
+    
+    localStorage.setItem('cliente', cliente);
+
+    //console.log(cliente);
+   
+
+    //this.cliente = cliente;    
+
+  }
+
   guardarFactura(factura: Factura) {
 
     /* let url = URL_SERVICIOS + '/factura'; */
@@ -97,8 +108,9 @@ export class FacturaService {
       return this.http.put(url, factura)
         .pipe(
           map((resp: any) => {
-
-            Swal.fire('Factura actualizada', factura.numFactura, 'success');
+            
+            
+            //Swal.fire('Factura actualizada', factura.numFactura, 'success');
             this.router.navigate(['/facturas']);
             return resp.factura;
           })
@@ -113,8 +125,9 @@ export class FacturaService {
       return this.http.post(url, factura)
         .pipe(
           map((resp: any) => {
-            Swal.fire('Factura creada', factura.numFactura, 'success');
-  
+            //Swal.fire('Factura creada', factura.numFactura, 'success');
+            //console.log(resp.factura.cliente);
+            this.guardarStorage(resp.factura.cliente);
             this.router.navigate(['/facturas']);
             return resp.factura;
           })

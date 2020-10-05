@@ -32,6 +32,7 @@
                                 <option>COMPRAS</option>
                                 <option>NOTA DE CREDITO</option>
                                 <option>NOTA DE VENTA</option>
+                                <option>LIQUIDACION</option>
                             </select>
                         </div>
 
@@ -79,6 +80,8 @@
                                 <option>MONITOREO</option>
                                 <option>COMBUSTIBLE</option>
                                 <option>DEVOLUCION</option>
+                                <option>LIQUIDACION</option>
+                                <option>FALTA COMPROBANTE</option>
                             </select>
                         </div>
 
@@ -94,25 +97,31 @@
 
                     <div class="row">
 
+                        <div class="col" *ngIf="mostrarLiq">
+                            <label>Liquidación</label>
+                            <input [(ngModel)]="factura.liquidacion"  (ngModelChange)="calculoDatosLiq($event)" name="liquidacion" type="number" step="0.01" class="form-control"
+                                placeholder="Liquidación" >
+                        </div>
+
 
 
 
                         <div class="col">
                             <label>Base Imponible Iva</label>
-                            <input [(ngModel)]="factura.bImponible" [disabled]="is_edit" (ngModelChange)="calculoDatos($event)" name="bImponible" type="number" step="0.01" class="form-control"
+                            <input [(ngModel)]="factura.bImponible"  (ngModelChange)="calculoDatos($event)" name="bImponible" type="number" step="0.01" class="form-control"
                                 placeholder="Base Imponible Iva" >
                         </div>
 
                         <div class="col">
-                            <label>Iva</label>
+                            <label>Iva %</label>
                             <input [(ngModel)]="factura.iva"  name="iva" type="number" step="0.01" class="form-control"
                                 placeholder="Iva" disabled>
                         </div>
 
                         <div class="col">
                             <label>Total</label>
-                            <input [(ngModel)]="factura.total" [disabled]="is_edit1" (ngModelChange)="calculoDatos($event)" name="number" step="0.01" type="text" class="form-control"
-                                placeholder="Total">
+                            <input [(ngModel)]="factura.total"  (ngModelChange)="calculoDatos($event)" name="number" step="0.01" type="text" class="form-control"
+                                placeholder="Total" disabled>
                         </div>
 
                     </div>
@@ -124,20 +133,20 @@
                         <div class="row">
 
 
-                            <div  class="col">
+                            <!-- <div  class="col">
                                 <label>Base Imp. Ret.</label>
                                 <input [(ngModel)]="factura.bImpRet" (ngModelChange)="onChanges1($event)" name="bImpRet" type="number" step="0.01" class="form-control"
                                     placeholder="Base Imp. Ret.">
-                            </div>
+                            </div> -->
 
                             <div class="col">
-                                <label>Cbte. Retenc.</label>
+                                <label>Comprobante</label>
                                 <input [(ngModel)]="factura.cbte" name="cbte" type="text" class="form-control"
                                     placeholder="Cbte. Retenc.">
                             </div>
 
                             <div class="col">
-                                <label>Agnt. Retención</label>
+                                <label>Agente</label>
                                 <input [(ngModel)]="factura.agnt" name="agnt" type="text" class="form-control"
                                     placeholder="Agnt. Retención">
                             </div>
@@ -150,19 +159,19 @@
 
 
                             <div class="col">
-                                <label>Ret. I.R</label>
+                                <label>IR</label>
                                 <input [(ngModel)]="factura.retIr" name="retIr" type="number" step="0.01" class="form-control"
                                     placeholder="Ret. I.R" disabled>
                             </div>
 
                             <div class="col">
-                                <label>Ret. Iva</label>
+                                <label>Iva</label>
                                 <input [(ngModel)]="factura.retIva" name="retIva" type="number" step="0.01" class="form-control"
-                                    placeholder="Ret. Iva" (ngModelChange)="total2($event)">
+                                    placeholder="Ret. Iva"  disabled>
                             </div>
 
                             <div class="col">
-                                <label>Total 2</label>
+                                <label>Total</label>
                                 <input [(ngModel)]="factura.total2" name="total2" type="number" step="0.01" class="form-control"
                                     placeholder="Total 2" disabled>
                             </div>

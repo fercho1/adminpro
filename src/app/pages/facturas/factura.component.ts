@@ -23,6 +23,7 @@ export class FacturaComponent implements OnInit {
 
 
   mostrarCol: boolean = false;
+  mostrarLiq: boolean = false;
   clientes: Cliente[] = [];
   variables: Variable[] = [];
   factura: Factura = new Factura('');
@@ -64,6 +65,8 @@ export class FacturaComponent implements OnInit {
         this.factura.img = resp.factura.img;
       });
 
+      this.factura.cliente = localStorage.getItem('cliente') || '';
+
 
       
 
@@ -102,6 +105,23 @@ export class FacturaComponent implements OnInit {
       });
   }
 
+  calculoDatosLiq(newValue: number) {
+    //console.log(this.factura.tipo);
+
+     if(this.factura.tipo === 'LIQUIDACION'){
+      this.is_edit1 = true;
+      this.is_edit = false;
+
+      this.factura.bImponible = Math.round((this.factura.liquidacion * this.variables[0].varLiq + Number.EPSILON) * 100) / 100;
+      this.factura.iva = Math.round((this.factura.bImponible * this.variables[0].varIva + Number.EPSILON) * 100) / 100;
+      this.factura.total = Math.round((this.factura.bImponible0 + this.factura.bImponible + this.factura.iva + Number.EPSILON) * 100) / 100;
+    }
+    
+    
+
+
+  }
+
 
 
 
@@ -110,27 +130,24 @@ export class FacturaComponent implements OnInit {
 
     if (this.factura.tipo === 'VENTA DE BIENES / PRESTACION DE SERVICIOS') {
 
-      
-      
-      
-      
-
-      
-
       this.is_edit = true;
 
-      this.is_edit1 = false;
-      
+      this.is_edit1 = false;    
 
-      //this.factura.bImponible0 = 0;
-
-      this.factura.bImponible = Math.round((newValue / this.variables[0].varImponible + Number.EPSILON) * 100) / 100;
-
-      this.factura.iva = Math.round((this.factura.bImponible * this.variables[0].varIva + Number.EPSILON) * 100) / 100;
-
+      /* this.factura.bImponible = Math.round((newValue / this.variables[0].varImponible + Number.EPSILON) * 100) / 100;
       this.factura.retIr = Math.round((this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
+ */
+      this.factura.iva = Math.round((this.factura.bImponible * this.variables[0].varIva + Number.EPSILON) * 100) / 100;
+      this.factura.total = Math.round((this.factura.bImponible0 + newValue + this.factura.iva + Number.EPSILON) * 100) / 100;
+      this.factura.retIr = Math.round((newValue * 0.0275 + Number.EPSILON) * 100) / 100;
+      this.factura.retIva = Math.round((this.factura.iva * this.variables[0].varImponible + Number.EPSILON) * 100) / 100;
+
+      this.factura.total2 = Math.round((this.factura.retIva + this.factura.retIr + Number.EPSILON) * 100) / 100;
+      
+      
     }
-    else{
+    
+    else {
 
       this.is_edit1 = true;
       this.is_edit = false;
@@ -145,7 +162,7 @@ export class FacturaComponent implements OnInit {
 
   }
 
-  onChanges1(newValue: number) {
+  /* onChanges1(newValue: number) {
 
 
     this.factura.retIr = Math.round((this.factura.bImpRet * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
@@ -155,19 +172,22 @@ export class FacturaComponent implements OnInit {
 
     this.factura.total2 = Math.round((this.factura.retIr + this.factura.retIva + Number.EPSILON) * 100) / 100;
 
-  }
+  } */
 
-  total2(newValue: number) {    
+  /* total2(newValue: number) {    
 
 
     this.factura.total2 = Math.round((this.factura.retIr + this.factura.retIva + Number.EPSILON) * 100) / 100;
 
-  }
+  } */
 
   calculoT(newValue: number) {  
 
     if (this.factura.tipo === 'VENTA DE BIENES / PRESTACION DE SERVICIOS') {
-
+      this.factura.retIva = 0;
+      this.factura.total = Math.round((newValue + this.factura.bImponible + this.factura.iva + Number.EPSILON) * 100) / 100;
+      this.factura.retIr = Math.round((newValue * this.variables[0].varRetIr + Number.EPSILON) * 100) / 100;
+      this.factura.total2 = Math.round(( this.factura.retIr + this.factura.retIva + Number.EPSILON) * 100) / 100;
     }else {
       
       this.factura.total = Math.round((newValue + this.factura.bImponible + this.factura.iva + Number.EPSILON) * 100) / 100;
@@ -203,9 +223,29 @@ export class FacturaComponent implements OnInit {
         this.is_edit1 = false;
     
         this.mostrarCol = true;
+
+        this.mostrarLiq = false;
         
         break;
       }
+
+      case "LIQUIDACION": {
+
+        this.mostrarCol = false;
+        this.mostrarLiq = true;
+
+        this.is_edit = false;
+
+        this.is_edit1 = true;
+
+        this.factura.bImponible0 = 0;
+        this.factura.bImponible = 0;
+        this.factura.iva = 0;
+        this.factura.liquidacion = 0;
+          
+          break;
+        }
+
       default: {
         //console.log("default");
       /*   this.factura.bImponible0=null;
@@ -218,6 +258,8 @@ export class FacturaComponent implements OnInit {
         this.factura.bImpRet=null; */
         this.mostrarCol = false;
 
+        this.mostrarLiq = false;
+
         this.is_edit = false;
 
         this.is_edit1 = true;
@@ -225,6 +267,8 @@ export class FacturaComponent implements OnInit {
         this.factura.bImponible0 = 0;
         this.factura.bImponible = 0;
         this.factura.iva = 0;
+
+        this.factura.total = 0;
 
       
 
