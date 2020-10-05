@@ -212,7 +212,7 @@ export class FacturaComponent implements OnInit {
       this.factura.bImponible = 0;
       this.factura.iva = 0;
       this.factura.total = 0;
-      this.factura.bImpRet = 0;
+      //this.factura.bImpRet = 0;
       this.factura.cbte = "";
       this.factura.agnt = "";
       this.factura.retIr = 0;
