@@ -9,7 +9,7 @@
                         <div class="form-group">
                             <label>Nombre</label>
                             <input [(ngModel)]="cliente.nombre" name="nombre" type="text" class="form-control"
-                                placeholder="Nombre" required>
+                                placeholder="Nombre" oninput="this.value = this.value.toUpperCase()" required>
                         </div>
 
                         <div class="form-group">
