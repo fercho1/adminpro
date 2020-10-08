@@ -58,7 +58,7 @@
                                     <div >
                                         <dx-date-box
                                         [(ngModel)]="factura.fecha" name="fecha"
-                                            type="date" placeholder="Fecha">
+                                            type="date" placeholder="Fecha"   (onContentReady)="onDateBoxContentReady($event)" >
                                         </dx-date-box>
                                     </div>
                                 

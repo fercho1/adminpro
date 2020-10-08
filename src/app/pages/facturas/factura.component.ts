@@ -283,6 +283,12 @@ export class FacturaComponent implements OnInit {
 
   }
 
+  onDateBoxContentReady(e)
+  {
+      
+      e.component.option('inputAttr', { readonly: true })
+  }
+
 
 
   /*  onChanges(newValue: number) {
