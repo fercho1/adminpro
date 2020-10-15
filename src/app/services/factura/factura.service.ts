@@ -88,11 +88,22 @@ export class FacturaService {
   guardarStorage(cliente: string) {
     
     localStorage.setItem('cliente', cliente);
+   
 
     //console.log(cliente);
    
 
     //this.cliente = cliente;    
+
+  }
+
+  guardarStorage1(varIr: any, varIva: any) {
+    
+    localStorage.setItem('varIr', varIr);
+    localStorage.setItem('varIva', varIva);
+   
+
+   
 
   }
 
@@ -122,12 +133,14 @@ export class FacturaService {
       url += '?token=' + this._usuarioService.token;
 
 
+
       return this.http.post(url, factura)
         .pipe(
           map((resp: any) => {
             //Swal.fire('Factura creada', factura.numFactura, 'success');
-            //console.log(resp.factura.cliente);
+            //console.log(resp);
             this.guardarStorage(resp.factura.cliente);
+            this.guardarStorage1(resp.factura.varIr, resp.factura.varIva);
             this.router.navigate(['/facturas']);
             return resp.factura;
           })

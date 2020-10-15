@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-12">
+    <div class="col-12">    
         <div class="card">
             <div class="card-body">
 
@@ -9,7 +9,7 @@
 
                     <div class="row">
 
-                        <div class="col">
+                        <div class="col-5">
                             <label>Cliente</label>
 
                             <select (change)="cambioCliente($event.target.value)" [(ngModel)]="factura.cliente"
@@ -22,7 +22,7 @@
                         </div>
 
 
-                        <div class="col">
+                        <div class="col-5">
                             <label>Tipo de factura</label>
 
                             <select [(ngModel)]="factura.tipo" (ngModelChange)="calculoFactura($event)" name="tipo"
@@ -34,6 +34,18 @@
                                 <option>NOTA DE VENTA</option>
                                 <option>LIQUIDACION</option>
                             </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="myCheck">Datos adicionales:</label> 
+                            <br>
+                            <label class="switch">
+                                <input type="checkbox" [checked]="checkbox"  (change)="changed($event)">
+                                <span class="slider round"></span>
+                            </label>
+                            
+                           
+
                         </div>
 
                     </div>
@@ -52,13 +64,25 @@
                                 placeholder="Fecha">
                         </div> -->
 
-                        <div class="col">
+                        <!-- <div class="col">
                             <label>Fecha</label>
                             
                                     <div >
                                         <dx-date-box
                                         [(ngModel)]="factura.fecha" name="fecha"
                                             type="date" placeholder="Fecha"   (onContentReady)="onDateBoxContentReady($event)" >
+                                        </dx-date-box>
+                                    </div>
+                                
+                        </div> -->
+
+                        <div class="col">
+                            <label>Fecha</label>
+                            
+                                    <div >
+                                        <dx-date-box
+                                        [(ngModel)]="factura.fecha" name="fecha"
+                                            type="date" placeholder="dd/MM/yyyy"    >
                                         </dx-date-box>
                                     </div>
                                 
@@ -85,14 +109,26 @@
                             </select>
                         </div>
 
-                        <div class="col">
-                            <label>Base Imponible Iva 0%</label>
-                            <input [(ngModel)]="factura.bImponible0" (ngModelChange)="calculoT($event)" name="bImponible0" type="number" step="0.01" class="form-control"
-                                placeholder="Base Imponible Iva 0%">
-                        </div>
+                        
 
                     </div>
 
+                    <br>
+                    <div class="row">
+
+                        <div class="col" *ngIf="mostrarCol">
+                            <label>Var IR</label>
+                            <input [(ngModel)]="factura.varIr"   name="varIr" type="number" step="any"  class="form-control"
+                                placeholder="Var Ir" >
+                        </div>
+
+                        <div class="col" *ngIf="mostrarCol">
+                            <label>Var Iva</label>
+                            <input [(ngModel)]="factura.varIva"   name="varIva" type="number" step="any"  class="form-control"
+                                placeholder="Var Iva" >
+                        </div>
+
+                    </div>
                     <br>
 
                     <div class="row">
@@ -101,6 +137,12 @@
                             <label>Liquidación</label>
                             <input [(ngModel)]="factura.liquidacion"  (ngModelChange)="calculoDatosLiq($event)" name="liquidacion" type="number" step="0.01" class="form-control"
                                 placeholder="Liquidación" >
+                        </div>
+
+                        <div class="col">
+                            <label>Base Imponible Iva 0%</label>
+                            <input [(ngModel)]="factura.bImponible0" (ngModelChange)="calculoT($event)" name="bImponible0" type="number" step="0.01" class="form-control"
+                                placeholder="Base Imponible Iva 0%">
                         </div>
 
 

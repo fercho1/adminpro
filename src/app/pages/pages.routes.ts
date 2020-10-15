@@ -1,3 +1,4 @@
+import { RangosComponent } from './rangos/rangos/rangos.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { GastosPersonalesComponent } from './gastos-personales/gastos-personales.component';
 import { ImpuestoRentaComponent } from './impuesto-renta/impuesto-renta.component';
@@ -24,6 +25,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { PagesComponent } from './pages.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ReporteComponent } from './reportes/reporte.component';
+import { RangoComponent } from './rangos/rango/rango.component';
 
 
 const pagesRoutes: Routes = [
@@ -57,6 +59,8 @@ const pagesRoutes: Routes = [
     { path: 'facturas', component: FacturasComponent, data: { titulo: 'Mantenimiento de facturas' } },
     { path: 'factura/:id', component: FacturaComponent, data: { titulo: 'Factura' } },
     { path: 'variables', component: VariablesComponent, data: { titulo: 'Variables' } },
+    { path: 'rangos', component: RangosComponent, data: { titulo: 'Mantenimiento de Rangos' } },
+    { path: 'rango/:id', component: RangoComponent, data: { titulo: 'Rango' } },
     { path: '', redirectTo: '/mensualIva', pathMatch: 'full' },
 
 

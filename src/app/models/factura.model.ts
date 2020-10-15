@@ -8,6 +8,8 @@ export class Factura {
         public bImponible0?: number,
         public bImponible?: number,
         public liquidacion?: number,
+        public varIr?: number,
+        public varIva?: number,
         public iva?: number,
         public total?: number,
         

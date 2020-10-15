@@ -42,6 +42,8 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { ReporteComponent } from './reportes/reporte.component';
 
 import { DxButtonModule,DxDataGridModule, DxDateBoxModule } from 'devextreme-angular';
+import { RangosComponent } from './rangos/rangos/rangos.component';
+import { RangoComponent } from './rangos/rango/rango.component';
 
 
 
@@ -73,7 +75,9 @@ import { DxButtonModule,DxDataGridModule, DxDateBoxModule } from 'devextreme-ang
         GastosPersonalesComponent,
         RetencionesRelacionComponent,
         ReportesComponent,
-        ReporteComponent
+        ReporteComponent,
+        RangosComponent,
+        RangoComponent
 
     ],
     exports: [

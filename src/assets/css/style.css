@@ -524,7 +524,7 @@ html body .bg-white {
 /*******************
 Rounds
 *******************/
-.round {
+/* .round {
   line-height: 48px;
   color: #ffffff;
   width: 50px;
@@ -533,7 +533,14 @@ Rounds
   font-weight: 400;
   text-align: center;
   border-radius: 100%;
-  background: #398bf7; }
+  background: #398bf7; } */
+
+  .round {
+   
+
+     }
+
+
   .round img {
     border-radius: 100%; }
 

@@ -19,7 +19,8 @@ import {  SettingsService,
           ReporteService,
           VerificaTokenGuard,
           VariableService,
-          ImpuestoRentaService } from './service.index'
+          ImpuestoRentaService,
+          RangoService } from './service.index'
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -39,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     ModalUploadService,
     ClienteService,
     FacturaService,
+    RangoService,
     ReporteService,
     VariableService,
     ImpuestoRentaService,

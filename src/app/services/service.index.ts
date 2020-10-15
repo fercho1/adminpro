@@ -15,6 +15,9 @@ export {SidebarService} from './shared/sidebar.service';
 
 export { UsuarioService } from './usuario/usuario.service';
 
+export { RangoService } from './rango/rango.service';
+
+
 
 
 

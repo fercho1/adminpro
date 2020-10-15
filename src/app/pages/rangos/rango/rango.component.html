@@ -1,0 +1,48 @@
+<div class="row animated fadeIn">
+    <div class="col-md-12">
+        <div class="card card-body">
+            
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRango(f)">
+                        <div class="form-group">
+                            <label>Fracción básica</label>
+                            <input [(ngModel)]="rango.fraccionBasica" name="fraccionBasica" type="text" class="form-control"
+                                placeholder="Fracción básica"  required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Exceso Hasta</label>
+                            <input [(ngModel)]="rango.excesoHasta" name="excesoHasta" type="text" class="form-control"
+                                placeholder="Exceso Hasta"  >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Impuesto fracción básica</label>
+                            <input [(ngModel)]="rango.impFraccionB" name="impFraccionB" type="text" class="form-control"
+                                placeholder="Impuesto fracción básica" >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Impuesto fracción excedente</label>
+                            <input [(ngModel)]="rango.impFraccionE" name="impFraccionE" type="text" class="form-control"
+                                placeholder="Impuesto fracción excedente">
+                        </div>
+                       
+
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                            <i class="fa fa-save"></i>
+                            Guardar
+                        </button>
+                        <a routerLink="/rangos" class="btn btn-inverse waves-effect waves-light">Cancelar
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

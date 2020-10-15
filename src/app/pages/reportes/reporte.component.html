@@ -213,12 +213,12 @@
                         <div class="col">
                             <label>Fracción Excedente</label>
                             <input [(ngModel)]="reporte.fExcedente" name="fExcedente" type="number" (ngModelChange)="cambio5($event)" 
-                                 class="form-control" placeholder="Fracción Excedente" >
+                                 class="form-control" placeholder="Fracción Excedente" disabled>
                         </div>
                         <div class="col">
                             <label>Fracción Básica</label>
                             <input [(ngModel)]="reporte.fBasica" name="fBasica" type="number" (ngModelChange)="cambio6($event)"
-                                 class="form-control" placeholder="Fracción Básica" >
+                                 class="form-control" placeholder="Fracción Básica" disabled>
                         </div>
                         <div class="col">
                             <label>IMPUESTO A LA RENTA CAUSADO</label>
@@ -284,6 +284,11 @@
                             </button>
                             <a routerLink="/reportes" class="btn btn-inverse waves-effect waves-light">Cancelar
                             </a>
+                            
+                                <button class="btn btn-primary m-l-10" type="button" (click)="renta()">
+                                    Fracción Excedente/Básica
+                                </button>
+                            
                         </div>
 
 
