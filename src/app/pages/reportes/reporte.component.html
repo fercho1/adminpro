@@ -1,0 +1,309 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+
+                <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarReporte(f)">
+
+                    <div class="row" *ngIf="!mostrar">
+
+                        <div class="col">
+                            <label>Cliente y Año</label>
+
+                            <select (change)="cambioCliente($event.target.value)" [(ngModel)]="cliente.cliente"
+                                name="cliente" class="form-control">
+
+                                <option *ngFor="let cliente of clientes" [value]="cliente._id">
+                                    {{cliente.nombre}}-{{cliente.anio}}
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <br>
+
+
+
+                    <div class="row">
+
+
+
+                        <div class="col">
+                            <label>Año</label>
+                            <input [(ngModel)]="reporte.anio" name="anio" type="text" class="form-control"
+                                placeholder="Año" disabled>
+                        </div>
+
+                        <div class="col">
+                            <label>Cédula</label>
+                            <input [(ngModel)]="reporte.cedula" name="cedula" type="text" class="form-control"
+                                placeholder="Cédula" disabled>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label>Clave</label>
+                                <input [(ngModel)]="reporte.clave" name="clave" type="text" class="form-control"
+                                    placeholder="Clave" disabled>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <br>
+
+                    <div class="row">
+
+
+
+                        <div class="col">
+                            <label>Nombre</label>
+                            <input [(ngModel)]="reporte.nombre" name="nombre" type="text" class="form-control"
+                                placeholder="Nombre" disabled>
+                        </div>
+
+                        <div class="col">
+                            <label>Ruc</label>
+                            <input [(ngModel)]="reporte.ruc" name="ruc" type="text" class="form-control"
+                                placeholder="Ruc" disabled>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                    <div class="row">
+
+
+
+
+
+                        <div class="col">
+                            <label>Retención</label>
+                            <input [(ngModel)]="reporte.totalRet" name="totalRet" type="text" class="form-control"
+                                placeholder="Retención" disabled>
+                        </div>
+
+                        
+
+
+
+
+
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label>ACTIVIDADES EMPRESARIALES</label>
+                            <input [(ngModel)]="reporte.actEmpresariales" name="actEmpresariales" type="number"
+                                class="form-control" placeholder="ACTIVIDADES EMPRESARIALES" disabled>
+                        </div>
+                        <div class="col">
+                            <label>Ingresos</label>
+                            <input [(ngModel)]="reporte.totalIng" name="totalIng" type="number" class="form-control"
+                                placeholder="Ingresos" disabled>
+                        </div>
+                        <div class="col">
+                            <label>Egresos</label>
+                            <input [(ngModel)]="reporte.totalEg" name="totalEg" type="number" class="form-control"
+                                placeholder="Egresos" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label>ACTIVIDADES RELACION DE DEPENDENCIA</label>
+                            <input [(ngModel)]="reporte.actRelDep" name="actRelDep" type="number"
+                                 class="form-control" placeholder="ACTIVIDADES RELACION DE DEPENDENCIA" disabled>
+                        </div>
+                        <div class="col">
+                            <label>Sueldos, Salarios y otros</label>
+                            <input [(ngModel)]="reporte.sueldos" name="sueldos" type="number" step="0.01" (ngModelChange)="onChanges1($event)"
+                                class="form-control" placeholder="Sueldos, Salarios y otros">
+                        </div>
+                        <div class="col">
+                            <label>Aporte Personal IESS</label>
+                            <input [(ngModel)]="reporte.apPersonal" name="apPersonal" type="number" step="0.01" (ngModelChange)="onChanges2($event)"
+                                class="form-control" placeholder="Aporte Personal IESS">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label>INGRESOS POR RENDIMIENTOS</label>
+                            <input [(ngModel)]="reporte.ingRendimientos" name="ingRendimientos" type="number" (ngModelChange)="onChanges3($event)"
+                                 class="form-control" placeholder="INGRESOS POR RENDIMIENTOS" >
+                        </div>
+                        
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label>SUBTOTAL BASE IMPONIBLE</label>
+                            <input [(ngModel)]="reporte.subBImponible" name="subBImponible" type="number"
+                                 class="form-control" placeholder="SUBTOTAL BASE IMPONIBLE" disabled>
+                        </div>
+                        
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label>GASTOS PERSONALES</label>
+                            <input [(ngModel)]="reporte.gPersonales" name="gPersonales" type="number"
+                                 class="form-control" placeholder="GASTOS PERSONALES" disabled>
+                        </div>
+                        <div class="col">
+                            <label>Gastos Personales Proyectados</label>
+                            <input [(ngModel)]="reporte.gPersonalesPro" name="gPersonalesPro" type="number"
+                                 class="form-control" placeholder="Gastos Personales Proyectados" >
+                        </div>
+                        <div class="col">
+                            <label>Educación</label>
+                            <input [(ngModel)]="reporte.educacion" name="educacion" type="number" (ngModelChange)="cambio($event)"
+                                 class="form-control" placeholder="Educación" >
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Salud</label>
+                            <input [(ngModel)]="reporte.salud" name="salud" type="number" (ngModelChange)="cambio1($event)"
+                                 class="form-control" placeholder="Salud" >
+                        </div>
+                        <div class="col">
+                            <label>Alimentación</label>
+                            <input [(ngModel)]="reporte.alimentacion" name="alimentacion" type="number" (ngModelChange)="cambio2($event)"
+                                 class="form-control" placeholder="Alimentación" >
+                        </div>
+                        <div class="col">
+                            <label>Vivienda</label>
+                            <input [(ngModel)]="reporte.vivienda" name="vivienda" type="number" (ngModelChange)="cambio3($event)"
+                                 class="form-control" placeholder="Vivienda" >
+                        </div>
+                        <div class="col">
+                            <label>Vestimenta</label>
+                            <input [(ngModel)]="reporte.vestimenta" name="vestimenta" type="number" (ngModelChange)="cambio4($event)"
+                                 class="form-control" placeholder="Vestimenta" >
+                        </div>
+                        
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label>BASE IMPONIBLE GENERAL</label>
+                            <input [(ngModel)]="reporte.bimponibleGeneral" name="bimponibleGeneral" type="number"
+                                 class="form-control" placeholder="BASE IMPONIBLE GENERAL" disabled>
+                        </div>
+                        
+                    </div>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label>Fracción Excedente</label>
+                            <input [(ngModel)]="reporte.fExcedente" name="fExcedente" type="number" (ngModelChange)="cambio5($event)" 
+                                 class="form-control" placeholder="Fracción Excedente" disabled>
+                        </div>
+                        <div class="col">
+                            <label>Fracción Básica</label>
+                            <input [(ngModel)]="reporte.fBasica" name="fBasica" type="number" (ngModelChange)="cambio6($event)"
+                                 class="form-control" placeholder="Fracción Básica" disabled>
+                        </div>
+                        <div class="col">
+                            <label>IMPUESTO A LA RENTA CAUSADO</label>
+                            <input [(ngModel)]="reporte.iRentaC" name="iRentaC" type="number"
+                                 class="form-control" placeholder="IMPUESTO A LA RENTA CAUSADO" disabled>
+                        </div>                    
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label>Retenciones que se realizaron en el periodo</label>
+                            <input [(ngModel)]="reporte.totalRet" name="totalRet" type="number"  
+                                 class="form-control" placeholder="Retenciones que se realizaron en el periodo" disabled>
+                        </div>
+                        <div class="col">
+                            <label>Retenciones que se realizaron en el periodo en relación de dependencia</label>
+                            <input [(ngModel)]="reporte.retRelacionD" name="retRelacionD" type="number" (ngModelChange)="cambio7($event)"
+                                 class="form-control" placeholder="Retenciones que se realizaron en el periodo en relación de dependencia" >
+                        </div>
+                                         
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <label>Retenciones rendimientos Financieros</label>
+                            <input [(ngModel)]="reporte.retRendimiento" name="retRendimiento" type="number" (ngModelChange)="cambio8($event)" 
+                                 class="form-control" placeholder="Retenciones que se realizaron en el periodo" >
+                        </div>
+                        <div class="col">
+                            <label>Crédito tributario de años anteriores</label>
+                            <input [(ngModel)]="reporte.creditoT" name="creditoT" type="number" (ngModelChange)="cambio9($event)"
+                                 class="form-control" placeholder="Crédito tributario de años anteriores" >
+                        </div>
+                        <div class="col">
+                            <label>Impuesto a la renta a favor</label>
+                            <input [(ngModel)]="reporte.iRentaFavor" name="iRentaFavor" type="number" 
+                                 class="form-control" placeholder="Impuesto a la renta a favor" disabled>
+                        </div>
+                                         
+                    </div>
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="row mt-4">
+
+
+                        <div class="col">
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                                <i class="fa fa-save"></i>
+                                Guardar
+                            </button>
+                            <a routerLink="/reportes" class="btn btn-inverse waves-effect waves-light">Cancelar
+                            </a>
+                            
+                                <button class="btn btn-primary m-l-10" type="button" (click)="renta()">
+                                    Fracción Excedente/Básica
+                                </button>
+                            
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                </form>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

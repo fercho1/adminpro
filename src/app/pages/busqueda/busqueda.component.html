@@ -1,0 +1,118 @@
+<div class="row animated fadeIn">
+
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Usuarios</h4>
+
+                <table class="table table-hover" *ngIf="usuarios.length > 0">
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios" 
+                            [routerLink]="['/usuarios']" 
+                            class="pointer">
+                            <td>
+                                <img [src]="usuario.img | imagen" class="img-50 img-circle">
+                            </td>
+                            <td>{{usuario.nombre}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info" *ngIf="usuarios.length === 0">
+                    No hay registros
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Clientes</h4>
+
+                <table class="table table-hover" *ngIf="clientes.length > 0">
+                    <tbody>
+                        <tr *ngFor="let cliente of clientes" 
+                            [routerLink]="['/clientes']" 
+                            class="pointer">
+                            <td>
+                                <img [src]="cliente.img | imagen:'cliente'" class="img-50 img-circle">
+                            </td>
+                            <td>{{cliente.nombre}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info" *ngIf="clientes.length === 0">
+                    No hay registros
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Facturas</h4>
+
+                <table class="table table-hover" *ngIf="facturas.length > 0">
+                    <tbody>
+                        <tr *ngFor="let factura of facturas" 
+                            [routerLink]="['/factura', factura._id]" 
+                            class="pointer">
+                            <td>
+                                <img [src]="factura.img | imagen:'factura'" class="img-50 img-circle">
+                            </td>
+                            <td>{{factura.numFactura}}</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info" *ngIf="facturas.length === 0">
+                    No hay registros
+                </div>
+
+                
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Conceptos</h4>
+
+                <table class="table table-hover" *ngIf="conceptos.length > 0">
+                    <tbody>
+                        <tr *ngFor="let concepto of conceptos" 
+                            [routerLink]="['/usuarios']" 
+                            class="pointer">
+                            
+                            <td>{{concepto.nombre}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info" *ngIf="conceptos.length === 0">
+                    No hay registros
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

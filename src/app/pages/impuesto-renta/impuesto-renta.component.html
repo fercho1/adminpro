@@ -1,0 +1,141 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button (click)="cargarDatos()" type="button"
+                        class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"> Cargar Datos</i>
+                    </button>
+                </div>
+                <h3 class="card-title">Totales Ingresos, Egresos y Ret (<small>{{this.totalRegistros}}</small>)</h3>
+
+                                <dx-data-grid id="gridContainer"
+                                [dataSource]="this.arreglado"
+                                [remoteOperations]="false"
+                                [allowColumnReordering]="true"
+                                [rowAlternationEnabled]="true"
+                                [showBorders]="true">
+
+                                <dxo-paging [pageSize]="40"></dxo-paging>
+                                <dxo-pager
+                                    [showPageSizeSelector]="true"
+                                    [allowedPageSizes]="[50, 60, 70, 100]"
+                                ></dxo-pager>
+                                <dxo-search-panel
+                                    [visible]="true"
+                                    [highlightCaseSensitive]="true"
+                                ></dxo-search-panel>
+                                <dxo-group-panel
+                                    [visible]="true"
+                                ></dxo-group-panel>
+                                <dxo-grouping
+                                    [autoExpandAll]="false"
+                                ></dxo-grouping>
+    
+
+                                <dxo-column-chooser
+                                mode="dragAndDrop"
+                                [allowSearch]="true"
+                                [enabled]="true">
+                                </dxo-column-chooser>
+
+                                <dxo-selection 
+                                mode="multiple">
+                                </dxo-selection>
+
+                                <dxo-export
+                                fileName="Reporte 2"
+                                [allowExportSelectedData]="true"
+                                [enabled]="true"
+                                >
+                                </dxo-export>
+
+                                <dxo-header-filter
+                                [visible]="true">
+                                </dxo-header-filter>
+
+                                <dxo-filter-row 
+                                [visible]="true">
+                                </dxo-filter-row>
+
+                                <dxo-filter-panel
+                                [filterEnabled]="true"
+                                [visible]="true">
+                                </dxo-filter-panel>
+
+                                <dxo-load-panel
+                                [enabled]="true"
+                                [indicatorSrc]="'../../../../assets/images/dia-b.png'"
+                                [showIndicator]="true"
+                                [showPane]="true">
+                                </dxo-load-panel>
+
+                                <dxi-column [caption]="'Año'" dataField="anio" [groupIndex]="0"></dxi-column>
+                                <dxi-column [caption]="'Nombre'" dataField="nombre" [groupIndex]="1"></dxi-column>
+                                <dxi-column dataField="ruc" caption="RUC" dataType="string" ></dxi-column>
+
+                                <dxi-column 
+                                [caption]="'Mes'" 
+                                [allowFiltering]="true" 
+                                dataField="mes" 
+                                cellTemplate="cityCell"                
+                                ></dxi-column>
+                                <div *dxTemplate="let data of 'cityCell'">  
+                                    {{data.displayValue | meses}}  
+                                </div> 
+
+                                <dxi-column 
+                                [caption]="'Ingresos'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'ingreso'"                
+                                ></dxi-column>                        
+
+                                <dxi-column 
+                                [caption]="'Egresos'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'egreso'"                
+                                ></dxi-column>                               
+
+                                <dxi-column 
+                                [caption]="'Retención'" 
+                                [allowFiltering]="true" 
+                                [dataField]="'retencion'"                
+                                ></dxi-column>
+
+    
+
+                                
+
+                                <dxo-summary>                                                                      
+                                    <dxi-group-item
+                                        column="ingreso"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                        <dxo-value-format precision="2"></dxo-value-format>
+                                    </dxi-group-item>
+
+                                    <dxi-group-item
+                                        column="egreso"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                        <dxo-value-format precision="2"></dxo-value-format>
+                                    </dxi-group-item>
+
+                                    <dxi-group-item
+                                        column="retencion"
+                                        summaryType="sum"                                        
+                                        displayFormat="Total: {0}"
+                                        [showInGroupFooter]="true">
+                                        <dxo-value-format precision="2"></dxo-value-format>
+                                    </dxi-group-item>
+                                </dxo-summary>                                
+                </dx-data-grid>
+                                
+            </div>
+        </div>
+    </div>
+</div>
+

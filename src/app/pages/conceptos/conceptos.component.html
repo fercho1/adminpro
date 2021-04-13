@@ -1,0 +1,79 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="buscarConcepto(input.value)" type="text" class="form-control" placeholder="Buscar concepto...">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+
+    <div class="col-sm-12">
+
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button (click)="nuevo()" type="button"
+                        class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"> Crear Concepto</i>
+                    </button>
+                </div>
+                <h3 class="card-title">Conceptos registrados (<small>{{totalRegistros}}</small>)</h3>
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th >Nombre</th>                            
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let concepto of conceptos">
+                            
+                            <td>
+                                <input [(ngModel)]="concepto.nombre" name="nombre" type="text" class="form-control"
+                                    placeholder="Nombre">
+                            </td>
+                            
+                            <td class="text-center">
+                                <button (click)="guardarConcepto(concepto)" class="btn btn-primary mr-3">
+                                    <i class="fa fa-save"></i>
+                                </button>
+
+                                <button (click)="borrarConcepto(concepto)" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-3">
+                    Anteriores
+                </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                    Siguientes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
